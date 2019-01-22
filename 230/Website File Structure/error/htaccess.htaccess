@@ -1,0 +1,5 @@
+ErrorDocument 404 /jgm1844/230/error/error.html
+# DirectoryIndex hello.html
+Options -Indexes-
+# Header add X-HeaderName "Header Value"
+ModPagespeed off
