@@ -3,7 +3,7 @@ DirectoryIndex hello.html
 Options -Indexes-
 ModPagespeed off
 
-ShibRedirectToSSL 443
-AuthType shibboleth
-ShibRequireSession on
-require anwigm jgm1844
+# AuthType shibboleth
+# AuthName "RIT"
+# ShibRequireSession on
+# require valid-user

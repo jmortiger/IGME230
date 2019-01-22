@@ -1,0 +1,7 @@
+AuthType shibboleth
+AuthName "RIT"
+ShibRequireSession on
+require valid-user
+
+Options -Indexes-
+ModPagespeed off
