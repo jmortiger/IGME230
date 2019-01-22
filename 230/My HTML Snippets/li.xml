@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>li HTML</Title>
+          <SnippetTypes>
+            <SnippetType>SurroundsWith</SnippetType>
+          </SnippetTypes>
+          <Shortcut>li</Shortcut>
+        </Header>
+        <Snippet>
+          <Declarations>
+            <Literal>
+              <ID>element</ID>
+              <Default>List Element</Default>
+              <ToolTip>The List Element</ToolTip>
+            </Literal>
+          </Declarations>
+            <Code Language="HTML">
+                <![CDATA[<li>$element$</li>]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
