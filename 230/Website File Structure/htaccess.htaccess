@@ -1,6 +1,6 @@
 ErrorDocument 404 /jgm1844/230/error/error.html
 DirectoryIndex hello.html
-Options -Indexes-
+Options -Indexes
 ModPagespeed off
 
 # AuthType shibboleth

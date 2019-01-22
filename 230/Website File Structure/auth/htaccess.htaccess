@@ -3,5 +3,5 @@ AuthName "RIT"
 ShibRequireSession on
 require valid-user
 
-Options -Indexes-
+Options -Indexes
 ModPagespeed off
