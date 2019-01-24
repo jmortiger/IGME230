@@ -9,9 +9,15 @@ body {
 
 h1 {
     background-color: lightgray;
+    text-align: center;
     padding-top: .25em;
     padding-bottom: .25em;
     padding-left: .25em;
     padding-right: .25em;
+    /*width: fit-content;*/
+}
+
+.ingredients {
+    background-color: antiquewhite;
     width: fit-content;
 }
