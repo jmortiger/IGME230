@@ -2,9 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\230",
+    "\\230\\exercises",
+    "\\230\\exercises\\recipe",
+    "\\230\\My HTML Snippets",
     "\\230\\Website File Structure",
-    "\\230\\Website File Structure\\error"
+    "\\230\\Website File Structure\\exercises"
   ],
-  "SelectedNode": "\\230\\Website File Structure\\htaccess.htaccess",
+  "SelectedNode": "\\230\\Website File Structure\\exercises\\recipe",
   "PreviewInSolutionExplorer": false
 }
