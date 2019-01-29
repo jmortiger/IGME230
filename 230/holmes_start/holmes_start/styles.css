@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-family: 'Major Mono Display', monospace;
+}
+
+img{
+    padding: .5em;
+}
+
+img[alt="watson small"]{
+
+}
+

@@ -2,11 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\230",
+    "\\230\\holmes_start",
+    "\\230\\holmes_start\\holmes_start",
+    "\\230\\holmes_start\\holmes_start\\images",
     "\\230\\My HTML Snippets",
     "\\230\\Website File Structure",
     "\\230\\Website File Structure\\exercises",
     "\\230\\Website File Structure\\exercises\\recipe"
   ],
-  "SelectedNode": "\\230\\Website File Structure\\exercises\\recipe\\recipe.css",
+  "SelectedNode": "\\230\\holmes_start\\holmes_start\\styles.css",
   "PreviewInSolutionExplorer": false
 }
