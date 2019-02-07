@@ -21,13 +21,13 @@ ol, ul {
     margin: 0;
 }
 
-    ul li {
-        margin: 0;
-        padding: 0;
-    }
+ul li {
+    margin: 0;
+    padding: 0;
+}
 
 h1 {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     color: #111111;
 }
 
@@ -36,18 +36,18 @@ a, img {
     border: none;
     color: #000;
     font-weight: bold;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 p {
-    margin: 0 0 10px;
+    /*margin: 0 0 10px;*/
     line-height: 1.4em;
     font-size: 1.2em;
 }
 
 img {
     display: block;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 aside {
@@ -61,6 +61,14 @@ footer, header, hgroup, menu, nav, section {
 }
 
 /* Structure */
+header h1 {
+    /*width: 15%;
+    height: 15%;*/
+    display: inline-block;
+    float: left;
+    margin: 10px/*4px 4px 0px 4px*/;
+}
+
 #banner {
     display: block;
     float: right;
@@ -69,5 +77,10 @@ footer, header, hgroup, menu, nav, section {
 }
 
 #exercises {
-    background-color: gray;
+    width: 50%;
+    background-color: lightgray;
+}
+
+.main {
+
 }
