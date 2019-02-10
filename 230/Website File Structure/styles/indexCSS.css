@@ -41,7 +41,7 @@ a, img {
 
 p {
     /*margin: 0 0 10px;*/
-    line-height: 1.4em;
+    line-height: 1.5em;
     font-size: 1.2em;
 }
 
@@ -60,13 +60,38 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 
-/* Structure */
+    /* ----------Structure---------- */
+header nav li {
+    display: inline;
+}
+
+a {
+    font-size: 1.25em;
+}
+
+header a {
+    font-size: 2.5em;
+}
+
 header h1 {
-    /*width: 15%;
-    height: 15%;*/
     display: inline-block;
     float: left;
     margin: 10px/*4px 4px 0px 4px*/;
+    padding: 5px;
+    background-color: lightcoral;
+}
+
+#flex-container {
+    float: left;
+    display: flex;
+    flex-direction: row;
+}
+
+aside {
+    display: block;
+    float: right;
+    border-color: black;
+    border: 5px 5px 5px 5px;
 }
 
 #banner {
@@ -81,6 +106,6 @@ header h1 {
     background-color: lightgray;
 }
 
-.main {
+/*.main {
 
-}
+}*/
