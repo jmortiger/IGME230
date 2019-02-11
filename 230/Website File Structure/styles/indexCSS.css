@@ -79,26 +79,63 @@ header h1 {
     margin: 10px/*4px 4px 0px 4px*/;
     padding: 5px;
     background-color: lightcoral;
+    border: 2px solid black;
 }
 
-#flex-container {
+#banner {
+    display: block;
     float: left;
+    margin: 5px;
+    width: 10%;
+    height: 10%;
+}
+
+.flex-container {
+    /*float: left;*/
     display: flex;
+}
+
+nav ul {
+    /*margin-top: 10px;*/
+    padding-bottom: 10px;
     flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+nav ul li {
+    margin: 10px;
+    flex: 1 1 auto;
+}
+
+/*#projects {
+    flex-grow: 1;
+}
+
+#exercise {
+    flex-grow: 1;
+}
+
+#misc {
+    flex-grow: 1;
+}*/
+
+#main {
+    padding: 5px;
+    flex: 2 2 auto;
 }
 
 aside {
     display: block;
     float: right;
-    border-color: black;
-    border: 5px 5px 5px 5px;
+    flex: 1 1 auto;
+    border: 2px solid black;
+    padding: 5px;
 }
 
-#banner {
-    display: block;
-    float: right;
-    width: 10%;
-    height: 10%;
+aside ul {
+    list-style-type: circle;
+    list-style-position: inside;
 }
 
 #exercises {
