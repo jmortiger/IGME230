@@ -2,36 +2,10 @@
     margin: 0;
     padding: 0;
 }
-/*SWICHED TO GRID*/
-/******** main flexbox ********/
-/*#wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-between;
-    align-content: space-between;
-}*/
-/*#mainContent, footer {
-    margin: auto;
-}
-
-header {
-    margin: 0;
-    flex-grow: 0;
-}
-
-#wrapper #mainContent {
-    flex-grow: 1;
-}
-
-#wrapper footer {
-    flex-grow: 0;
-}*/
-/*****************/
 /******** grid ********/
 header {
     grid-area: header;
-    background-color: white;
+    background-color: black;
 }
 
 #mainContent {
@@ -44,7 +18,7 @@ footer {
 }
 
 .mainGridObj {
-    outline: 5px solid black;
+    outline: 5px solid pink;/*for construction only*/
     /*background-color: white;*//*overrides footer's color*/
 }
 
@@ -60,11 +34,12 @@ footer {
         "footer footer footer";
     /*temp for outline bars; TODO: remove*/
     grid-gap: 10px;
-    background-color: aqua;
+    /*background-color: aqua;*/
+    background-image: linear-gradient(black, mediumblue, aqua, white);
 }
 
 header nav a {
-    outline: 5px solid black;
+    outline: 5px solid pink; /*for construction only*/
     padding: 5px;
 }
 /*****************/
@@ -73,6 +48,10 @@ header nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /*background-color: black;*/
+    background: linear-gradient(/*to right,*/ /*black,*/ /*mediumblue*/#ff00dc, aqua);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .navFlexObj {
     /*outline: 5px solid black;*/
@@ -80,6 +59,11 @@ header nav {
 /*****************/
 h1 {
     display: inline;
+    /*font-size: 1.25em;*/
+}
+
+nav a {
+    font-size: large;
 }
 
 footer {
