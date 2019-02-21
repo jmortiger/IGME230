@@ -1,26 +1,22 @@
-
 * {
     margin: 0;
     padding: 0;
 }
-
-#wrapper {
+/*SWICHED TO GRID*/
+/******** main flexbox ********/
+/*#wrapper {
     height: 100%;
-    /*width: 60%;*/
-    /*margin: 0%, 20%, 0%, 20%;*/
     display: flex;
     flex-direction: column;
     justify-content:space-between;
     align-content: space-between;
-    /*justify-content: center;*/
-    /*align-items: center;*/
+}*/
+/*#mainContent, footer {
+    margin: auto;
 }
 
-.flexObject {
-    margin:auto;
-}
-
-#wrapper nav {
+header {
+    margin: 0;
     flex-grow: 0;
 }
 
@@ -30,15 +26,65 @@
 
 #wrapper footer {
     flex-grow: 0;
+}*/
+/*****************/
+/******** grid ********/
+header {
+    grid-area: header;
+    background-color: white;
 }
 
+#mainContent {
+    grid-area: main;
+    background-color: white;
+}
+
+footer {
+    grid-area: footer;
+}
+
+.mainGridObj {
+    outline: 5px solid black;
+    /*background-color: white;*//*overrides footer's color*/
+}
+
+#wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    grid-template-columns: 20vw, auto, 20vw;
+    grid-template-areas: 
+        "header header header"
+        ". main ."
+        "footer footer footer";
+    /*temp for outline bars; TODO: remove*/
+    grid-gap: 10px;
+    background-color: aqua;
+}
+
+header nav a {
+    outline: 5px solid black;
+    padding: 5px;
+}
+/*****************/
+/******** nav flexbox ********/
 header nav {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
-
+.navFlexObj {
+    /*outline: 5px solid black;*/
+}
+/*****************/
 h1 {
     display: inline;
+}
+
+footer {
+    background-color: darkgray;
+    height: auto;
 }
 
 a:link, a:hover {
