@@ -1,11 +1,11 @@
-/*Palette: fa215d 0000cd 00ffff bf00ff 3066be*/
+/*Palette: fa215d 0000cd 00ffff bf00ff 3066be MAYBE #ff00dc*/
 * {
     margin: 0;
     padding: 0;
 }
 /*@font-face {
     font-family: Geostar;
-    src: url(media/Geostar-Regular.ttf);
+    src: url("../media/Geostar-Regular.ttf");
 }*/
 /******** grid ********/
 header {
@@ -78,7 +78,7 @@ header nav {
 /*****************/
 h1 {
     display: inline;
-    /*font-family: 'Geostar', cursive;*/
+    font-family: 'Geostar', cursive;
     /*font-size: 1.25em;*/
 }
 
