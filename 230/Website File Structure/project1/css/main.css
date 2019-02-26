@@ -42,9 +42,9 @@ footer {
         ". main ."
         "footer footer footer";
     justify-content: stretch;
-    /*temp for outline bars; TODO: remove*/
-    /*grid-gap: 10px;*/
-    /*background-color: aqua;*/
+    /*temp for outline bars; TODO: remove
+    grid-gap: 10px;
+    background-color: aqua;*/
     background-image: linear-gradient(black, mediumblue, aqua, white);
 
 }
