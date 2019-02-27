@@ -7,13 +7,26 @@
     font-family: Geostar;
     src: url("../media/Geostar-Regular.ttf");
 }*/
+html {
+    width: 100vw;
+}
+@font-face {
+    font-family: Finger Paint;
+    src: url("../media/Finger_Paint/FingerPaint-Regular.ttf");
+}
+@font-face {
+    font-family: Varela Round;
+    src: url("../media/Varela_Round/VarelaRound-Regular.ttf");
+}
 /******** grid ********/
 header {
     grid-area: header;
-    background-color: black;
+    width: 100vw;
+    /*background-color: black;*/
     margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
-
 #mainContent {
     grid-area: main;
     outline: 5px solid #bf00ff;
@@ -21,7 +34,6 @@ header {
     margin-bottom: 5px;
     background-color: white;
 }
-
 footer {
     grid-area: footer;
     margin-top: 5px;
@@ -33,21 +45,34 @@ footer {
 
 #wrapper {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: grid;
     grid-template-rows: min-content auto min-content;
-    grid-template-columns: 20vw, auto, 20vw;
-    grid-template-areas: 
-        "header header header"
-        ". main ."
-        "footer footer footer";
+    grid-template-columns: 20vw auto 20vw;
+    grid-template-areas: "header header header" ". main ." "footer footer footer";
     justify-content: stretch;
-    /*temp for outline bars; TODO: remove
-    grid-gap: 10px;
-    background-color: aqua;*/
     background-image: linear-gradient(black, mediumblue, aqua, white);
-
 }
+/*****************/
+/******** nav flexbox ********/
+/*#navlink3short {
+    display: none;
+}*/
+header nav {
+    margin: 0px;
+    /*width: 99vw;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.navFlexObj {
+    flex-grow: 1;
+}
+#navlink1 {
+    flex-grow: 0;
+}
+/*****************/
 
 header nav a {
     /*outline: 5px solid pink;*/ /*for construction only*/
@@ -55,51 +80,38 @@ header nav a {
     padding: 15px;
     text-align: center;
 }
-/*****************/
-/******** nav flexbox ********/
+
 header nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    /*background-color: black;*/
-    background: linear-gradient(/*to right,*/ /*black,*/ /*mediumblue*/#ff00dc, aqua);
+    background: linear-gradient(#ff00dc, aqua);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.navFlexObj {
-    flex-grow: 1;
-}
-
-#navlink1 {
-    flex-grow: 0;
-}
-/*****************/
 h1 {
     display: inline;
-    font-family: 'Geostar', cursive;
-    /*font-size: 1.25em;*/
+    font-family: 'Finger Paint', cursive;
+}
+
+#navlink2, #navlink3, /*#navlink3short,*/ #navlink4 {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 1.5em;
 }
 
 nav a {
     font-size: large;
     font-weight: bold;
-    transition: opacity .25s ease-in-out;
+    transition: opacity .5s ease-in-out;
 }
 
 nav a:hover {
-    /*background-color: whitesmoke;*/
-    text-shadow: 5px 5px 2px whitesmoke;
+    background: linear-gradient(#ff00dc, aqua);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: transparent 3px;
     opacity: 0.5;
 }
 
-a:link, a:hover {
-    color: black;
-    text-decoration: none;
-}
-
-a:visited {
+a:link, a:hover, a:visited {
     color: black;
     text-decoration: none;
 }
@@ -111,4 +123,32 @@ h3 {
 ol {
     /*list-style: none;*/
     list-style-position: inside;
+}
+/*Temp responsive design for main content: replace w/ page-specific method of stopping single lines of content from spanning the main content obj*/
+@media screen and (min-width: 1000px){
+    #wrapper {
+        grid-template-columns: 1fr 600px 1fr;
+    }
+}
+
+/*RESPONSIVE FOR NAVBAR: Up to 538px*/
+@media screen and (max-width: 675px) {
+    #navlink1 {
+        font-size: initial;
+        width: min-content;
+    }
+    /*#navlink3short {
+        display: block;
+    }
+    #navlink3 {
+        display: none;
+    }*/
+}
+/*Title probs from width 669 - 600
+    EDIT: Randomly fixed
+*/
+@media screen and (max-width: 600px) {
+    header nav a {
+        padding: 10px;
+    }
 }
