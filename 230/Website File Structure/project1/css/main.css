@@ -24,8 +24,8 @@ header {
     width: 100vw;
     /*background-color: black;*/
     margin-bottom: 10px;
-    margin-left: 0px;
-    margin-right: 0px;
+    /*margin-left: 0px;
+    margin-right: 0px;*/
 }
 #mainContent {
     grid-area: main;
