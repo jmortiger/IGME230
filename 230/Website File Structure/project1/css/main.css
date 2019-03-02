@@ -83,6 +83,7 @@ header nav {
     background: linear-gradient(#ff00dc, aqua);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 h1 {
@@ -95,7 +96,7 @@ h1 {
     font-size: 1.5em;
 }
 
-nav a, nav a:link, nav a:visited {
+.navFlexObj, .navFlexObj:link, .navFlexObj:visited {
     font-size: large;
     font-weight: bold;
     transition: opacity .5s ease-in-out;
@@ -111,6 +112,7 @@ nav a:hover {
 
 a:link, a:hover, a:visited {
     text-decoration: none;
+    text-decoration-color: none;
 }
 
 h3 {
