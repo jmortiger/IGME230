@@ -7,8 +7,10 @@
     font-family: Geostar;
     src: url("../media/Geostar-Regular.ttf");
 }*/
+/*FIXES HORIZONTAL SCROLL PROBLEM*/
 html {
-    width: 100vw;
+    width: 100%;
+    height: 100%;
 }
 @font-face {
     font-family: Finger Paint;
@@ -21,34 +23,31 @@ html {
 /******** grid ********/
 header {
     grid-area: header;
-    width: 100vw;
-    /*background-color: black;*/
     margin-bottom: 10px;
-    /*margin-left: 0px;
-    margin-right: 0px;*/
+    /*background-color: black;*/
 }
 #mainContent {
     grid-area: main;
-    outline: 5px solid #bf00ff;
     padding: 5px;
     margin-bottom: 5px;
+    outline: 5px solid #bf00ff;
     background-color: white;
 }
 footer {
     grid-area: footer;
     margin-top: 5px;
-    background-color: darkgray;
     height: auto;
+    background-color: darkgray;
     text-align: center;
     font-size: large;
 }
 
 #wrapper {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-rows: min-content auto min-content;
-    grid-template-columns: 20vw auto 20vw;
+    grid-template-columns: 20% auto 20%;
     grid-template-areas: "header header header" ". main ." "footer footer footer";
     justify-content: stretch;
     background-image: linear-gradient(black, mediumblue, aqua, white);
@@ -60,7 +59,6 @@ footer {
 }*/
 header nav {
     margin: 0px;
-    /*width: 99vw;*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -97,7 +95,7 @@ h1 {
     font-size: 1.5em;
 }
 
-nav a {
+nav a, nav a:link, nav a:visited {
     font-size: large;
     font-weight: bold;
     transition: opacity .5s ease-in-out;
@@ -112,7 +110,6 @@ nav a:hover {
 }
 
 a:link, a:hover, a:visited {
-    color: black;
     text-decoration: none;
 }
 
@@ -125,11 +122,11 @@ ol {
     list-style-position: inside;
 }
 /*Temp responsive design for main content: replace w/ page-specific method of stopping single lines of content from spanning the main content obj*/
-@media screen and (min-width: 1000px){
+/*@media screen and (min-width: 1000px){
     #wrapper {
         grid-template-columns: 1fr 600px 1fr;
     }
-}
+}*/
 
 /*RESPONSIVE FOR NAVBAR: Up to 538px*/
 @media screen and (max-width: 675px) {

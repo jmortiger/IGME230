@@ -1,0 +1,36 @@
+@import "main.css";
+/*Add something here to indicate this is the page you're on.*/
+#navlink2 {
+
+}
+
+#mainFlex {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+}
+#sideNav {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    outline: 5px dotted black;
+    /*outline: 5px solid pink;*/
+    /*padding: 5px;*/
+    margin: 5px;
+}
+#contentList {
+    flex: 1 1 auto;
+    
+    /*outline: 5px dotted black;*/
+    /*outline: 5px solid pink;*/
+    padding: 5px;
+    margin: 5px;
+}
+
+.sideNavObj {
+    display: block;
+    text-align: center;
+}
