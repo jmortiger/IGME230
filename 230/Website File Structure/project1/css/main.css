@@ -82,6 +82,7 @@ header nav {
     background: linear-gradient(#ff00dc, aqua);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    /*color: #ff00dc;*/
     color: transparent;
 }
 
@@ -109,10 +110,12 @@ nav a:hover {
     opacity: 0.5;
 }
 
-a:link, a:hover, a:visited {
+a:link, a:visited, a:hover, a:active {
     text-decoration: none;
     /*text-decoration-color: none;*/
 }
+
+#mainContent { font-family: sans-serif; }
 
 h3 {
     display: inline;

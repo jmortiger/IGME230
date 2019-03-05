@@ -1,7 +1,8 @@
 @import "main.css";
 /*Add something here to indicate this is the page you're on.*/
 #navlink2 {
-    /*text-decoration: underline;*/
+    text-decoration: underline;
+    text-decoration-color: white;
     /*-webkit-text-stroke: whitesmoke 1px;*/
     /*-webkit-text-stroke-color: whitesmoke;
     -webkit-text-stroke-width: 3px;*/
