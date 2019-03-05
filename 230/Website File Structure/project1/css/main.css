@@ -31,7 +31,8 @@ header {
     padding: 5px;
     margin-bottom: 5px;
     outline: 5px solid #bf00ff;
-    background-color: white;
+    background-color: rgba(0,0,0,.75);
+    color: whitesmoke;
 }
 footer {
     grid-area: footer;
@@ -54,9 +55,7 @@ footer {
 }
 /*****************/
 /******** nav flexbox ********/
-/*#navlink3short {
-    display: none;
-}*/
+#navlink3short { display: none; }
 header nav {
     margin: 0px;
     display: flex;
@@ -91,7 +90,7 @@ h1 {
     font-family: 'Finger Paint', cursive;
 }
 
-#navlink2, #navlink3, /*#navlink3short,*/ #navlink4 {
+#navlink2, #navlink3, #navlink3short, #navlink4 {
     font-family: 'Varela Round', sans-serif;
     font-size: 1.5em;
 }
@@ -112,7 +111,7 @@ nav a:hover {
 
 a:link, a:hover, a:visited {
     text-decoration: none;
-    text-decoration-color: none;
+    /*text-decoration-color: none;*/
 }
 
 h3 {
@@ -130,18 +129,14 @@ ol {
     }
 }*/
 
-/*RESPONSIVE FOR NAVBAR: Up to 538px*/
+/*RESPONSIVE FOR NAVBAR: Works past 480px*/
 @media screen and (max-width: 675px) {
     #navlink1 {
         font-size: initial;
         width: min-content;
     }
-    /*#navlink3short {
-        display: block;
-    }
-    #navlink3 {
-        display: none;
-    }*/
+    #navlink3short { display: block; }
+    #navlink3 { display: none; }
 }
 /*Title probs from width 669 - 600
     EDIT: Randomly fixed

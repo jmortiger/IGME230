@@ -1,7 +1,10 @@
 @import "main.css";
 /*Add something here to indicate this is the page you're on.*/
 #navlink2 {
-
+    /*text-decoration: underline;*/
+    /*-webkit-text-stroke: whitesmoke 1px;*/
+    /*-webkit-text-stroke-color: whitesmoke;
+    -webkit-text-stroke-width: 3px;*/
 }
 
 #mainFlex {
@@ -17,7 +20,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    outline: 5px dotted black;
+    outline: 5px dotted whitesmoke;
     /*outline: 5px solid pink;*/
     /*padding: 5px;*/
     margin: 5px;
@@ -34,4 +37,12 @@
 .sideNavObj {
     display: block;
     text-align: center;
+}
+
+#sideNav a {
+    padding: 10px;
+}
+
+#sideNav a:link, #sideNav a:visited {
+    color: whitesmoke;
 }
