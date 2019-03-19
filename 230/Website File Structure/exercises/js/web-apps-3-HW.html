@@ -40,9 +40,9 @@
         p1.style.textTransform = "uppercase";
         p1.style.textShadow = "3px 2px #A44";
         document.querySelector("p:nth-of-type(2)").innerHTML = "";
-        //Finish these
-        document.querySelector("#lastParagraph").innerHTML = "<img source=\"https://pixel.nymag.com/imgs/daily/selectall/2018/03/19/magazine/19-aliens-vert-lede.w570.h712.jpg\" alt=\"UFO Image\"></img>";
-        document.querySelector("footer").innerHTML = "&copy; 20xx Justin Morris";
+        document.querySelector("#lastParagraph").innerHTML = "<img src=\"https://pixel.nymag.com/imgs/daily/selectall/2018/03/19/magazine/19-aliens-vert-lede.w570.h712.jpg\" alt=\"UFO Image\"></img>";
+        let year = (new Date()).getUTCFullYear();
+        document.querySelector("footer").innerHTML = "&copy; " + year + " Justin Morris";
     </script>
 </body>
 </html>
