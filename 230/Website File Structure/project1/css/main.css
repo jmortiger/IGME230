@@ -20,6 +20,16 @@ html {
     font-family: Varela Round;
     src: url("../media/Varela_Round/VarelaRound-Regular.ttf");
 }
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/Inconsolata-Regular.tff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/Inconsolata-Bold.tff");
+    font-weight: bold;
+}
 /******** grid ********/
 header {
     grid-area: header;
