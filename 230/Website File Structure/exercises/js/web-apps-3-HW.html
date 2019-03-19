@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,7 +31,18 @@
         h2s[1].innerHTML = "My UFO Pictures";
         h2s[2].innerHTML = "";
         document.body.style.fontFamily = "san-serif";
-        document.body.style.color = "";
+        document.body.style.color = "#ff00dc";
+        let p1 = document.querySelector("p");
+        p1.innerHTML = "Report your UFO sightings here: <a href=\"http://www.nuforc.org\">http://www.nuforc.org</a>";
+        p1.style.color = "green";
+        p1.style.fontWeight = "bold";
+        p1.style.fontSize = "2em";
+        p1.style.textTransform = "uppercase";
+        p1.style.textShadow = "3px 2px #A44";
+        document.querySelector("p:nth-of-type(2)").innerHTML = "";
+        //Finish these
+        document.querySelector("#lastParagraph").innerHTML = "<img source=\"https://pixel.nymag.com/imgs/daily/selectall/2018/03/19/magazine/19-aliens-vert-lede.w570.h712.jpg\" alt=\"UFO Image\"></img>";
+        document.querySelector("footer").innerHTML = "&copy; 20xx Justin Morris";
     </script>
 </body>
 </html>
