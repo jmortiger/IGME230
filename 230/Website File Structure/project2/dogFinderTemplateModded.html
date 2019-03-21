@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Modded Dog Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/modded.css" type="text/css" rel="stylesheet">
+    <!-- Import jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        window.onload = init;
+        function init() { document.querySelector("#search").onclick = getData; }
+        function getData() {
+            // 1 - main entry point to web service
+            const SERVICE_URL = "https://dog.ceo/api/breeds/image/random";
+
+            // No API Key required!
+
+            // 2 - build up our URL string
+            // not necessary for this service endpoint
+            let url = SERVICE_URL;
+
+            // 3 - parse the user entered term we wish to search
+            // not necessary for this service endpoint
+
+            // 4 - update the UI
+            document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
+
+            // 5- call the web service, and prepare to download the file
+            $.ajax({
+                dataType: "json",
+                url: url,
+                data: null,
+                success: jsonLoaded
+            });
+        }
+
+
+        function jsonLoaded(obj) {
+            // 6 - if there are no results, print a message and return
+            // Here, we don't get an array back, but instead a single object literal with 2 properties
+
+            if (obj.status != "success") {
+                document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
+                return; // Bail out
+            }
+
+            // 7 - if there is an array of results, loop through them
+            let results = obj.data
+            let bigString = "<p><i>Here is the result!</i></p>";
+            let src = obj.message;
+
+            bigString += `<img src="${src}" alt="random dog" />`
+
+            // 8 - display final results to user
+            document.querySelector("#content").innerHTML = bigString;
+        }
+    </script>
+
+</head>
+<body>
+    <header>
+        <h1 id="title">Modded Dog Finder</h1>
+    </header>
+    <p id="searchbar">
+        Search Term -&gt; 
+        <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" /> 
+        <button type="button" id="search" class="green">Search!</button>
+    </p>
+    <p id="debug"></p>
+    <hr/>
+    <h2>Results</h2>
+    <div id="content">
+        <p>No data yet!</p>
+    </div>
+
+</body>
+</html>
