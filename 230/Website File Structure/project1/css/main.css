@@ -117,6 +117,10 @@ nav a:hover {
     opacity: 0.5;
     color: transparent;
 }
+/*Fix link probs here*/
+nav a:link, nav a:visited, nav a:hover, nav a:active {
+    
+}
 
 a:link, a:visited, a:hover, a:active {
     text-decoration: none;
