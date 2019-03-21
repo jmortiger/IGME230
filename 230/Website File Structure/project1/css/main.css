@@ -73,12 +73,8 @@ header nav {
     justify-content: space-between;
     align-items: center;
 }
-.navFlexObj {
-    flex-grow: 1;
-}
-#navlink1 {
-    flex-grow: 0;
-}
+.navFlexObj { flex-grow: 1; }
+#navlink1 { flex-grow: 0; }
 /*****************/
 
 header nav a {
@@ -91,6 +87,7 @@ header nav a {
 header nav {
     background: linear-gradient(#ff00dc, aqua);
     -webkit-background-clip: text;
+    /*This is where Edge problems are.*/
     -webkit-text-fill-color: transparent;
     /*color: #ff00dc;*/
     color: transparent;
@@ -118,6 +115,7 @@ nav a:hover {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: transparent 3px;
     opacity: 0.5;
+    color: transparent;
 }
 
 a:link, a:visited, a:hover, a:active {
