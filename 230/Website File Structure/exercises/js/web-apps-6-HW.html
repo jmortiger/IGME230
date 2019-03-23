@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,20 +30,35 @@
 <body>
     <div id="colorform">
         <legend>Choose your favorite color!</legend>
-        <p><input type="radio" name="colorGroup" id="colorGroup" value="red" checked /> Red</p>
+        <p><input type="radio" name="colorGroup" id="colorGroup" value="red" /> Red</p>
         <p><input type="radio" name="colorGroup" id="colorGroup" value="green" /> Green</p>
         <p><input type="radio" name="colorGroup" id="colorGroup" value="blue" /> Blue</p>
         <p><button id="colorButton" type="button">Submit</button></p>
         <p id="info"></p>
     </div>
     <script>
+        "use strict";
         let button = document.querySelector("#colorButton");
         let output = document.querySelector("#info");
-        button.onclick = function (e) {
-            //console.log("onclick worked");
-            let answer = "";
 
-            output.innerHTML = 'You selected ${answer}.';
+        document.querySelector("input").checked = true;
+        output.innerHTML = "Red is selected by default.";
+
+        let radioButtons = document.querySelectorAll("#colorGroup");
+        for (var i = 0; i < radioButtons.length; i++)
+            radioButtons[i].onchange = function (e) {
+                output.innerHTML = `You selected ${e.target.value}.`;
+            }
+        button.onclick = function (e) {
+            let answer = "";
+            for (let i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].onchange = undefined;
+                if (radioButtons[i].checked)
+                    answer = radioButtons[i].value;
+            }
+            output.innerHTML = `Your final answer was ${answer}.`;
+            document.querySelector("legend").style.color = answer;
+            e.target.onclick = undefined;
         }
     </script>
 </body>
