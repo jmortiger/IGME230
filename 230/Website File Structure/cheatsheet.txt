@@ -1,0 +1,5 @@
+I. CSS
+	1. Buttons
+		- border-radius: adds a rounded curve of the specified size to the button's corners.
+		- cursor: not-allowed;
+			Adds cursor feedback indicating the button can't be used.

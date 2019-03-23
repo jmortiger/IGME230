@@ -47,10 +47,10 @@
 
             // 7 - if there is an array of results, loop through them
             let results = obj.data
-            let bigString = "<p><i>Here is the result!</i></p>";
             let src = obj.message;
+            let bigString = `<p><i>Here is the result!</i> <a href="${src}">${src}</a></p>`;
 
-            bigString += `<img src="${src}" alt="random dog" />`
+            bigString += `<img src="${src}" alt="random dog" style="float:right;" />`
 
             // 8 - display final results to user
             document.querySelector("#content").innerHTML = bigString;
