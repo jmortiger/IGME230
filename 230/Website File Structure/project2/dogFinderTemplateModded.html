@@ -9,20 +9,27 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
         window.onload = init;
-        function init() { document.querySelector("#search").onclick = getData; }
+        function init() {
+            document.querySelector("#search").onclick = getData;
+            document.querySelector("#searchterm").onfocus = function (e) {
+                if (e.target.value == "not used")
+                    e.target.value = "";
+            }
+            document.querySelector("#searchterm").onblur = function (e) {
+                if (e.target.value == "")
+                    e.target.value = "not used";
+            }
+        }
         function getData() {
             // 1 - main entry point to web service
             const SERVICE_URL = "https://dog.ceo/api/breeds/image/random";
 
             // No API Key required!
 
-            // 2 - build up our URL string
-            // not necessary for this service endpoint
+            // 2 - build up our URL string; not necessary for this service endpoint
             let url = SERVICE_URL;
 
-            // 3 - parse the user entered term we wish to search
-            // not necessary for this service endpoint
-
+            // 3 - parse the user entered term we wish to search; not necessary for this service endpoint
             // 4 - update the UI
             document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
 
@@ -34,12 +41,9 @@
                 success: jsonLoaded
             });
         }
-
-
         function jsonLoaded(obj) {
             // 6 - if there are no results, print a message and return
             // Here, we don't get an array back, but instead a single object literal with 2 properties
-
             if (obj.status != "success") {
                 document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
                 return; // Bail out
@@ -49,7 +53,6 @@
             let results = obj.data
             let src = obj.message;
             let bigString = `<p><i>Here is the result!</i> <a href="${src}">${src}</a></p>`;
-
             bigString += `<img src="${src}" alt="random dog" style="float:right;" />`
 
             // 8 - display final results to user
@@ -64,7 +67,7 @@
     </header>
     <p id="searchbar">
         Search Term -&gt; 
-        <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" /> 
+        <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" />
         <button type="button" id="search" class="green">Search!</button>
     </p>
     <p id="debug"></p>
