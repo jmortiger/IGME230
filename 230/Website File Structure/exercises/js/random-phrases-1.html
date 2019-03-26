@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Random 1</title>
+    <style>
+        header {
+            width: 100%;
+            text-align: center;
+        }
+        #mainContent {
+            margin: 30px 0px 30px 0px;
+            width: 100%;
+            text-align: center;
+        }
+        footer {
+            width: 100%;
+            background-color: lightgray;
+            text-align: center;
+        }
+    </style>
+    <script>
+        "use strict";
+        window.onload = init;
+        let phrases = ["Phrase 1", "Phrase 2", "Phrase 3", "Phrase 4", "Phrase 5"];
+
+        function init() {
+            let randNum = Math.floor(Math.random() * phrases.length);
+            document.querySelector("#mainContent").innerHTML = phrases[randNum];
+        }
+    </script>
+</head>
+<body>
+    <header><h1>Random Phrases 1</h1></header>
+    <img src="" alt="image" />
+    <div id="mainContent"></div>
+    <footer>Justin Morris</footer>
+</body>
+</html>
