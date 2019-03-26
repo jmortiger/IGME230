@@ -8,9 +8,17 @@
     <!-- Import jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
+        //debugger;
+        const searchedTermKey = "searchedTerm";
         window.onload = init;
         function init() {
+            let storedSearchTerm = localStorage.getItem("searchedTerm");
+            if ((storedSearchTerm != null) && (storedSearchTerm != ""))
+                document.querySelector("#searchterm").value = storedSearchTerm;
             document.querySelector("#search").onclick = getData;
+            document.querySelector("#searchByBreed").onclick = function (e) {
+
+            }
             document.querySelector("#searchterm").onfocus = function (e) {
                 if (e.target.value == "not used")
                     e.target.value = "";
@@ -30,6 +38,7 @@
             let url = SERVICE_URL;
 
             // 3 - parse the user entered term we wish to search; not necessary for this service endpoint
+            localStorage.setItem("searchedTerm", document.querySelector("#searchterm").value);
             // 4 - update the UI
             document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
 
@@ -64,6 +73,7 @@
 <body>
     <header>
         <h1 id="title">Modded Dog Finder</h1>
+        <button type="button" id="searchByBreed" class="green">Search by breed! (Under construction)</button>
     </header>
     <p id="searchbar">
         Search Term -&gt; 
