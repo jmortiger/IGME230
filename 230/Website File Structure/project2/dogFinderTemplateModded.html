@@ -15,7 +15,7 @@
             let storedSearchTerm = localStorage.getItem("searchedTerm");
             if ((storedSearchTerm != null) && (storedSearchTerm != ""))
                 document.querySelector("#searchterm").value = storedSearchTerm;
-            document.querySelector("#search").onclick = getData;
+            document.querySelector("#search").onclick = searchDefault;
             document.querySelector("#searchByBreed").onclick = function (e) {
 
             }
@@ -28,7 +28,7 @@
                     e.target.value = "not used";
             }
         }
-        function getData() {
+        function searchDefault() {
             // 1 - main entry point to web service
             const SERVICE_URL = "https://dog.ceo/api/breeds/image/random";
 
@@ -36,6 +36,19 @@
 
             // 2 - build up our URL string; not necessary for this service endpoint
             let url = SERVICE_URL;
+            getData(url);
+        }
+        function searchByBreed() {
+            // 1 - main entry point to web service
+            const SERVICE_URL = "https://dog.ceo/api/breed/";
+
+            // No API Key required!
+
+            // 2 - build up our URL string
+            let url = SERVICE_URL;// TODO: finish
+            getData(url);
+        }
+        function getData(url) {
 
             // 3 - parse the user entered term we wish to search; not necessary for this service endpoint
             localStorage.setItem("searchedTerm", document.querySelector("#searchterm").value);
