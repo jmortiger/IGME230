@@ -16,8 +16,9 @@
             if ((storedSearchTerm != null) && (storedSearchTerm != ""))
                 document.querySelector("#searchterm").value = storedSearchTerm;
             document.querySelector("#search").onclick = searchDefault;
-            document.querySelector("#searchByBreed").onclick = function (e) {
-
+            document.querySelector("#searchByBreed").onclick = searchByBreed;
+            document.querySelector("#clearDebug").onclick = function (e) {
+                document.querySelector("#debug").innerHTML = "<b>Cleared.</b><br />";
             }
             document.querySelector("#searchterm").onfocus = function (e) {
                 if (e.target.value == "not used")
@@ -45,15 +46,23 @@
             // No API Key required!
 
             // 2 - build up our URL string
-            let url = SERVICE_URL;// TODO: finish
+            debugger;
+            let temp = document.querySelector("#searchterm").value;
+            // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
+            if (temp.includes(" ")) {
+                let tempArr = temp.split(" ");
+                temp = tempArr[tempArr.length - 1];
+                for (let i = tempArr.length - 2; i >= 0; i--)
+                    temp += "-" + tempArr[i];
+            }
+            let url = SERVICE_URL + temp + "/images/random";
             getData(url);
         }
         function getData(url) {
-
             // 3 - parse the user entered term we wish to search; not necessary for this service endpoint
             localStorage.setItem("searchedTerm", document.querySelector("#searchterm").value);
             // 4 - update the UI
-            document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
+            document.querySelector("#debug").innerHTML += `<br /><b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
 
             // 5- call the web service, and prepare to download the file
             $.ajax({
@@ -67,14 +76,16 @@
             // 6 - if there are no results, print a message and return
             // Here, we don't get an array back, but instead a single object literal with 2 properties
             if (obj.status != "success") {
-                document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
+                document.querySelector("#content").innerHTML = `<p><i>There was a problem!</i> message: ${obj.message}</p>`;
                 return; // Bail out
             }
 
             // 7 - if there is an array of results, loop through them
             let results = obj.data
             let src = obj.message;
-            let bigString = `<p><i>Here is the result!</i> <a href="${src}">${src}</a></p>`;
+            let link = `<a href="${src}">${src}</a>`;
+            document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
+            let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
             bigString += `<img src="${src}" alt="random dog" style="float:right;" />`
 
             // 8 - display final results to user
@@ -86,12 +97,13 @@
 <body>
     <header>
         <h1 id="title">Modded Dog Finder</h1>
-        <button type="button" id="searchByBreed" class="green">Search by breed! (Under construction)</button>
     </header>
     <p id="searchbar">
-        Search Term -&gt; 
+        Search Term -&gt;
         <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" />
-        <button type="button" id="search" class="green">Search!</button>
+        <button type="button" id="search" class="green">Search for a random image!</button>
+        <button type="button" id="searchByBreed" class="green">Search for a random image by breed! (Under construction)</button>
+        <button type="button" id="clearDebug" class="green">Clear Query List</button>
     </p>
     <p id="debug"></p>
     <hr/>
