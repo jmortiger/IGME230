@@ -24,13 +24,8 @@
          .year of 1970 or earlier. Use Array.filter() on the cars array:
          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
         */
-        let filterCarsBefore1971 = (cars) => {
-            let temp = new Array();
-            for (let val in cars)
-                for (let key in val)
-                    if (key == "year" && val[key] <= 1970)
-                        temp.push(val);
-        }
+        //debugger;
+        let filterCarsBefore1971 = (car) => car["year"] <= 1970;
         let classicCars = cars.filter(filterCarsBefore1971);
         console.log(classicCars);
         /*
