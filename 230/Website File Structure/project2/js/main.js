@@ -2,6 +2,7 @@
 // 1 - main entry point to web service
 const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
+const favURLKey = "jgm1844-favs";
 window.onload = init;
 function init() {
     let storedSearchTerm = localStorage.getItem(searchedTermKey);
@@ -94,10 +95,10 @@ function getData(url) {
 }
 function jsonLoaded(obj) {
     // 6 - if there are no results, print a message and return
-    // Here, we don't get an array back, but instead a single object literal with 2 properties
+    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
     if (obj.status != "success") {
         document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
-        document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b>></p>";
+        document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b></p>";
         return; // Bail out
     }
     let bigString;
@@ -108,12 +109,13 @@ function jsonLoaded(obj) {
         for (let i = 0; i < results.length; i++) {
             let result = results[i];
             
-            let smallURL = result;
-            if (!smallURL) smallURL = "media/no-image-found.png";
-            
-            let line = `<div class="result"><img src="${smallURL}" />`;
-            line += `<span><a target="_blank" href="${result}">View Source</a>`;
-            line += `</span></div>`;
+            let src = result;
+            if (!src) src = "media/no-image-found.png";
+
+            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
+            //let line = `<div class="result"><img src="${src}" />`;
+            //line += `<span><a target="_blank" href="${result}">View Source</a>`;
+            //line += `</span></div>`;
             
             bigString += line;
         }
@@ -125,16 +127,16 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
+        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
     }
 
     // 8 - display final results to user
     document.querySelector("#content").innerHTML = bigString;
 }
 
-function parseMessage(src) {
-    let link = `<a href="${src}">${src}</a>`;
-    document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
-    let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-    bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
-}
+//function parseMessage(src) {
+//    let link = `<a href="${src}">${src}</a>`;
+//    document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
+//    let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
+//    bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
+//}
