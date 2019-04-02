@@ -95,7 +95,7 @@ function getData(url) {
 }
 function jsonLoaded(obj) {
     // 6 - if there are no results, print a message and return
-    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
+    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     if (obj.status != "success") {
         document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
         document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b></p>";
@@ -108,15 +108,9 @@ function jsonLoaded(obj) {
         let results = obj.message;
         for (let i = 0; i < results.length; i++) {
             let result = results[i];
-            
             let src = result;
             if (!src) src = "media/no-image-found.png";
-
-            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
-            //let line = `<div class="result"><img src="${src}" />`;
-            //line += `<span><a target="_blank" href="${result}">View Source</a>`;
-            //line += `</span></div>`;
-            
+            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
             bigString += line;
         }
         bigString += "</div>";
@@ -127,7 +121,7 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button></span><a href="${src}">View Source</a></div>`;
+        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     }
 
     // 8 - display final results to user

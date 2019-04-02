@@ -33,6 +33,7 @@ html {
 }
 
 button {
+    display: inline;
     padding: 7px 10px 7px 10px;
     text-align: center;
     /*box-shadow: rgba(0,0,0,.4) 7px 7px;*/
@@ -52,28 +53,60 @@ button:active{
     box-shadow: rgba(0,0,0,.5) 3px 3px;
 }
 
-#wrapper {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: space-between;
-}
 header {
-    flex: 0 0 auto;
+    /*flex: 0 0 auto;*/
+    grid-area: header;
+
+    outline: 3px solid black;
 }
 #mainBody {
-    flex: 1 1 auto;
+    /*flex: 1 1 auto;*/
+    grid-area: mainBody;
+    align-self: stretch;
+
+
+    height: 100%;
+    outline: 3px solid black;
 }
 footer {
-    flex: 0 0 auto;
+    /*flex: 0 0 auto;*/
+    grid-area: footer;
     text-align: center;
+
+    outline: 3px solid black;
+}
+#wrapper {
+    /*display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;*/
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    grid-template-columns: auto;
+    grid-template-areas: "header" "mainBody" "footer";
+    justify-content: stretch;
+    align-content: stretch;
+    height: 100%;
 }
 
-img {
+.result {
+    border: 5px solid gray;
     width: min-content;
     height: min-content;
 }
+
+a {
+    display: inline;
+}
+
+.favButton, .imgLink {
+    /*text-align: center;*/
+}
+
+/*img {
+    width: min-content;
+    height: min-content;
+}*/
 #searchbar {
     display: inline;
     text-align: center;
