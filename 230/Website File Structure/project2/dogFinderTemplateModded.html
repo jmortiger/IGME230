@@ -13,6 +13,7 @@
         window.onload = init;
         function init() {
             let storedSearchTerm = localStorage.getItem("searchedTerm");
+            // Sets searchbar term to stored previous value
             if ((storedSearchTerm != null) && (storedSearchTerm != ""))
                 document.querySelector("#searchterm").value = storedSearchTerm;
             document.querySelector("#search").onclick = searchDefault;
