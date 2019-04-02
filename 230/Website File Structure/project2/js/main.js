@@ -1,4 +1,6 @@
 //debugger;
+// 1 - main entry point to web service
+const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
 window.onload = init;
 function init() {
@@ -8,6 +10,7 @@ function init() {
         document.querySelector("#searchterm").value = storedSearchTerm;
     document.querySelector("#search").onclick = searchDefault;
     document.querySelector("#searchByBreed").onclick = searchByBreed;
+    document.querySelector("#searchByBreedAll").onclick = searchByBreed;
     document.querySelector("#clearDebug").onclick = (e) => {
         document.querySelector("#debug").innerHTML = "<b>Cleared.</b><br />";
     }
@@ -21,19 +24,29 @@ function init() {
     }
 }
 function searchDefault() {
-    // 1 - main entry point to web service
-    const SERVICE_URL = "https://dog.ceo/api/breeds/image/random";
-
     // No API Key required!
 
     // 2 - build up our URL string; not necessary for this service endpoint
-    let url = SERVICE_URL;
+    let url = SERVICE_URL + "s/image/random";
     getData(url);
 }
 function searchByBreed() {
-    // 1 - main entry point to web service
-    const SERVICE_URL = "https://dog.ceo/api/breed/";
+    // No API Key required!
 
+    // 2 - build up our URL string
+    debugger;
+    let temp = document.querySelector("#searchterm").value;
+    // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
+    if (temp.includes(" ")) {
+        let tempArr = temp.split(" ");
+        temp = tempArr[tempArr.length - 1];
+        for (let i = tempArr.length - 2; i >= 0; i--)
+            temp += "-" + tempArr[i];
+    }
+    let url = SERVICE_URL + temp + "/images/random";
+    getData(url);
+}
+function searchByBreed() {
     // No API Key required!
 
     // 2 - build up our URL string
