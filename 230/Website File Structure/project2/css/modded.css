@@ -63,7 +63,7 @@ header {
     /*flex: 1 1 auto;*/
     grid-area: mainBody;
     align-self: stretch;
-
+    justify-self: stretch;
 
     height: 100%;
     outline: 3px solid black;
