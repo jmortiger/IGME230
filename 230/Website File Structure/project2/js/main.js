@@ -26,15 +26,14 @@ function init() {
             document.querySelector("#clearDebug").style.display = "none";
             document.querySelector("#toggleDebug").innerHTML = "Show Debug Log";
         }
-
     }
     document.querySelector("#searchterm").onfocus = (e) => {
-        if (e.target.value == "not used")
+        if (e.target.value == "<Please enter a search term>")
             e.target.value = "";
     }
     document.querySelector("#searchterm").onblur = (e) => {
         if (e.target.value == "")
-            e.target.value = "not used";
+            e.target.value = "<Please enter a search term>";
     }
 }
 function searchDefault() {
