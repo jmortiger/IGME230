@@ -10,9 +10,22 @@ function init() {
         document.querySelector("#searchterm").value = storedSearchTerm;
     document.querySelector("#search").onclick = searchDefault;
     document.querySelector("#searchByBreed").onclick = searchByBreed;
-    document.querySelector("#searchByBreedAll").onclick = searchByBreed;
+    document.querySelector("#searchByBreedAll").onclick = searchByBreedAll;
     document.querySelector("#clearDebug").onclick = (e) => {
         document.querySelector("#debug").innerHTML = "<b>Cleared.</b><br />";
+    }
+    document.querySelector("#toggleDebug").onclick = (e) => {
+        if (document.querySelector("#debug").style.display == "none") {
+            document.querySelector("#debug").style.display = "block";
+            document.querySelector("#clearDebug").style.display = "inline";
+            document.querySelector("#toggleDebug").innerHTML = "Hide Debug Log";
+        }
+        else {
+            document.querySelector("#debug").style.display = "none";
+            document.querySelector("#clearDebug").style.display = "none";
+            document.querySelector("#toggleDebug").innerHTML = "Show Debug Log";
+        }
+
     }
     document.querySelector("#searchterm").onfocus = (e) => {
         if (e.target.value == "not used")
@@ -43,14 +56,14 @@ function searchByBreed() {
         for (let i = tempArr.length - 2; i >= 0; i--)
             temp += "-" + tempArr[i];
     }
-    let url = SERVICE_URL + temp + "/images/random";
+    let url = SERVICE_URL + "/" + temp + "/images/random";
     getData(url);
 }
-function searchByBreed() {
+function searchByBreedAll() {
     // No API Key required!
 
     // 2 - build up our URL string
-    debugger;
+    //debugger;
     let temp = document.querySelector("#searchterm").value;
     // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
     if (temp.includes(" ")) {
@@ -59,7 +72,7 @@ function searchByBreed() {
         for (let i = tempArr.length - 2; i >= 0; i--)
             temp += "-" + tempArr[i];
     }
-    let url = SERVICE_URL + temp + "/images/random";
+    let url = SERVICE_URL + "/" + temp + "/images";
     getData(url);
 }
 function getData(url) {
@@ -83,12 +96,16 @@ function jsonLoaded(obj) {
     // 6 - if there are no results, print a message and return
     // Here, we don't get an array back, but instead a single object literal with 2 properties
     if (obj.status != "success") {
-        document.querySelector("#content").innerHTML = `<p><i>There was a problem!</i> message: ${obj.message}</p>`;
+        document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
+        document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b>></p>";
         return; // Bail out
     }
 
     // 7 - if there is an array of results, loop through them
-    let results = obj.data
+    if (obj.message.length != null || obj.message.length != undefined) {
+        let results = obj.message;
+
+    }
     let src = obj.message;
     let link = `<a href="${src}">${src}</a>`;
     document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;

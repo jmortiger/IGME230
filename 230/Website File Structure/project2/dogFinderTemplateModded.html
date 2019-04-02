@@ -13,20 +13,23 @@
     <header>
         <h1 id="title">Modded Dog Finder</h1>
     </header>
-    <p id="searchbar">
-        Search Term -&gt;
-        <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" />
-        <button type="button" id="search" class="green">Search for a random image!</button>
-        <button type="button" id="searchByBreed" class="green">Search for a random image by breed!</button>
-        <button type="button" id="searchByBreedAll" class="green">Search for images by breed! (Under Construction)</button>
-        <button type="button" id="clearDebug" class="green">Clear Query List</button>
-    </p>
-    <p id="debug"></p>
-    <hr/>
-    <h2>Results</h2>
-    <div id="content">
-        <p>No data yet!</p>
+    <div id="mainBody">
+        <p id="searchbar">
+            Search Term -&gt;
+            <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="not used" />
+            <button type="button" id="search" class="green">Search for a random image!</button>
+            <button type="button" id="searchByBreed" class="green">Search for a random image by breed!</button>
+            <button type="button" id="searchByBreedAll" class="green">Search for images by breed! (Under Construction)</button>
+            <button type="button" id="toggleDebug" class="green">Show Debug Log</button>
+            <button type="button" id="clearDebug" class="green" style="display:none;">Clear Query List</button>
+        </p>
+        <p id="debug" style="display:none;"></p>
+        <hr />
+        <h2>Results</h2>
+        <div id="content">
+            <p>No data yet!</p>
+        </div>
     </div>
-
+    <footer>Powered by Dog API <img src="https://dog.ceo/img/dog-api-logo.svg" alt="Dog API Logo" style="display:none;"></footer>
 </body>
 </html>
