@@ -47,7 +47,7 @@ function searchByBreed() {
     // No API Key required!
 
     // 2 - build up our URL string
-    debugger;
+    //debugger;
     let temp = document.querySelector("#searchterm").value;
     // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
     if (temp.includes(" ")) {
@@ -100,18 +100,41 @@ function jsonLoaded(obj) {
         document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b>></p>";
         return; // Bail out
     }
-
+    let bigString;
     // 7 - if there is an array of results, loop through them
-    if (obj.message.length != null || obj.message.length != undefined) {
+    if (Array.isArray(obj.message)) {
+        bigString = `<p><i>Here is the result!</i></p><div id="searchResults">`;
         let results = obj.message;
-
+        for (let i = 0; i < results.length; i++) {
+            let result = results[i];
+            
+            let smallURL = result;
+            if (!smallURL) smallURL = "media/no-image-found.png";
+            
+            let line = `<div class="result"><img src="${smallURL}" />`;
+            line += `<span><a target="_blank" href="${result}">View Source</a>`;
+            line += `</span></div>`;
+            
+            bigString += line;
+        }
+        bigString += "</div>";
+        document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: LIST</b>";
     }
-    let src = obj.message;
-    let link = `<a href="${src}">${src}</a>`;
-    document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
-    let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-    bigString += `<img src="${src}" alt="random dog" style="float:right;" />`
+    else {
+        let src = obj.message;
+        let link = `<a href="${src}">${src}</a>`;
+        document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
+        bigString = `<p><i>Here is the result!</i> ${link}</p>`;
+        bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
+    }
 
     // 8 - display final results to user
     document.querySelector("#content").innerHTML = bigString;
+}
+
+function parseMessage(src) {
+    let link = `<a href="${src}">${src}</a>`;
+    document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
+    let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
+    bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
 }
