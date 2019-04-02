@@ -83,7 +83,7 @@ function dataLoaded(e) {
     // 9
     let results = obj.data;
     console.log(`results.length = ${results.length}`);
-    let bigString = `<p><i>Here are ${results.length} results for "${displayTerm}".</i></p>`;
+    let bigString = `<p><i>Here are ${results.length} results for "${displayTerm}".</i></p><div id="results">`;
 
     // 10
     for (let i = 0; i < results.length; i++) {
@@ -105,7 +105,7 @@ function dataLoaded(e) {
         // 15
         bigString += line;
     }
-
+    bigString += "</div>";
     // 16
     document.querySelector("#content").innerHTML = bigString;
 
