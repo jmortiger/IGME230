@@ -2,8 +2,7 @@
 // 1 - main entry point to web service
 const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
-const favURLsKey = "jgm1844-favs";
-let favs = localStorage.getItem(favURLsKey);
+const favURLKey = "jgm1844-favs";
 window.onload = init;
 function init() {
     let storedSearchTerm = localStorage.getItem(searchedTermKey);
@@ -38,10 +37,16 @@ function init() {
     }
 }
 function searchDefault() {
+    // No API Key required!
+
+    // 2 - build up our URL string; not necessary for this service endpoint
     let url = SERVICE_URL + "s/image/random";
     getData(url);
 }
 function searchByBreed() {
+    // No API Key required!
+
+    // 2 - build up our URL string
     //debugger;
     let temp = document.querySelector("#searchterm").value;
     // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
@@ -55,6 +60,9 @@ function searchByBreed() {
     getData(url);
 }
 function searchByBreedAll() {
+    // No API Key required!
+
+    // 2 - build up our URL string
     //debugger;
     let temp = document.querySelector("#searchterm").value;
     // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
@@ -68,9 +76,15 @@ function searchByBreedAll() {
     getData(url);
 }
 function getData(url) {
+    // 3 - parse the user entered term we wish to search; not necessary for this service endpoint
+
+    // Store new last searched term.
     if (document.querySelector("#searchterm").value != "")
         localStorage.setItem(searchedTermKey, document.querySelector("#searchterm").value);
+    // 4 - update the UI
     document.querySelector("#debug").innerHTML += `<br /><b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
+
+    // 5- call the web service, and prepare to download the file
     $.ajax({
         dataType: "json",
         url: url,
@@ -111,10 +125,6 @@ function jsonLoaded(obj) {
 
     // 8 - display final results to user
     document.querySelector("#content").innerHTML = bigString;
-}
-
-function createFavorite() {
-
 }
 
 //function parseMessage(src) {

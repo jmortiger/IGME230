@@ -87,6 +87,16 @@ footer {
     justify-content: stretch;
     align-content: stretch;
     height: 100%;
+    /*width: 100%;*/
+}
+
+#searchResults {
+    border: 5px solid gray;
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .result {
