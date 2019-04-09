@@ -101,8 +101,13 @@ footer {
 
 .result {
     border: 5px solid gray;
-    width: min-content;
-    height: min-content;
+    /*width: min-content;*/
+    /*height: min-content;*/
+}
+
+.result img {
+    max-width: 100%;
+    height: auto;
 }
 
 a {

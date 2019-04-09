@@ -11,18 +11,21 @@ else favs = JSON.parse(favs);
 window.onload = init;
 
 function init() {
-    // \/ \/ \/ Handle storage loading \/ \/ \/
+    // \/ \/ \/ Handle search term loading \/ \/ \/
     let storedSearchTerm = localStorage.getItem(searchedTermKey);
     console.log(storedSearchTerm);
     // Sets searchbar term to stored previous value
     if ((storedSearchTerm != null) && (storedSearchTerm != ""))
         document.querySelector("#searchterm").value = storedSearchTerm;
-    // /\ /\ /\ Handle storage loading /\ /\ /\
+    // /\ /\ /\ Handle search term loading /\ /\ /\
 
     // \/ \/ \/ BIND EVENTS \/ \/ \/
+    // Searches
     document.querySelector("#search").onclick = searchDefault;
     document.querySelector("#searchByBreed").onclick = searchByBreed;
     document.querySelector("#searchByBreedAll").onclick = searchByBreedAll;
+    document.querySelector("#viewFavs").onclick = showFavorites;
+    // Debugs
     document.querySelector("#clearDebug").onclick = (e) => {
         document.querySelector("#debug").innerHTML = "<b>Cleared.</b><br />";
     }
@@ -53,6 +56,7 @@ function init() {
             document.querySelector("#toggleDebug").innerHTML = "Show Debug Log";
         }
     }
+    // Searchbar QOL
     document.querySelector("#searchterm").onfocus = (e) => {
         if (e.target.value == "<Please enter a search term>")
             e.target.value = "";
@@ -91,21 +95,17 @@ function searchByBreedAll() {
     let url = SERVICE_URL + "/" + userInput + "/images";
     getData(url);
 }
-// ****************************TODO: THIS*************************************************
 function showFavorites() {
+    console.log(`showFavorites called`);
 
-}
+    // Log debug
+    document.querySelector("#debug").innerHTML += `<br /><b>Gathering from favorites:</b>`;
 
-// Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
-function formatUserString(userInput) {
-    // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
-    if (userInput.includes(" ")) {
-        let inputStrArr = userInput.split(" ");
-        userInput = inputStrArr[inputStrArr.length - 1];
-        for (let i = inputStrArr.length - 2; i >= 0; i--)
-            userInput += "-" + inputStrArr[i];
-    }
-    return userInput;
+    let mockJSON = {
+        status: "success",
+        message: (favs.slice())
+    };
+    jsonLoaded(mockJSON);
 }
 
 function getData(url) {
@@ -137,7 +137,7 @@ function jsonLoaded(obj) {
     let bigString;
 
     // Process results
-    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     if (Array.isArray(obj.message)) {
         bigString = `<p><i>Here is the result!</i></p><div id="searchResults">`;
         let results = obj.message;
@@ -145,7 +145,7 @@ function jsonLoaded(obj) {
             let result = results[i];
             let src = result;
             if (!src) src = "media/no-image-found.png";
-            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+            let line = `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
             bigString += line;
         }
         bigString += "</div>";
@@ -156,7 +156,7 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+        bigString += `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     }
 
     // 8 - display final results to user
@@ -201,6 +201,20 @@ function storeFavs() {
     let temp = JSON.stringify(favs);
     console.log(temp);
     localStorage.setItem(favURLsKey, temp);
+}
+
+// HELPER FUNCTIONS
+
+// Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
+function formatUserString(userInput) {
+    // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
+    if (userInput.includes(" ")) {
+        let inputStrArr = userInput.split(" ");
+        userInput = inputStrArr[inputStrArr.length - 1];
+        for (let i = inputStrArr.length - 2; i >= 0; i--)
+            userInput += "-" + inputStrArr[i];
+    }
+    return userInput;
 }
 
 function getImgURLAttrib(elem) {
