@@ -3,13 +3,10 @@ const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
 const favURLsKey = "jgm1844-dog-finder-favs";
 
-// \/ \/ \/ Gets user favorites \/ \/ \/
+// Gets user favorites
 let favs = localStorage.getItem(favURLsKey);
-if (favs == null || favs == undefined)
-    favs = new Array();
-else
-    favs = JSON.parse(favs);
-// /\ /\ /\ Gets user favorites /\ /\ /\
+if (isntNull(favs)) favs = new Array();
+else favs = JSON.parse(favs);
 
 window.onload = init;
 
@@ -169,7 +166,7 @@ function jsonLoaded(obj) {
     let favButtons = document.querySelectorAll(".favButton");
     for (let i = 0; i < favButtons.length; i++) {
         // if the current list of favs has this url
-        if (favs.find(function (elem) { return elem == getImgURLAttrib(favButtons[i])/*favButtons[i].getAttribute("imgURL")*/; }) != undefined) {
+        if (favs.find(function (elem) { return elem == getImgURLAttrib(favButtons[i]); }) != undefined) {
             favButtons[i].innerHTML = "Favorited!";// TODO: CHANGE CSS TO MAKE IT CLEAR IT'S ALREADY BEEN FAVORITED AND CLICKING WILL UNFAVORITE
             favButtons[i].onclick = removeFavorite;
         }
@@ -182,7 +179,7 @@ function addFavorite(e) {
     console.log(`addFavorite called`);
 
     console.log(`length before: ${favs.length}`);
-    favs.push(getImgURLAttrib(e.target)/*e.target.getAttribute("imgURL")*/);
+    favs.push(getImgURLAttrib(e.target));
     console.log(`length after: ${favs.length}`);
     e.target.innerHTML = "Favorited!";
     e.target.onclick = removeFavorite;
@@ -192,7 +189,7 @@ function addFavorite(e) {
 function removeFavorite(e) {
     console.log(`removeFavorite called`);
     console.log(`length before: ${favs.length}`);
-    favs = favs.filter((elem) => { return elem != getImgURLAttrib(e.target)/*(e.target.getAttribute("imgURL"))*/; });
+    favs = favs.filter((elem) => { return elem != getImgURLAttrib(e.target); });
     console.log(`length after: ${favs.length}`);
     e.target.innerHTML = "Favorite?";
     e.target.onclick = addFavorite;
@@ -208,10 +205,10 @@ function storeFavs() {
 
 function getImgURLAttrib(elem) {
     if (!elem.hasAttributes) return undefined;
-    for (var i = 0; i < elem.attributes.length; i++) {
-        if (elem.attributes[i].name == "imgUrl" || elem.attributes[i].name == "img-url" || /*Y THIS 1*/elem.attributes[i].name == "data-img-url") {
+    for (let i = 0; i < elem.attributes.length; i++)
+        if (elem.attributes[i].name == "imgUrl" || elem.attributes[i].name == "img-url" || /*Y THIS 1*/elem.attributes[i].name == "data-img-url")
             return elem.attributes[i].value;
-        }
-    }
     return undefined;
 }
+
+function isntNull(val) { return (favs == null || favs == undefined); }
