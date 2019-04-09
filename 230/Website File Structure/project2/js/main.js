@@ -91,7 +91,7 @@ function getData(url) {
 }
 function jsonLoaded(obj) {
     // 6 - if there are no results, print a message and return
-    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     if (obj.status != "success") {
         document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
         document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b></p>";
@@ -106,7 +106,7 @@ function jsonLoaded(obj) {
             let result = results[i];
             let src = result;
             if (!src) src = "media/no-image-found.png";
-            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+            let line = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
             bigString += line;
         }
         bigString += "</div>";
@@ -117,7 +117,7 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+        bigString += `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     }
 
     // 8 - display final results to user
@@ -126,13 +126,35 @@ function jsonLoaded(obj) {
     // \/ \/ \/ CONFIGURE FAVORITE BUTTON \/ \/ \/
     let favButtons = document.querySelectorAll(".favButton");
     for (let i = 0; i < favButtons.length; i++) {
-        if (favs.find((elem) => { return ; })) // TODO: return true if the fav button's image url is already faved.
+        // if the current list of favs has this url
+        if (favs.find((elem) => { return elem == favButtons[i].getAttributte("imgURL"); }) != undefined) {
+            favButtons[i].innerHTML = "Favorited!";// TODO: CHANGE CSS TO MAKE IT CLEAR IT'S ALREADY BEEN FAVORITED
+            favButtons[i].onclick = removeFavorite;
+        }
+        else
+            favButtons[i].onclick = addFavorite;
     }
     // /\ /\ /\ CONFIGURE FAVORITE BUTTON /\ /\ /\
 }
 
-function createFavorite() {
+function addFavorite(e) {
+    // e.target.getAttribute("imgURL");
+    console.log(`addFavorite called`);
+    console.log(`length before: ${favs.length}`);
+    favs.push(e.target.getAttribute("imgURL"));
+    console.log(`length after: ${favs.length}`);
+    e.target.innerHTML = "Favorited!";
+    e.target.onclick = removeFavorite;
+}
 
+function removeFavorite(e) {
+    // e.target.getAttribute("imgURL");
+    console.log(`removeFavorite called`);
+    console.log(`length before: ${favs.length}`);
+    favs = favs.filter((elem) => { return elem != e.target.getAttribute("imgURL"); });
+    console.log(`length after: ${favs.length}`);
+    e.target.innerHTML = "Favorite?";
+    e.target.onclick = addFavorite;
 }
 
 //function parseMessage(src) {
