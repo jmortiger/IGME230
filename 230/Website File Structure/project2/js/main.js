@@ -1,15 +1,25 @@
 //debugger;
-// 1 - main entry point to web service
 const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
 const favURLsKey = "jgm1844-favs";
+// \/ \/ \/ Gets user favorites \/ \/ \/
 let favs = localStorage.getItem(favURLsKey);
+if (favs == null)
+    favs = new Array();
+else
+    favs = JSON.parse(favs);
+// /\ /\ /\ Gets user favorites /\ /\ /\
 window.onload = init;
 function init() {
+    // \/ \/ \/ Handle storage loading \/ \/ \/
     let storedSearchTerm = localStorage.getItem(searchedTermKey);
+    console.log(storedSearchTerm);
     // Sets searchbar term to stored previous value
     if ((storedSearchTerm != null) && (storedSearchTerm != ""))
         document.querySelector("#searchterm").value = storedSearchTerm;
+    // /\ /\ /\ Handle storage loading /\ /\ /\
+
+    // *** BIND EVENTS ***
     document.querySelector("#search").onclick = searchDefault;
     document.querySelector("#searchByBreed").onclick = searchByBreed;
     document.querySelector("#searchByBreedAll").onclick = searchByBreedAll;
@@ -36,6 +46,7 @@ function init() {
         if (e.target.value == "")
             e.target.value = "<Please enter a search term>";
     }
+    // *** BIND EVENTS ***
 }
 function searchDefault() {
     let url = SERVICE_URL + "s/image/random";
@@ -111,6 +122,13 @@ function jsonLoaded(obj) {
 
     // 8 - display final results to user
     document.querySelector("#content").innerHTML = bigString;
+
+    // \/ \/ \/ CONFIGURE FAVORITE BUTTON \/ \/ \/
+    let favButtons = document.querySelectorAll(".favButton");
+    for (let i = 0; i < favButtons.length; i++) {
+        if (favs.find((elem) => { return ; })) // TODO: return true if the fav button's image url is already faved.
+    }
+    // /\ /\ /\ CONFIGURE FAVORITE BUTTON /\ /\ /\
 }
 
 function createFavorite() {
