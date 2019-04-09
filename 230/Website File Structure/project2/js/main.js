@@ -4,12 +4,11 @@ const searchedTermKey = "jgm1844-searchedTerm";
 const favURLsKey = "jgm1844-dog-finder-favs";
 
 // \/ \/ \/ Gets user favorites \/ \/ \/
-let thisispain = localStorage.getItem(favURLsKey);
-let favs;
-if (thisispain == null || thisispain == undefined)
+let favs = localStorage.getItem(favURLsKey);
+if (favs == null || favs == undefined)
     favs = new Array();
 else
-    favs = JSON.parse(thisispain);
+    favs = JSON.parse(favs);
 // /\ /\ /\ Gets user favorites /\ /\ /\
 
 window.onload = init;
@@ -131,15 +130,17 @@ function getData(url) {
 }
 function jsonLoaded(obj) {
     console.log(`jsonLoaded called`);
+
     // 6 - if there are no results, print a message and return
-    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     if (obj.status != "success") {
         document.querySelector("#content").innerHTML = "<p><i>There was a problem!</i></p>";
         document.querySelector("#debug").innerHTML = "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b><i>There was a problem!</i></b></p>";
         return; // Bail out
     }
     let bigString;
-    // 7 - if there is an array of results, loop through them
+
+    // Process results
+    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
     if (Array.isArray(obj.message)) {
         bigString = `<p><i>Here is the result!</i></p><div id="searchResults">`;
         let results = obj.message;
@@ -164,8 +165,7 @@ function jsonLoaded(obj) {
     // 8 - display final results to user
     document.querySelector("#content").innerHTML = bigString;
 
-    // \/ \/ \/ CONFIGURE FAVORITE BUTTON \/ \/ \/
-    //debugger;
+    // CONFIGURE FAVORITE BUTTON
     let favButtons = document.querySelectorAll(".favButton");
     for (let i = 0; i < favButtons.length; i++) {
         // if the current list of favs has this url
@@ -176,13 +176,12 @@ function jsonLoaded(obj) {
         else
             favButtons[i].onclick = addFavorite;
     }
-    // /\ /\ /\ CONFIGURE FAVORITE BUTTON /\ /\ /\
 }
 
 function addFavorite(e) {
     console.log(`addFavorite called`);
+
     console.log(`length before: ${favs.length}`);
-    //debugger;
     favs.push(getImgURLAttrib(e.target)/*e.target.getAttribute("imgURL")*/);
     console.log(`length after: ${favs.length}`);
     e.target.innerHTML = "Favorited!";
@@ -216,10 +215,3 @@ function getImgURLAttrib(elem) {
     }
     return undefined;
 }
-
-//function parseMessage(src) {
-//    let link = `<a href="${src}">${src}</a>`;
-//    document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
-//    let bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-//    bigString += `<img src="${src}" alt="${src}" style="float:right;" />`;
-//}
