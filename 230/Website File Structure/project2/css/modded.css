@@ -53,56 +53,50 @@ button:active{
     box-shadow: rgba(0,0,0,.5) 3px 3px;
 }
 
-header {
-    /*flex: 0 0 auto;*/
-    grid-area: header;
-
-    outline: 3px solid black;
-}
-#mainBody {
-    /*flex: 1 1 auto;*/
-    grid-area: mainBody;
-    align-self: stretch;
-    justify-self: stretch;
-
-    height: 100%;
-    outline: 3px solid black;
-}
-footer {
-    /*flex: 0 0 auto;*/
-    grid-area: footer;
-    text-align: center;
-
-    outline: 3px solid black;
-}
 #wrapper {
-    /*display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-content: space-between;*/
-    display: grid;
+    align-content: space-between;
+    /*display: grid;
     grid-template-rows: min-content auto min-content;
     grid-template-columns: auto;
     grid-template-areas: "header" "mainBody" "footer";
     justify-content: stretch;
-    align-content: stretch;
-    height: 100%;
+    align-content: stretch;*/
+    height: 97vh;
     /*width: 100%;*/
+}
+header {
+    flex: 0 1 auto;
+    /*grid-area: header;*/
+}
+#mainBody {
+    flex: 3 1 auto;
+    /*grid-area: mainBody;
+    align-self: stretch;*/
+    /*height: 100%;*/
+}
+footer {
+    flex: 0 0 auto;
+    /*grid-area: footer;*/
 }
 
 #searchResults {
-    border: 5px solid gray;
-    /*width: 100%;*/
+    /*border: 5px solid gray;*/
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+    /*align-content: space-around;*/
 }
 
 .result {
     border: 5px solid gray;
     /*width: min-content;*/
-    /*height: min-content;*/
+    height: min-content;
+    text-align: center;
 }
 
 .result img {
@@ -116,6 +110,19 @@ a {
 
 .favButton, .imgLink {
     /*text-align: center;*/
+}
+
+header {
+    outline: 3px solid black;
+}
+
+#mainBody {
+    outline: 3px solid black;
+}
+
+footer {
+    text-align: center;
+    outline: 3px solid black;
 }
 
 /*img {

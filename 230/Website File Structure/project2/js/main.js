@@ -137,7 +137,7 @@ function jsonLoaded(obj) {
     let bigString;
 
     // Process results
-    //let imgTemplate = `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+    //let imgTemplate = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /></span></div>`;
     if (Array.isArray(obj.message)) {
         bigString = `<p><i>Here is the result!</i></p><div id="searchResults">`;
         let results = obj.message;
@@ -145,7 +145,7 @@ function jsonLoaded(obj) {
             let result = results[i];
             let src = result;
             if (!src) src = "media/no-image-found.png";
-            let line = `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+            let line = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /></span></div>`;
             bigString += line;
         }
         bigString += "</div>";
@@ -156,7 +156,7 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString += `<div class="result"><img src="${src}" alt="${src}" /><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /><a class="imgLink" href="${src}">View Source</a></span></div>`;
+        bigString += `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">Favorite?</button><br /></span></div>`;
     }
 
     // 8 - display final results to user
