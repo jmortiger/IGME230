@@ -3,6 +3,8 @@ const SERVICE_URL = "https://dog.ceo/api/breed";
 const searchedTermKey = "jgm1844-searchedTerm";
 const favURLsKey = "jgm1844-dog-finder-favs";
 
+const dispMod_reverse = "reverseResults";
+
 // Gets user favorites
 let favs = localStorage.getItem(favURLsKey);
 if (isntNull(favs)) favs = new Array();
@@ -55,6 +57,9 @@ function init() {
             document.querySelector("#displayLocalStorage").style.display = "none";
             document.querySelector("#toggleDebug").innerHTML = "Show Debug Log";
         }
+    }
+    document.querySelector("#viewMods").onclick = (e) => {
+        document.querySelector("#content").innerHTML = `Putting these words into the searchbar will modify the results display in the following ways (currently unfinished; USE AT OWN RISK):<br />&nbsp&nbsp&nbsp&nbsp&nbsp${dispMod_reverse}: Reverses the order of the results.`;
     }
     // Searchbar QOL
     document.querySelector("#searchterm").onfocus = (e) => {
@@ -137,7 +142,7 @@ function jsonLoaded(obj) {
     let bigString;
 
     // Process results
-    //let imgTemplate = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">&hearts;</button><br /></span></div>`;
+    //let imgTemplate = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><span><button class="favButton" data-img-url="${src}">&hearts;</button><br /></span></div>`;
     if (Array.isArray(obj.message)) {
         //bigString = `<p><i>Here is the result!</i></p><div id="searchResults">`;
         bigString = `<div id="searchResults">`;
@@ -146,7 +151,7 @@ function jsonLoaded(obj) {
             let result = results[i];
             let src = result;
             if (!src) src = "media/no-image-found.png";
-            let line = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">&hearts;</button><br /></span></div>`;
+            let line = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><button class="favButton" data-img-url="${src}">&hearts;</button></div>`;
             bigString += line;
         }
         bigString += "</div>";
@@ -157,7 +162,7 @@ function jsonLoaded(obj) {
         let link = `<a href="${src}">${src}</a>`;
         document.querySelector("#debug").innerHTML += "<br />&nbsp&nbsp&nbsp&nbsp&nbsp<b>Retrieved: </b>" + link;
         //bigString = `<p><i>Here is the result!</i> ${link}</p>`;
-        bigString = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><br /><span><button class="favButton" data-img-url="${src}">&hearts;</button><br /></span></div>`;
+        bigString = `<div class="result"><a class="imgLink" href="${src}" target="_blank"><img src="${src}" alt="${src}" /></a><button class="favButton" data-img-url="${src}">&hearts;</button></div>`;
     }
 
     // 8 - display final results to user
@@ -217,6 +222,8 @@ function formatUserString(userInput) {
     if (userInput.includes(" ")) {
         let inputStrArr = userInput.split(" ");
         userInput = inputStrArr[inputStrArr.length - 1];
+        //if (userInput.filter((elem) => { return elem.contains(dispMod_reverse); }) != null)
+
         for (let i = inputStrArr.length - 2; i >= 0; i--)
             userInput += "-" + inputStrArr[i];
     }

@@ -29,6 +29,27 @@ html {
     width: 100%;
     height: 100%;
 }
+/*color and theming*/
+body {
+    background-color: rgb(6, 70, 173);
+    margin-left: 10%;
+    margin-right: 10%;
+}
+header {
+    background-color: whitesmoke;
+    border-radius: 7px 7px;
+    border: 3px solid black;
+}
+#mainBody {
+    background-color: whitesmoke;
+    border-radius: 7px 7px;
+    border: 3px solid black;
+}
+footer {
+    background-color: whitesmoke;
+    border-radius: 7px 7px;
+    border: 3px solid black;
+}
 
 /*button stylings*/
 button {
@@ -36,24 +57,38 @@ button {
     padding: 7px 10px 7px 10px;
     text-align: center;
     /*box-shadow: rgba(0,0,0,.4) 7px 7px;*/
-    border: 2px solid rgb(128, 128, 128);
     border-radius: 3px;
     transition-duration: 0.4s;
     background-color: rgba(255,255,255,1);
     border: 2px solid rgb(25, 95, 209);
 }
-button:hover{
+button:hover {
     background-color: rgba(40,95,209,1);
     border: 2px solid rgb(40, 95, 209);
     color: whitesmoke;
 }
-button:active{
+button:active {
     background-color: rgba(0,55,169,1); /*original color -25 from each*/
     box-shadow: rgba(0,0,0,.5) 3px 3px;
 }
 .favButton {
+    display: inline;
+    padding: 7px 10px 7px 10px;
+    text-align: center;
+    /*box-shadow: rgba(0,0,0,.4) 7px 7px;*/
+    border-radius: 3px;
+    transition-duration: 0.4s;
+    background-color: rgba(224,224,224,0);
+    /*border: 2px solid rgb(25, 95, 209);*/
+    /*border: 2px solid rgb(128, 128, 128);*/
+    border: none;
+
     font-size: x-large;
+}
+.favButton:hover {
     background-color: rgba(224,224,224,1);
+    border: /*2px solid rgb(40, 95, 209)*/none;
+    color: whitesmoke;
 }
 
 /*Main flexbox*/
@@ -62,46 +97,27 @@ button:active{
     flex-direction: column;
     justify-content: space-between;
     align-content: space-between;
-    /*display: grid;
-    grid-template-rows: min-content auto min-content;
-    grid-template-columns: auto;
-    grid-template-areas: "header" "mainBody" "footer";
-    justify-content: stretch;
-    align-content: stretch;*/
-    height: 97vh;
+    height: 98vh;
+    /*height: 100vh;*/
     /*width: 100%;*/
 }
-header {
-    flex: 0 1 auto;
-    /*grid-area: header;*/
-}
-#mainBody {
-    flex: 3 1 auto;
-    /*grid-area: mainBody;
-    align-self: stretch;*/
-    /*height: 100%;*/
-}
-footer {
-    flex: 0 0 auto;
-    /*grid-area: footer;*/
-}
+header { flex: 0 1 auto; }
+#mainBody { flex: 3 1 auto; }
+footer { flex: 0 0 auto; }
 
 /*Header flexbox*/
 header {
-    display: flex;
+    /*display: flex;
     justify-content: flex-start;
     align-content: center;
-    align-items: center;
+    align-items: center;*/
+
 }
 #title {
     margin-left: 20px;
     margin-right: 20px;
 }
-#search {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-#viewFavs {
+.titlebarButton {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -121,6 +137,20 @@ header {
     /*width: min-content;*/
     height: min-content;
     text-align: center;
+
+    position: relative;
+}
+
+.result .favButton {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.imgLink {
+    height: min-content;
+    margin: 0px;
+    padding: 0px;
 }
 
 .result img {
@@ -132,25 +162,27 @@ a {
     display: inline;
 }
 
-.favButton, .imgLink {
-    /*text-align: center;*/
-}
+.favButton { text-align: center; }
 
 header {
-    outline: 3px solid black;
+    padding: 7px;
+    margin-bottom: 15px;
 }
 
 #mainBody {
-    outline: 3px solid black;
+    /*height: 100%;*/
+    padding: 15px;
 }
 
 footer {
     text-align: center;
-    outline: 3px solid black;
+    margin-top: 15px;
+    /*margin-bottom: 15px;*/
 }
 
 #title {
     display: inline;
+    font-family: Geostar, sans-serif;
 }
 
 #searchbar {
@@ -161,10 +193,6 @@ footer {
     margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-header {
-    margin-bottom: 20px;
 }
 
 #resultsContainer {
