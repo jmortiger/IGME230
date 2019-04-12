@@ -7,7 +7,7 @@ const dispMod_reverse = "reverseResults";
 
 // Gets user favorites
 let favs = localStorage.getItem(favURLsKey);
-if (isntNull(favs)) favs = new Array();
+if (isDefined(favs)) favs = new Array();
 else favs = JSON.parse(favs);
 
 window.onload = init;
@@ -194,20 +194,18 @@ function addFavorite(e) {
     e.target.onclick = removeFavorite;
     storeFavs();
 }
-
 function removeFavorite(e) {
     console.log(`removeFavorite called`);
 
     console.log(`length before: ${favs.length}`);
     //if (getImgURLAttrib(e.target) == "media/no-image-found.png")
-    favs = favs.filter((elem) => { return elem != getImgURLAttrib(e.target) && elem != null; });
+    favs = favs.filter((elem) => { return elem != getImgURLAttrib(e.target) && isDefined(elem); });
     console.log(`length after: ${favs.length}`);
     //e.target.innerHTML = "Favorite?";
     e.target.style.color = "black";
     e.target.onclick = addFavorite;
     storeFavs();
 }
-
 function storeFavs() {
     console.log(`storeFavs called`);
     let temp = JSON.stringify(favs);
@@ -238,4 +236,4 @@ function getImgURLAttrib(elem) {
     return undefined;
 }
 
-function isntNull(val) { return (val == null || val == undefined); }
+function isDefined(val) { return (val == null || val == undefined); }

@@ -10,18 +10,18 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
+        <header class="topLevelElem">
             <h1 id="title">Dog Finder</h1>
             <button type="button" id="search" class="titlebarButton">Search for a random image!</button>
             <button type="button" id="viewFavs" class="titlebarButton">View Favs!</button>
             <button type="button" id="viewMods" class="titlebarButton">View Modifiers!</button>
         </header>
-        <div id="mainBody">
+        <div id="mainBody" class="topLevelElem">
             <p id="searchbar">
                 Enter breed -&gt;
                 <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="<Please enter a search term>" />
-                <button type="button" id="searchByBreed" class="green">Search for a random image by breed!</button>
-                <button type="button" id="searchByBreedAll" class="green">Search for images by breed!</button>
+                <button type="button" id="searchByBreed">Search for a random image by breed!</button>
+                <button type="button" id="searchByBreedAll">Search for images by breed!</button>
 
                 <button type="button" id="toggleDebug" class="debugButton">Show Debug Log</button>
                 <button type="button" id="clearDebug" class="debugButton" style="display:none;">Clear Query List</button>
@@ -31,11 +31,11 @@
             <div id="resultsContainer">
                 <!--<h2>Results</h2>-->
                 <div id="content">
-                    <p><!--No data yet!--></p>
+                    <!--<p>No data yet!</p>-->
                 </div>
             </div>
         </div>
-        <footer>
+        <footer class="topLevelElem">
             Powered by <a href="https://dog.ceo/dog-api/">Dog API</a> <img src="https://dog.ceo/img/dog-api-logo.svg" alt="Dog API Logo" style="display:none;">
         </footer>
     </div>

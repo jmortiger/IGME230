@@ -29,25 +29,13 @@ html {
     width: 100%;
     height: 100%;
 }
+
 /*color and theming*/
 body {
     background-color: rgb(6, 70, 173);
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin: 0px 10% 0px 10%;
 }
-header {
-    background-color: whitesmoke;
-    border-radius: 7px 7px;
-    border: 3px solid black;
-}
-#mainBody {
-    background-color: whitesmoke;
-    border-radius: 7px 7px;
-    border: 3px solid black;
-}
-footer {
+.topLevelElem {
     background-color: whitesmoke;
     border-radius: 7px 7px;
     border: 3px solid black;
@@ -73,6 +61,7 @@ button:active {
     background-color: rgba(0,55,169,1); /*original color -25 from each*/
     box-shadow: rgba(0,0,0,.5) 3px 3px;
 }
+/*Fav button styling*/
 .favButton {
     display: inline;
     padding: 7px 10px 7px 10px;
@@ -84,13 +73,16 @@ button:active {
     /*border: 2px solid rgb(25, 95, 209);*/
     /*border: 2px solid rgb(128, 128, 128);*/
     border: none;
+    opacity: 0;
 
     font-size: x-large;
 }
+.result:hover>.favButton { opacity: 1; }
 .favButton:hover {
+    opacity: 1;
     background-color: rgba(224,224,224,1);
-    border: /*2px solid rgb(40, 95, 209)*/none;
-    color: whitesmoke;
+    border: /*2px solid rgb(40, 95, 209)*/ none;
+    color: black;
 }
 
 /*Main flexbox*/
@@ -131,39 +123,44 @@ header {
     left: 10px;
 }
 
+/*Handle image scaling*/
+.result img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+/*Results flexbox*/
 #searchResults {
     /*border: 5px solid gray;*/
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     align-items: center;
-    /*align-content: space-around;*/
+    /*align-content: stretch;*/
 }
 
 .result {
     border: 5px solid gray;
     /*width: min-content;*/
-    height: min-content;
+    /*height: min-content;*/
     text-align: center;
 }
 
-.imgLink {
-    height: min-content;
-    margin: 0px;
-    padding: 0px;
+.result {
+    margin: 7px 0px 7px 0px;
 }
 
-.result img {
-    max-width: 100%;
-    height: auto;
+.imgLink {
+    /*height: min-content;*/
+    /*height: 1px;*/
+    margin: 0px;
+    padding: 0px;
 }
 
 a {
     display: inline;
 }
-
-.favButton { text-align: center; }
 
 header {
     padding: 7px;

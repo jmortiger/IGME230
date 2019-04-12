@@ -1,0 +1,152 @@
+@font-face {
+    font-family: Finger Paint;
+    src: url("../media/Finger_Paint/FingerPaint-Regular.ttf");
+}
+@font-face {
+    font-family: Varela Round;
+    src: url("../media/Varela_Round/VarelaRound-Regular.ttf");
+}
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/Inconsolata-Regular.tff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/Inconsolata-Bold.tff");
+    font-weight: bold;
+}
+@font-face {
+    font-family: Geostar;
+    src: url("../media/Geostar-Regular.ttf");
+}
+* {
+    /*margin: 0;
+    padding: 0;*/
+    /*border: solid 1px pink;*/
+    /*width: min-content;*/
+}
+/*FIXES HORIZONTAL SCROLL PROBLEM (it did)*/
+html {
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    display: inline;
+    padding: 7px 10px 7px 10px;
+    text-align: center;
+    /*box-shadow: rgba(0,0,0,.4) 7px 7px;*/
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 3px;
+    transition-duration: 0.4s;
+    background-color: rgba(255,255,255,1);
+    border: 2px solid rgb(25, 95, 209);
+}
+button:hover{
+    background-color: rgba(40,95,209,1);
+    border: 2px solid rgb(40, 95, 209);
+    color: whitesmoke;
+}
+button:active{
+    background-color: rgba(0,55,169,1); /*original color -25 from each*/
+    box-shadow: rgba(0,0,0,.5) 3px 3px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    /*display: grid;
+    grid-template-rows: min-content auto min-content;
+    grid-template-columns: auto;
+    grid-template-areas: "header" "mainBody" "footer";
+    justify-content: stretch;
+    align-content: stretch;*/
+    height: 97vh;
+    /*width: 100%;*/
+}
+header {
+    flex: 0 1 auto;
+    /*grid-area: header;*/
+}
+#mainBody {
+    flex: 3 1 auto;
+    /*grid-area: mainBody;
+    align-self: stretch;*/
+    /*height: 100%;*/
+}
+footer {
+    flex: 0 0 auto;
+    /*grid-area: footer;*/
+}
+
+#searchResults {
+    /*border: 5px solid gray;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    /*align-content: space-around;*/
+}
+
+.result {
+    border: 5px solid gray;
+    /*width: min-content;*/
+    height: min-content;
+    text-align: center;
+}
+
+.result img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    display: inline;
+}
+
+.favButton, .imgLink {
+    /*text-align: center;*/
+}
+
+header {
+    outline: 3px solid black;
+}
+
+#mainBody {
+    outline: 3px solid black;
+}
+
+footer {
+    text-align: center;
+    outline: 3px solid black;
+}
+
+/*img {
+    width: min-content;
+    height: min-content;
+}*/
+#searchbar {
+    display: inline;
+    text-align: center;
+    width: min-content;
+}
+/*#debug {
+    width: min-content;
+}
+#title {
+    display: inline;
+    margin: 7px 0px 7px 0px;
+    width: min-content;
+}
+h2 {
+    display: inline;
+    width: min-content;
+}
+#content {
+    width: min-content;
+    display: inline;
+}*/
