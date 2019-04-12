@@ -1,5 +1,5 @@
 ErrorDocument 404 /jgm1844/230/error/error.html
-DirectoryIndex hello.html
+DirectoryIndex index.html
 Options -Indexes
 ModPagespeed off
 
