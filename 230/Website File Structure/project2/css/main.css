@@ -58,7 +58,7 @@ button:hover {
     color: whitesmoke;
 }
 button:active {
-    background-color: rgba(0,55,169,1); /*original color -25 from each*/
+    background-color: rgba(0,55,169,1); /*original color -40 from each*/
     box-shadow: rgba(0,0,0,.5) 3px 3px;
 }
 /*Fav button styling*/
@@ -83,6 +83,10 @@ button:active {
     background-color: rgba(224,224,224,1);
     border: /*2px solid rgb(40, 95, 209)*/ none;
     color: black;
+}
+.favButton:active {
+    box-shadow: /*none*/rgba(128,64,64,.5) 3px 3px;
+    border: none;
 }
 
 /*Main flexbox*/
@@ -125,6 +129,7 @@ header {
 
 /*Handle image scaling*/
 .result img {
+    /*max-height: 100%;*/
     max-width: 100%;
     width: auto;
     height: auto;
