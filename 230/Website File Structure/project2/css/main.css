@@ -163,8 +163,9 @@ header {
     padding: 0px;
 }
 
-a {
+a:link, a:visited {
     display: inline;
+    color: black;
 }
 
 header {
