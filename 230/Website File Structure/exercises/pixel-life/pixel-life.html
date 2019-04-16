@@ -11,7 +11,7 @@
     <div id="gridContainer"></div>
     <h1>Pixel Life</h1>
     <select id="colorChooser">
-        <option value="aqua">Aqua</option>
+        <!--<option value="aqua">Aqua</option>
         <option value="Bisque">Bisque</option>
         <option value="black">Black</option>
         <option value="blue">Blue</option>
@@ -19,17 +19,18 @@
         <option value="chocolate">Chocolate</option>
         <option value="cyan">Cyan</option>
         <option value="DarkGray">Dark Gray</option>
-        <option value="green">Green</option>
+        <option value="green">Green</option>-->
         <option value="red" selected>Red</option>
-        <option value="magenta">Magenta</option>
+        <!--<option value="magenta">Magenta</option>
         <option value="orange">Orange</option>
-        <option value="tan">Tan</option>
+        <option value="tan">Tan</option>-->
         <option value="white">White</option>
-        <option value="wheat">Wheat</option>
+        <!--<option value="wheat">Wheat</option>
         <option value="WhiteSmoke">WhiteSmoke </option>
-        <option value="yellow">Yellow</option>
+        <option value="yellow">Yellow</option>-->
     </select>
-
+    <!--<button type="button" id="stepButton">Step</button>-->
+    <button type="button" id="pauseButton">Play/Pause</button>
     <script>
         const numCols = 70;
         const numRows = 40;
@@ -76,8 +77,27 @@
         };
 
         document.querySelector("#colorChooser").onchange = (e) => { color = e.target.value; };
+        // Old
+        //function fillCell(e) {
+        //    let rect = container.getBoundingClientRect();
+        //    let mouseX = e.clientX - rect.left;
+        //    let mouseY = e.clientY - rect.top;
+        //    let columnWidth = cellWidth + cellSpacing;
+        //    let col = Math.floor(mouseX / columnWidth);
+        //    let row = Math.floor(mouseY / columnWidth);
+        //    let selectedCell = cells[row][col];
+        //    selectedCell.className = 'cellSelected';
+        //    selectedCell.style.backgroundColor = color;
+        //    console.log(`${col}, ${row}`);
+        //}
 
+        // Life Stuff
+
+        // Modded
         function fillCell(e) {
+            debugger;
+            if (!isPaused)
+                return;
             let rect = container.getBoundingClientRect();
             let mouseX = e.clientX - rect.left;
             let mouseY = e.clientY - rect.top;
@@ -85,12 +105,14 @@
             let col = Math.floor(mouseX / columnWidth);
             let row = Math.floor(mouseY / columnWidth);
             let selectedCell = cells[row][col];
-            selectedCell.className = 'cellSelected';
+            if (color == "red")
+                lifeworld.world[row][col] = 1;
+            if (color == "white")
+                lifeworld.world[row][col] = 0;
+            //selectedCell.className = 'cellSelected';
             selectedCell.style.backgroundColor = color;
             console.log(`${col}, ${row}`);
         }
-
-        // Life Stuff
 
         let lastUpdate = performance.now();
 
@@ -98,8 +120,16 @@
 
         let maxFrameDelay = 1000 / 12;
 
-        lifeworld.init(numCols, numRows);
+        let isPaused = true;
 
+        //document.querySelector("#stepButton").onclick = processFrame;
+        document.querySelector("#pauseButton").onclick = (e) => {
+            updateGrid();
+            isPaused = !isPaused;
+        };
+
+        lifeworld.init(numCols, numRows);
+        //debugger;
         loop(performance.now());
 
         function loop(timestamp) {
@@ -107,10 +137,28 @@
             lastUpdate = timestamp;
             if (timestamp - lastFrame > maxFrameDelay) {
                 lastFrame = timestamp;
-                lifeworld.step();
-                updateGrid();
+                if (!isPaused) {
+                    lifeworld.step();
+                    updateGrid();
+                }
             }
         }
+
+        //function loop(timestamp) {
+        //    if (isPaused)
+        //        return;
+        //    processFrame(timestamp);
+        //}
+
+        //function processFrame(timestamp) {
+        //    requestAnimationFrame(loop);
+        //    lastUpdate = timestamp;
+        //    if (timestamp - lastFrame > maxFrameDelay) {
+        //        lastFrame = timestamp;
+        //        lifeworld.step();
+        //        updateGrid();
+        //    }
+        //}
 
         function updateGrid() {
             for (let row = 0; row < numRows; row++) {

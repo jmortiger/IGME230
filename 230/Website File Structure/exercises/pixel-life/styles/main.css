@@ -33,6 +33,18 @@ span.cellSelected {
     left: 800px;
 }
 
+#stepButton {
+    position: absolute;
+    top: 90px;
+    left: 800px;
+}
+
+#pauseButton {
+    position: absolute;
+    top: 90px;
+    left: 850px;
+}
+
 h1 {
     font-family: 'Press Start 2P', cursive;
     display: inline-block;
