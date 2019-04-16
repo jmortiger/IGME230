@@ -33,6 +33,26 @@ const lifeworld = {
         if (row < 0 || col < 0 || row > this.numRows - 1 || col > this.numCols - 1)
             return 0;
         let neighbors = [];
+        if ((row != 0 && col != 0) || (row == this.numRows - 1 && col == this.numCols - 1)) {
+            neighbors.push(this.world[row - 1][col - 1]);
+            neighbors.push(this.world[row - 1][col]);
+            neighbors.push(this.world[row - 1][col + 1]);
+            neighbors.push(this.world[row][col - 1]);
+            neighbors.push(this.world[row][col + 1]);
+            neighbors.push(this.world[row + 1][col - 1]);
+            neighbors.push(this.world[row + 1][col]);
+            neighbors.push(this.world[row + 1][col + 1]);
+        }
+        else if (row == 0) {
+            neighbors.push(this.world[row - 1][col - 1]);
+            neighbors.push(this.world[row - 1][col]);
+            neighbors.push(this.world[row - 1][col + 1]);
+            neighbors.push(this.world[row][col - 1]);
+            neighbors.push(this.world[row][col + 1]);
+            neighbors.push(this.world[row + 1][col - 1]);
+            neighbors.push(this.world[row + 1][col]);
+            neighbors.push(this.world[row + 1][col + 1]);
+        }
         neighbors.push(this.world[row - 1][col - 1]);
         neighbors.push(this.world[row - 1][col]);
         neighbors.push(this.world[row - 1][col + 1]);
