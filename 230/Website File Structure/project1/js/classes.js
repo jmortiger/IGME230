@@ -28,7 +28,8 @@ class GameObject {
 
 // TODO: Lookup inheritance
 class Moveable extends GameObject {
-    constructor(dx = 0, dy = 0) {
+    constructor(x = 0, y = 0, width = 0, height = 0, dx = 0, dy = 0) {
+        super(x = 0, y = 0, width = 0, height = 0);
         this.dx = dx;
         this.dy = dy;
     }
