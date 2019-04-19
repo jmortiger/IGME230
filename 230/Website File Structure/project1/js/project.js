@@ -1,12 +1,24 @@
-window.onload = init;
+let currScreenWidth = 0;
+let currScreenHeight = 0;
+const ratioHeight = 9 / 16;
 
+window.onload = init;
 function init() {
+    // Setup input handling
+    keySetup();
+
+    // Setup canvas
     const projectHousingElement = document.querySelector("#mainContent");
 
     projectHousingElement.innerHTML = "";
+    
+    currScreenWidth = projectHousingElement.clientWidth;
+    currScreenHeight = projectHousingElement.clientHeight;
 
-    const app = new PIXI.Application(600, 400);
+    const app = new PIXI.Application(projectHousingElement.clientWidth, projectHousingElement.clientWidth * ratioHeight);
     projectHousingElement.appendChild(app.view);
+
+    window.onresize = resizeApp;
 
     const gameObjects = new Array();
 
@@ -38,21 +50,21 @@ function init() {
 
     // #2 - make some PixiJS buttons
     // http://pixijs.download/release/docs/PIXI.Sprite.html
-    const b1 = PIXI.Sprite.fromImage('images/button-130.png');
+    const b1 = PIXI.Sprite.fromImage('media/button-130.png');
     b1.buttonMode = true;
     b1.anchor.set(0.5);
     b1.x = 100;
     b1.y = 200;
     app.stage.addChild(b1);
 
-    const b2 = PIXI.Sprite.fromImage('images/button-130.png');
+    const b2 = PIXI.Sprite.fromImage('media/button-130.png');
     b2.buttonMode = true;
     b2.anchor.set(0.5);
     b2.x = 250;
     b2.y = 200;
     app.stage.addChild(b2);
 
-    const b3 = PIXI.Sprite.fromImage('images/button-130.png');
+    const b3 = PIXI.Sprite.fromImage('media/button-130.png');
     b3.buttonMode = true;
     b3.anchor.set(0.5);
     b3.x = 400;
@@ -100,6 +112,9 @@ function makeRoundedRectangle(width = 50, height = 50, color = 0xFF0000) {
 
 function resizeApp() {
     let parent = app.view.parentNode;
+
+    currScreenWidth = parent.clientWidth;
+    currScreenHeight = parent.clientHeight;
 
     app.renderer.resize(parent.clientWidth, parent.clientHeight);
 

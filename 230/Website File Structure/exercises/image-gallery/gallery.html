@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>Image Gallery</title>
     <style>
-
         body {
             font-family: "Helvetica","Arial",serif;
             color: #333;
@@ -85,9 +84,14 @@
         span. In JavaScript we access these custom data properties using the .dataset
         property. We also covered this in web-apps-6.
         */
+        "use strict";
+
         const listElems = document.querySelectorAll("span");
+        const imgWrapper = document.querySelector("#imagewrapper");
         for (let i = 0; i < listElems.length; i++) {
-            //listElems[i].
+            listElems[i].onclick = (e) => {
+                imgWrapper.innerHTML = `<img src="images/${listElems[i].dataset.image}" alt="${listElems[i].title}" />`;
+            }
         }
     </script>
 

@@ -7,3 +7,7 @@
     /*-webkit-text-stroke-color: whitesmoke;
     -webkit-text-stroke-width: 3px;*/
 }
+
+#mainContent {
+    padding: 0px;
+}
