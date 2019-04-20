@@ -103,12 +103,13 @@ class Button extends ScreenObject {
     }
 }
 
-class GameObject {
-    constructor(x = 0, y = 0, width = 0, height = 0) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+class GameObject extends ScreenObject {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
+        super(scaleX, scaleY, scaleWidth, scaleHeight);
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        this.scaleWidth = scaleWidth;
+        this.scaleHeight = scaleHeight;
     }
 
     //update(deltaTime) {

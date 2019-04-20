@@ -34,6 +34,12 @@ function init() {
     // Setup input handling
     keySetup();
 
+    // pre-load images
+    PIXI.loader.
+        add(["media/images/PC-Idle No Border.png"/*, "images/explosions.png"*/]).
+        on("progress", e => { console.log(`progress=${e.progress}`) }).
+        load(setup);
+
     window.onresize = resizeApp;
 
     //const gameObjects = new Array();

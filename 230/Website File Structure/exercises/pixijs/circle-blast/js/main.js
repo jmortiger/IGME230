@@ -363,7 +363,7 @@ function loadSpriteSheet() {
     let height = 64;
     let numFrames = 16;
     let textures = [];
-    for (var i = 0; i < numFrames; i++) {
+    for (let i = 0; i < numFrames; i++) {
         let frame = new PIXI.Texture(spriteSheet, new PIXI.Rectangle(i * width, 64, width, height));
         textures.push(frame);
     }
