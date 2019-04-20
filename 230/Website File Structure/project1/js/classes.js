@@ -63,13 +63,13 @@ class Button extends ScreenObject {
         this.sprite = PIXI.Sprite.fromImage(imgSrc);
         this.sprite.buttonMode = true;
         this.sprite.anchor.set(anchor.x, anchor.y);
-        this.sprite.x = scaleX;
-        this.sprite.y = scaleY;
-        this.sprite.width = scaleWidth;
-        this.sprite.height = scaleHeight;
+        this.sprite.x = scaleToScreenWidth(this.scaleX);
+        this.sprite.y = scaleToScreenHeight(this.scaleY);
+        this.sprite.width = scaleToScreenWidth(this.scaleWidth);
+        this.sprite.height = scaleToScreenHeight(this.scaleHeight);
         app.stage.addChild(this.sprite);
 
-        // Fix
+        // Fix this
         //this.sprite.on('pointerover', e => { e.target.tint = 0xBBBBBB });
         //this.sprite.on('pointerdown', e => { e.target.tint = 0x888888 });
         //this.sprite.on('pointerup', e => { e.target.tint = 0xBBBBBB });
@@ -77,6 +77,22 @@ class Button extends ScreenObject {
         //this.sprite.on('pointerupoutside', e => { e.target.tint = 0xFFFFFF });
     }
 
+    get anchorX() { return this.sprite.anchor.x; }
+    set anchorX(anchorX) { this.sprite.anchor.x = anchorX; }
+    get anchorY() { return this.sprite.anchor.y; }
+    set anchorY(anchorY) { this.sprite.anchor.y = anchorY; }
+
+    // WHYYYYYYYYYYYYYYYYYYYYYYYY
+    //set scaleX(newScaleX) {
+    //    this.scaleX = newScaleX;
+    //    this.sprite.x = scaleToScreenWidth(newScaleX);
+    //}
+
+    //set scaleY(newScaleY) {
+    //    this.scaleY = newScaleY;
+    //    this.sprite.y = scaleToScreenHeight(newScaleY);
+    //}
+    
     scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
         if (prevScreenHeight == newScreenHeight, prevScreenWidth == newScreenWidth)
             return;

@@ -16,10 +16,8 @@ const gameObjects = new Array();
 
 window.onload = init;
 function init() {
-    /*const */projectHousingElement = document.querySelector("#mainContent");
-
     // Setup canvas
-
+    /*const */projectHousingElement = document.querySelector("#mainContent");
     projectHousingElement.innerHTML = "";
     
     currScreenWidth = projectHousingElement.clientWidth;
@@ -27,6 +25,12 @@ function init() {
 
     /*const */app = new PIXI.Application(currScreenWidth, currScreenHeight);
     projectHousingElement.appendChild(app.view);
+
+    //projectHousingElement.innerHTML += "<p>This game supports window resizing. It only took a full day.</p>";
+    let tempNode = document.createElement("P");
+    tempNode.innerHTML = "This game supports window resizing. It only took a full day.";
+    projectHousingElement.appendChild(tempNode);
+
     // Setup input handling
     keySetup();
 
@@ -34,8 +38,16 @@ function init() {
 
     //const gameObjects = new Array();
 
-    let tR2 = new RectObj(.5, .5, .5 * widthToHeightFactor, .5);
-    let bTest = new Button(.5, .5, .25, .25 * (9 / 21) * heightToWidthFactor);
+    let tR2 = new RectObj(.5, .5, yToX(.5)/*.5 * widthToHeightFactor*/, .5);
+    let bTest = new Button(.05/* + (.25 / 2)*/, xToY(.05), .25, .25 * (35 / 130) * heightToWidthFactor);
+    bTest.anchorX = 0;
+    bTest.anchorY = 0;
+    //bTest.scaleX = .2;
+    //bTest.scaleY = xToY(.2);
+    //bTest.anchorX = .5;
+    //bTest.anchorY = .5;
+
+    //bTest.zIndex = 5;
     //let tR2 = makeCenteredScaleRect(.5, .5, .5 * widthToHeightFactor, .5);
     //tR2.x = scaleToScreenWidth(.5);
     //tR2.y = scaleToScreenHeight(.5);
@@ -237,4 +249,12 @@ function screenToScaleHeight(num) {
 
 function screenToScale(x, y) {
     return new PIXI.Point(screenToScaleWidth(x), screenToScaleHeight(y));
+}
+
+function xToY(scaleNum) {
+    return scaleNum * heightToWidthFactor;
+}
+
+function yToX(scaleNum) {
+    return scaleNum * widthToHeightFactor;
 }

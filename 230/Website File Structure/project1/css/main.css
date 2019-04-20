@@ -143,7 +143,9 @@ ol {
         grid-template-columns: 1fr 600px 1fr;
     }
 }*/
-/*RESPONSIVE FOR NAVBAR: Works past 480px*/
+/*RESPONSIVE FOR NAVBAR: Works past 480px
+    EDIT: Works to ~295px on project page
+*/
 @media screen and (max-width: 675px) {
     #navlink1 {
         font-size: initial;
@@ -155,4 +157,16 @@ ol {
 /*Title probs from width 669 - 600. EDIT: Randomly fixed*/
 @media screen and (max-width: 600px) {
     header nav a { padding: 10px; }
+}
+@media screen and (max-width: 420px) {
+    #navlink2, #navlink3short, #navlink4 {
+        font-size: 1em;
+        /*margin: 0px;*/
+    }
+    #navlink1 { font-size: smaller; }
+}
+@media screen and (max-width: 325px) {
+    #navlink2, #navlink3short, #navlink4 {
+        padding: 5px;
+    }
 }
