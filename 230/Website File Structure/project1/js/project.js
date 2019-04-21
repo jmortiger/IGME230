@@ -55,21 +55,7 @@ function init() {
     //bTest.scaleY = xToY(.2);
     //bTest.anchorX = .5;
     //bTest.anchorY = .5;
-
-    //bTest.zIndex = 5;
-    //let tR2 = makeCenteredScaleRect(.5, .5, .5 * widthToHeightFactor, .5);
-    //tR2.x = scaleToScreenWidth(.5);
-    //tR2.y = scaleToScreenHeight(.5);
-    //let testRect = new RectObj(.5, .5, .25, .25);
-    //gameObjects.push(testRect);
-    //app.stage.addChild(testRect.rect);
-    //app.stage.addChild(tR2);
-    //app.stage.addChild(tR2.rect); // Auto added
-    //app.stage.addChild(bTest.sprite);
-    //console.log(`x=${tR2.x} y=${tR2.y}`);
-    //console.log(`w=${tR2.width} h=${tR2.height}`);
-    //console.log(`x=${tr3.x} y=${tr3.y}`);
-    //console.log(`w=${tr3.width} h=${tr3.height}`);
+    
     gameObjects.push(tR2);
     gameObjects.push(bTest);
 
@@ -234,36 +220,4 @@ function resizeApp() {
         //obj.scaleObject(prevScreenWidth, prevScreenHeight, currScreenWidth, currScreenHeight);
         gameObjects[i].scaleObject(prevScreenWidth, prevScreenHeight, currScreenWidth, currScreenHeight);
     }
-}
-
-function scaleToScreenWidth(num) {
-    return Math.round(num * currScreenWidth);
-}
-
-function scaleToScreenHeight(num) {
-    return Math.round(num * currScreenHeight);
-}
-
-function scaleToScreen(x, y) {
-    return new PIXI.Point(scaleToScreenWidth(x), scaleToScreenHeight(y));
-}
-
-function screenToScaleWidth(num) {
-    return num / currScreenWidth;
-}
-
-function screenToScaleHeight(num) {
-    return num / currScreenHeight;
-}
-
-function screenToScale(x, y) {
-    return new PIXI.Point(screenToScaleWidth(x), screenToScaleHeight(y));
-}
-
-function xToY(scaleNum) {
-    return scaleNum * heightToWidthFactor;
-}
-
-function yToX(scaleNum) {
-    return scaleNum * widthToHeightFactor;
 }

@@ -1,25 +1,25 @@
 /*Palette: fa215d 0000cd 00ffff bf00ff 3066be MAYBE #ff00dc*/
 @font-face {
     font-family: Finger Paint;
-    src: url("../media/Finger_Paint/FingerPaint-Regular.ttf");
+    src: url("../media/fonts/Finger_Paint/FingerPaint-Regular.ttf");
 }
 @font-face {
     font-family: Varela Round;
-    src: url("../media/Varela_Round/VarelaRound-Regular.ttf");
+    src: url("../media/fonts/Varela_Round/VarelaRound-Regular.ttf");
 }
 @font-face {
     font-family: Inconsolata;
-    src: url("../media/Inconsolata-Regular.tff");
+    src: url("../media/fonts/Inconsolata-Regular.tff");
     font-weight: normal;
 }
 @font-face {
     font-family: Inconsolata;
-    src: url("../media/Inconsolata-Bold.tff");
+    src: url("../media/fonts/Inconsolata-Bold.tff");
     font-weight: bold;
 }
 @font-face {
     font-family: Geostar;
-    src: url("../media/Geostar-Regular.ttf");
+    src: url("../media/fonts/Geostar-Regular.ttf");
 }
 * {
     margin: 0;

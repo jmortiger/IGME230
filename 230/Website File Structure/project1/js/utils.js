@@ -29,3 +29,35 @@ function createAnim(x, y, frameWidth, frameHeight, animTextures, animSpeed, isLo
     //gameScene.addChild(anim);
     anim.play();
 }
+
+function scaleToScreenWidth(num) {
+    return Math.round(num * currScreenWidth);
+}
+
+function scaleToScreenHeight(num) {
+    return Math.round(num * currScreenHeight);
+}
+
+function scaleToScreen(x, y) {
+    return new PIXI.Point(scaleToScreenWidth(x), scaleToScreenHeight(y));
+}
+
+function screenToScaleWidth(num) {
+    return num / currScreenWidth;
+}
+
+function screenToScaleHeight(num) {
+    return num / currScreenHeight;
+}
+
+function screenToScale(x, y) {
+    return new PIXI.Point(screenToScaleWidth(x), screenToScaleHeight(y));
+}
+
+function xToY(scaleNum) {
+    return scaleNum * heightToWidthFactor;
+}
+
+function yToX(scaleNum) {
+    return scaleNum * widthToHeightFactor;
+}
