@@ -8,12 +8,10 @@ class RectObj {
 
         this.rect = makeCenteredScaleRect(scaleX, scaleY, scaleWidth, scaleHeight);
         console.log(`x=${this.rect.x} y=${this.rect.y}`);
-
-        app.stage.addChild(this.rect);
     }
 
     scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
-        if (prevScreenHeight == newScreenHeight, prevScreenWidth == newScreenWidth)
+        if (prevScreenHeight == newScreenHeight && prevScreenWidth == newScreenWidth)
             return;
         //let widthFactor = newScreenWidth / prevScreenWidth;
         //let heightFactor = newScreenHeight / prevScreenHeight;
@@ -29,6 +27,13 @@ class RectObj {
         this.rect.height = scaleToScreenHeight(this.scaleHeight)
         console.log(`w=${this.rect.width} h=${this.rect.height}`);
     }
+
+    scaleObj() {
+        this.rect.x = scaleToScreenWidth(this.scaleX);
+        this.rect.y = scaleToScreenHeight(this.scaleY)
+        this.rect.width = scaleToScreenWidth(this.scaleWidth);
+        this.rect.height = scaleToScreenHeight(this.scaleHeight)
+    }
 }
 
 class ScreenObject {
@@ -40,7 +45,7 @@ class ScreenObject {
     }
 
     scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
-        if (prevScreenHeight == newScreenHeight, prevScreenWidth == newScreenWidth)
+        if (prevScreenHeight == newScreenHeight && prevScreenWidth == newScreenWidth)
             return;
         //let widthFactor = newScreenWidth / previousScreenWidth;
         //let heightFactor = newScreenHeight / previousScreenHeight;
@@ -49,25 +54,85 @@ class ScreenObject {
         //this.scaleWidth *= widthFactor;
         //this.scaleHeight *= heightFactor;
 
-
+        this.textObj.x = scaleToScreenWidth(this.scaleX);
+        this.textObj.y = scaleToScreenHeight(this.scaleY)
+        //console.log(`x=${this.textObj.x} y=${this.textObj.y}`);
+        this.textObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.textObj.height = scaleToScreenHeight(this.scaleHeight)
+        //console.log(`w=${this.textObj.width} h=${this.textObj.height}`);
     }
 
-    draw() {
-
+    scaleObj() {
+        this.textObj.x = scaleToScreenWidth(this.scaleX);
+        this.textObj.y = scaleToScreenHeight(this.scaleY)
+        //console.log(`x=${this.textObj.x} y=${this.textObj.y}`);
+        this.textObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.textObj.height = scaleToScreenHeight(this.scaleHeight)
+        //console.log(`w=${this.textObj.width} h=${this.textObj.height}`);
     }
 }
-// INCOMPLETE
-class Button extends ScreenObject {
-    constructor(scaleX = 0, scaleY = 0, scaleWidth = .15, scaleHeight = .1, imgSrc = 'media/button-130.png', anchor = new PIXI.Point(.5, .5)) {
+
+class SprExtObj extends ScreenObject {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0, sprExtObj) {
         super(scaleX, scaleY, scaleWidth, scaleHeight);
-        this.sprite = PIXI.Sprite.fromImage(imgSrc);
-        this.sprite.buttonMode = true;
-        this.sprite.anchor.set(anchor.x, anchor.y);
-        this.sprite.x = scaleToScreenWidth(this.scaleX);
-        this.sprite.y = scaleToScreenHeight(this.scaleY);
-        this.sprite.width = scaleToScreenWidth(this.scaleWidth);
-        this.sprite.height = scaleToScreenHeight(this.scaleHeight);
-        app.stage.addChild(this.sprite);
+        this.sprObj = sprExtObj;
+
+        if (this.sprObj != null) {
+            this.sprObj.x = scaleToScreenWidth(this.scaleX);
+            this.sprObj.y = scaleToScreenHeight(this.scaleY);
+            this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
+            this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
+            //this.scaleHeight = screenToScaleHeight(this.sprObj.height);
+        }
+    }
+
+    scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
+        if (prevScreenHeight == newScreenHeight && prevScreenWidth == newScreenWidth)
+            return;
+
+        this.sprObj.x = scaleToScreenWidth(this.scaleX);
+        this.sprObj.y = scaleToScreenHeight(this.scaleY);
+        this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+
+    scaleObj() {
+        this.sprObj.x = scaleToScreenWidth(this.scaleX);
+        this.sprObj.y = scaleToScreenHeight(this.scaleY);
+        this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+}
+
+class TextObj extends SprExtObj {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0, textStr = "Failure To Set", textStyle) {
+        super(scaleX, scaleY, scaleWidth, scaleHeight, makeTxtObjFrmStrAndStyle(textStr, textStyle));
+        this.textObj = this.sprObj;
+    }
+
+    scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
+        if (prevScreenHeight == newScreenHeight && prevScreenWidth == newScreenWidth)
+            return;
+
+        this.textObj.x = scaleToScreenWidth(this.scaleX);
+        this.textObj.y = scaleToScreenHeight(this.scaleY);
+        this.textObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.textObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+
+    scaleObj() {
+        this.textObj.x = scaleToScreenWidth(this.scaleX);
+        this.textObj.y = scaleToScreenHeight(this.scaleY);
+        this.textObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.textObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+}
+
+// INCOMPLETE
+class Button extends SprExtObj {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = .15, scaleHeight = .1, imgSrc = 'media/images/button-130.png', anchor = new PIXI.Point(.5, .5)) {
+        super(scaleX, scaleY, scaleWidth, scaleHeight, makeBttnFrmImgSrc(imgSrc));
+        this.sprObj.anchor.set(anchor.x, anchor.y);
 
         // Fix this
         //this.sprite.on('pointerover', e => { e.target.tint = 0xBBBBBB });
@@ -77,10 +142,10 @@ class Button extends ScreenObject {
         //this.sprite.on('pointerupoutside', e => { e.target.tint = 0xFFFFFF });
     }
 
-    get anchorX() { return this.sprite.anchor.x; }
-    set anchorX(anchorX) { this.sprite.anchor.x = anchorX; }
-    get anchorY() { return this.sprite.anchor.y; }
-    set anchorY(anchorY) { this.sprite.anchor.y = anchorY; }
+    get anchorX() { return this.sprObj.anchor.x; }
+    set anchorX(anchorX) { this.sprObj.anchor.x = anchorX; }
+    get anchorY() { return this.sprObj.anchor.y; }
+    set anchorY(anchorY) { this.sprObj.anchor.y = anchorY; }
 
     // WHYYYYYYYYYYYYYYYYYYYYYYYY
     //set scaleX(newScaleX) {
@@ -94,12 +159,19 @@ class Button extends ScreenObject {
     //}
     
     scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
-        if (prevScreenHeight == newScreenHeight, prevScreenWidth == newScreenWidth)
+        if (prevScreenHeight == newScreenHeight && prevScreenWidth == newScreenWidth)
             return;
-        this.sprite.x = scaleToScreenWidth(this.scaleX);
-        this.sprite.y = scaleToScreenHeight(this.scaleY);
-        this.sprite.width = scaleToScreenWidth(this.scaleWidth);
-        this.sprite.height = scaleToScreenHeight(this.scaleHeight);
+        this.sprObj.x = scaleToScreenWidth(this.scaleX);
+        this.sprObj.y = scaleToScreenHeight(this.scaleY);
+        this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+
+    scaleObj() {
+        this.sprObj.x = scaleToScreenWidth(this.scaleX);
+        this.sprObj.y = scaleToScreenHeight(this.scaleY);
+        this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
+        this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
     }
 }
 
@@ -119,14 +191,10 @@ class GameObject extends ScreenObject {
     checkCollision(other) {
 
     }
-
+    // TODO: FINISH
     scaleObject(previousScreenWidth, previousScreenHeight, newScreenWidth, newScreenHeight) {
-        if (previousScreenHeight == newScreenHeight, previousScreenWidth == newScreenWidth)
+        if (previousScreenHeight == newScreenHeight && previousScreenWidth == newScreenWidth)
             return;
-
-    }
-
-    draw() {
 
     }
 }
