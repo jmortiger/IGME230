@@ -20,14 +20,7 @@ const gameObjects = new Array();
 const spriteObjs = new Array();
 
 // Game scenes
-const SCENES = {
-    startScene: null,
-    gameScene: null,
-    gameOverScene: null,
-    pausedScene: null,
-    loadScreen: null,
-    testScreen: null
-}
+let startScene, gameScene, gameOverScene, pausedScene, loadScreen, testScreen;
 
 // Text styles
 let titleTextStyle, defaultTextStyle;
@@ -96,45 +89,19 @@ function init() {
 
     // Bind resize event
     window.onresize = resizeApp;
-
-    // Create scenes
-    // Initialize them, set them to invisible, and add them to the app stage
-    // DEAR GOD WHY IS THIS LANGUAGE PAIN (Object.keys(SCENES) causes infinite hang)
-    //for (let i = 0; i < Object.keys(SCENES).length; i++) {
-    //    SCENES[i] = new PIXI.Container();
-    //    SCENES[i].visible = false;
-    //    app.stage.addChild(SCENES[i]);
-    //}
-    for (var i in SCENES) {
-        if (SCENES.hasOwnProperty(i)) {
-            SCENES[i] = new PIXI.Container();
-            SCENES[i].visible = false;
-            app.stage.addChild(SCENES[i]);
-        }
-    }
-
     // TEST CODE: create animation
-    SCENES.testScreen.visible = true;
     let idleAnimTextures = loadSpriteSheet("media/images/PC-Idle No Border.png", 256, 256, 8, 4, 2);
 
     let idleAnimTest = createAnim(scaleToScreenWidth(yToX(.5)), scaleToScreenHeight(.5), 256, 256, idleAnimTextures, 15 / 60, true);
     idleAnimTest.anchor = new PIXI.Point(0, 0);
-    let idleAnimObj = new SprExtObj(idleAnimTest, yToX(.5), .5, {
-        scaleWidth: yToX(.35),
-        scaleHeight: .35
-    });
+    let idleAnimObj = new SprExtObj(yToX(.5), .5, yToX(.35), .35, idleAnimTest);
     console.log(`x:${idleAnimObj.sprObj.x} y:${idleAnimObj.sprObj.y}`);
-    console.log(`screenW:${idleAnimObj.sprObj.width} h:${idleAnimObj.sprObj.height}`);
     idleAnimObj.sprObj.play();
     //idleAnimObj.sprObj.anchor = new PIXI.Point (0, 0);
     gameObjects.push(idleAnimObj);
-    //app.stage.addChild(idleAnimObj.sprObj);
-    SCENES.testScreen.addChild(idleAnimObj.sprObj);
+    app.stage.addChild(idleAnimObj.sprObj);
     // TEST CODE: Add text
-    let titleTest = new TextObj("Shifting Hues", .5, 0, {
-        scaleWidth: .75,
-        style: titleTextStyle
-    }/*.75, .25*/);
+    let titleTest = new TextObj("Shifting Hues", titleTextStyle, .5, 0, .75, .25);
     //titleTest.textObj.anchor = 0;
     titleTest.textObj.anchor = new PIXI.Point(.5, 0);
 
@@ -144,8 +111,7 @@ function init() {
     //    anchorX: .5,
     //    anchorY: 0
     //});
-    //app.stage.addChild(titleTest.textObj);
-    SCENES.testScreen.addChild(titleTest.textObj);
+    app.stage.addChild(titleTest.textObj);
     gameObjects.push(titleTest);
 
     //let textTest2 = new PIXI.Text("Shifting Hues", titleTextStyle);
@@ -234,11 +200,5 @@ function resizeApp() {
     }
     for (let i = 0; i < spriteObjs.length; i++) {
         resizeSpriteFromDataObj(spriteObjs[i]);
-    }
-}
-
-function logGameObjData() {
-    for (let i = 0; i < gameObjects.length; i++) {
-        gameObjects[i].logInfo();
     }
 }
