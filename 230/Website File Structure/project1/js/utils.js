@@ -14,11 +14,11 @@ function SpriteObjData(sprite, scaleX, scaleY, scaleWidth, scaleHeight) {
     this.scaleHeight = scaleHeight;
 }
 
-function makeTxtObjFrmStrAndStyle(txtStr, txtStyle) {
-    let textObj = new PIXI.Text(txtStr);
-    textObj.style = txtStyle;
-    return textObj;
-}
+//function makeTextObjFromStrAndStyle(txtStr, txtStyle) {
+//    let textObj = new PIXI.Text(txtStr);
+//    textObj.style = txtStyle;
+//    return textObj;
+//}
 
 function makeBttnFrmImgSrc(imgSrc) {
     let sprite = PIXI.Sprite.fromImage(imgSrc);
@@ -81,6 +81,10 @@ function screenToScale(x, y) {
     return new PIXI.Point(screenToScaleWidth(x), screenToScaleHeight(y));
 }
 
+function screenToScaleFromPoint(point) {
+    return new PIXI.Point(screenToScaleWidth(point.x), screenToScaleHeight(point.y));
+}
+
 function xToY(scaleNum) {
     return scaleNum * heightToWidthFactor;
 }
@@ -88,6 +92,54 @@ function xToY(scaleNum) {
 function yToX(scaleNum) {
     return scaleNum * widthToHeightFactor;
 }
+
+// Object creation helpers
+
+function makeTextObjFromParamObj(textStr, scaleX, scaleY, paramObj) {
+    let textObj;
+    // Text style
+    if (isDefined(paramObj.style))
+        textObj = new TextObj(textStr, paramObj.style, scaleX, scaleY);
+    else if (isDefined(paramObj.textStyle))
+        textObj = new TextObj(textStr, paramObj.textStyle, scaleX, scaleY);
+    else
+        textObj = new TextObj(textStr, null, scaleX, scaleY, 0, 0);
+
+    // if both are there, scale accordingly. If one one is there, scale based on the sprite's size and the other val
+    if (isDefined(paramObj.scaleWidth)) {
+        if (isDefined(paramObj.scaleHeight)) {
+            textObj.scaleWidth = paramObj.scaleWidth;
+            textObj.scaleHeight = paramObj.scaleHeight;
+        }
+        else {
+            textObj.scaleWidth = paramObj.scaleWidth;
+            scaleSprObjByWidth(textObj, paramObj.scaleWidth);
+        }
+    }
+    else if (isDefined(paramObj.scaleHeight)) {
+        textObj.scaleHeight = paramObj.scaleHeight;
+        scaleSprObjByHeight(textObj, paramObj.scaleHeight);
+    }
+
+    if (isDefined(paramObj.anchor)) {
+        if ((typeof paramObj.anchor) == "number")
+            textObj.sprObj.anchor.set(paramObj.anchor);
+        else if ((typeof paramObj.anchor) == "object")
+            textObj.sprObj.anchor.set(paramObj.anchor.x, paramObj.anchor.y);
+    }
+    else if (isDefined(paramObj.anchorX) && isDefined(paramObj.anchorY))
+        textObj.sprObj.anchor.set(paramObj.anchorX, paramObj.anchorY);
+
+    return textObj;
+}
+
+//function makeTextObjFromStyle_ScaleWidth_ScaleHeight(style, scaleWidth, scaleHeight) {
+
+//}
+
+//function makeTextObjFromAlphaAnchorButton_ModeInteractive() {
+
+//}
 
 function makeCenteredScaleRect(scaleX = 0, scaleY = 0,
     scaleWidth = .25, scaleHeight = .25,
@@ -177,4 +229,38 @@ function resizeSpriteFromDataObj(spriteDataObj) {
     spriteDataObj.sprite.y = scaleToScreenHeight(spriteDataObj.scaleY);
     spriteDataObj.sprite.width = scaleToScreenWidth(spriteDataObj.scaleWidth);
     spriteDataObj.sprite.height = scaleToScreenHeight(spriteDataObj.scaleHeight);
+}
+
+function refreshScreenVals(sprExtObj) {
+    sprExtObj.sprObj.x = scaleToScreenWidth(sprExtObj.scaleX);
+    sprExtObj.sprObj.y = scaleToScreenHeight(sprExtObj.scaleY);
+    sprExtObj.sprObj.width = scaleToScreenWidth(sprExtObj.scaleWidth);
+    sprExtObj.sprObj.height = scaleToScreenHeight(sprExtObj.scaleHeight);
+}
+
+function scaleSprObjByWidth(sprObj, desiredScaleWidth) {
+    // Error handling and checking (divide by zero)
+    if (desiredScaleWidth == 0) return false;
+    let size = sprObj.getSpriteSize();
+    size = screenToScaleFromPoint(size);
+    let factor = size.x / desiredScaleWidth;
+    let desiredScaleHeight = size.y * factor;
+    sprObj.scaleWidth = desiredScaleWidth;
+    sprObj.scaleHeight = desiredScaleHeight;
+}
+
+function scaleSprObjByHeight(sprObj, desiredScaleHeight) {
+    // Error handling and checking (divide by zero)
+    if (desiredScaleHeight == 0) return false;
+    let size = sprObj.getSpriteSize();
+    size = screenToScaleFromPoint(size);
+    let factor = size.y / desiredScaleHeight;
+    let desiredScaleWidth = size.x * factor;
+    sprObj.scaleWidth = desiredScaleWidth;
+    sprObj.scaleHeight = desiredScaleHeight;
+    return true;
+}
+
+function isDefined(thing) {
+    return (thing != undefined && thing != null);
 }

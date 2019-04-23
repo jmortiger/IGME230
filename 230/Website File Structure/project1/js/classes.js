@@ -105,9 +105,21 @@ class SprExtObj extends ScreenObject {
 }
 
 class TextObj extends SprExtObj {
-    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0, textStr = "Failure To Set", textStyle) {
-        super(scaleX, scaleY, scaleWidth, scaleHeight, makeTxtObjFrmStrAndStyle(textStr, textStyle));
-        this.textObj = this.sprObj;
+    constructor(textStr = "Failure To Set TextObj textStr", textStyle = null, scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
+        // Give a null so the size isn't messed up
+        super(scaleX, scaleY, scaleWidth, scaleHeight, null);
+        if (textStyle == null)
+            this.textObj = new PIXI.Text(textStr);
+        else
+            this.textObj = new PIXI.Text(textStr, textStyle);
+        this.sprObj = this.textObj;
+        if (scaleWidth == 0) {
+            if (!scaleSprObjByHeight(this, this.scaleHeight)) {
+                // TODO: Throw error here.
+            }
+            scaleSprObjByWidth(this, this.scaleWidth);
+        }
+        refreshScreenVals(this);
     }
 
     scaleObject(prevScreenWidth, prevScreenHeight, newScreenWidth, newScreenHeight) {
@@ -125,6 +137,12 @@ class TextObj extends SprExtObj {
         this.textObj.y = scaleToScreenHeight(this.scaleY);
         this.textObj.width = scaleToScreenWidth(this.scaleWidth);
         this.textObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+
+    // getWidthHeightRatio()
+    // Returns the width and height from the sprite.
+    getSpriteSize() {
+        return new PIXI.Point(this.sprObj.width, this.sprObj.height);
     }
 }
 

@@ -20,7 +20,7 @@ const gameObjects = new Array();
 const spriteObjs = new Array();
 
 // Game scenes
-let startScene, gameScene, gameOverScene, pausedScene;
+let startScene, gameScene, gameOverScene, pausedScene, loadScreen, testScreen;
 
 // Text styles
 let titleTextStyle, defaultTextStyle;
@@ -45,7 +45,7 @@ function preload() {
 }
 
 function init() {
-    // Console QOL
+    // Dev Console Stuffs
     document.querySelector("#myConsole").onfocus = (e) => {
         if (e.target.value == "<Please enter a debug command>")
             e.target.value = "";
@@ -59,6 +59,7 @@ function init() {
         processDevConsoleInput(e.target.value);
         e.target.value = "";
     }
+
     // Get the element that houses the app
     /*const */projectHousingElement = document.querySelector("#mainContent");
     //projectHousingElement.innerHTML = "";
@@ -68,7 +69,8 @@ function init() {
     currScreenHeight = Math.round(projectHousingElement.clientWidth * widthToHeightFactor);
 
     // Setup canvas
-    /*const */app = new PIXI.Application(currScreenWidth, currScreenHeight); if (projectHousingElement.hasChildNodes())
+    /*const */app = new PIXI.Application(currScreenWidth, currScreenHeight);
+    if (projectHousingElement.hasChildNodes())
         projectHousingElement.insertBefore(app.view, projectHousingElement.firstElementChild);
     else
         projectHousingElement.appendChild(app.view);
@@ -99,9 +101,16 @@ function init() {
     gameObjects.push(idleAnimObj);
     app.stage.addChild(idleAnimObj.sprObj);
     // TEST CODE: Add text
-    let titleTest = new TextObj(.5, 0, .75, .25, "Shifting Hues", titleTextStyle);
+    let titleTest = new TextObj("Shifting Hues", titleTextStyle, .5, 0, .75, .25);
     //titleTest.textObj.anchor = 0;
     titleTest.textObj.anchor = new PIXI.Point(.5, 0);
+
+    //let titleTest = makeTextObjFromParamObj("Shifting Hues", .5, 0, {
+    //    scaleWidth: .75,
+    //    textStyle: titleTextStyle,
+    //    anchorX: .5,
+    //    anchorY: 0
+    //});
     app.stage.addChild(titleTest.textObj);
     gameObjects.push(titleTest);
 
