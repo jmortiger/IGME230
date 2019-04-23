@@ -264,3 +264,12 @@ function scaleSprObjByHeight(sprObj, desiredScaleHeight) {
 function isDefined(thing) {
     return (thing != undefined && thing != null);
 }
+
+function setupContainer(paramObj) {
+    let newContainer = new PIXI.Container();
+    if (isDefined(paramObj.visible))
+        newContainer.visible = paramObj.visible;
+    if (isDefined(paramObj.parent))
+        parent.addChild(newContainer);
+    return newContainer;
+}

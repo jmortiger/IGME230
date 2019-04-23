@@ -37,7 +37,7 @@ class RectObj {
 }
 
 class ScreenObject {
-    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = .5, scaleHeight = 0) {
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         this.scaleWidth = scaleWidth;
@@ -73,11 +73,29 @@ class ScreenObject {
 }
 
 class SprExtObj extends ScreenObject {
-    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0, sprExtObj) {
-        super(scaleX, scaleY, scaleWidth, scaleHeight);
+    constructor(sprExtObj, scaleX = 0, scaleY = 0, paramObj) {
+        super(scaleX, scaleY);
         this.sprObj = sprExtObj;
 
-        if (this.sprObj != null) {
+        // if both are there, scale accordingly. If one one is there, scale based on the sprite's size and the other val
+        if (isDefined(paramObj.scaleWidth) && paramObj.scaleWidth != 0) {
+            if (isDefined(paramObj.scaleHeight) && paramObj.scaleHeight != 0) {
+                this.scaleWidth = paramObj.scaleWidth;
+                this.scaleHeight = paramObj.scaleHeight;
+            }
+            else {
+                this.scaleWidth = paramObj.scaleWidth;
+                scaleSprObjByWidth(this, paramObj.scaleWidth);
+            }
+        }
+        else if (isDefined(paramObj.scaleHeight) && paramObj.scaleHeight != 0) {
+            this.scaleHeight = paramObj.scaleHeight;
+            scaleSprObjByHeight(this, paramObj.scaleHeight);
+        }
+
+        // TODO: handle other params
+
+        if (isDefined(this.sprObj)) {
             this.sprObj.x = scaleToScreenWidth(this.scaleX);
             this.sprObj.y = scaleToScreenHeight(this.scaleY);
             this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
@@ -102,23 +120,64 @@ class SprExtObj extends ScreenObject {
         this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
         this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
     }
+
+    // getSpriteSize()
+    // Returns the width and height from the sprite.
+    getSpriteSize() {
+        return new PIXI.Point(this.sprObj.width, this.sprObj.height);
+    }
 }
 
 class TextObj extends SprExtObj {
-    constructor(textStr = "Failure To Set TextObj textStr", textStyle = null, scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
-        // Give a null so the size isn't messed up
-        super(scaleX, scaleY, scaleWidth, scaleHeight, null);
-        if (textStyle == null)
-            this.textObj = new PIXI.Text(textStr);
-        else
-            this.textObj = new PIXI.Text(textStr, textStyle);
-        this.sprObj = this.textObj;
-        if (scaleWidth == 0) {
-            if (!scaleSprObjByHeight(this, this.scaleHeight)) {
-                // TODO: Throw error here.
+    constructor(textStr = "Failure To Set TextObj textStr", textStyle = null, scaleX = 0, scaleY = 0, paramObj) {
+        super(new PIXI.Text(textStr), scaleX, scaleY, paramObj);
+        this.textObj = this.sprObj;
+        // Text style
+        if (isDefined(paramObj.style))
+            //this.textObj = new Text(textStr, paramObj.style);
+            this.textObj.style = paramObj.style;
+        else if (isDefined(paramObj.textStyle))
+            //this.textObj = new Text(textStr, paramObj.textStyle);
+            this.textObj.style = paramObj.textStyle;
+        //else
+        //    //this.textObj = new Text(textStr);
+
+        // if both are there, scale accordingly. If one one is there, scale based on the sprite's size and the other val
+        if (isDefined(paramObj.scaleWidth)) {
+            if (isDefined(paramObj.scaleHeight)) {
+                this.scaleWidth = paramObj.scaleWidth;
+                this.scaleHeight = paramObj.scaleHeight;
             }
-            scaleSprObjByWidth(this, this.scaleWidth);
+            else {
+                this.scaleWidth = paramObj.scaleWidth;
+                scaleSprObjByWidth(this, paramObj.scaleWidth);
+            }
         }
+        else if (isDefined(paramObj.scaleHeight)) {
+            this.scaleHeight = paramObj.scaleHeight;
+            scaleSprObjByHeight(this, paramObj.scaleHeight);
+        }
+
+        if (isDefined(paramObj.anchor)) {
+            if ((typeof paramObj.anchor) == "number")
+                this.sprObj.anchor.set(paramObj.anchor);
+            else if ((typeof paramObj.anchor) == "object")
+                this.sprObj.anchor.set(paramObj.anchor.x, paramObj.anchor.y);
+        }
+        else if (isDefined(paramObj.anchorX) && isDefined(paramObj.anchorY))
+            this.sprObj.anchor.set(paramObj.anchorX, paramObj.anchorY);
+        
+        //if (!isDefined(textStyle))
+        //    this.textObj = new PIXI.Text(textStr);
+        //else
+        //    this.textObj = new PIXI.Text(textStr, textStyle);
+        //this.sprObj = this.textObj;
+        //if (scaleWidth == 0) {
+        //    if (!scaleSprObjByHeight(this, this.scaleHeight)) {
+        //        // TODO: Throw error here.
+        //    }
+        //    scaleSprObjByWidth(this, this.scaleWidth);
+        //}
         refreshScreenVals(this);
     }
 
@@ -139,7 +198,7 @@ class TextObj extends SprExtObj {
         this.textObj.height = scaleToScreenHeight(this.scaleHeight);
     }
 
-    // getWidthHeightRatio()
+    // getSpriteSize()
     // Returns the width and height from the sprite.
     getSpriteSize() {
         return new PIXI.Point(this.sprObj.width, this.sprObj.height);
