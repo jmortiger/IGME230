@@ -99,11 +99,11 @@ function makeTextObjFromParamObj(textStr, scaleX, scaleY, paramObj) {
     let textObj;
     // Text style
     if (isDefined(paramObj.style))
-        textObj = new TextObj(textStr, paramObj.style, scaleX, scaleY);
+        textObj = new TextObj(textStr, scaleX, scaleY, paramObj);
     else if (isDefined(paramObj.textStyle))
-        textObj = new TextObj(textStr, paramObj.textStyle, scaleX, scaleY);
+        textObj = new TextObj(textStr, scaleX, scaleY, paramObj);
     else
-        textObj = new TextObj(textStr, null, scaleX, scaleY, 0, 0);
+        textObj = new TextObj(textStr, scaleX, scaleY, paramObj);
 
     // if both are there, scale accordingly. If one one is there, scale based on the sprite's size and the other val
     if (isDefined(paramObj.scaleWidth)) {
@@ -163,11 +163,11 @@ function makeCenteredScaleRect(scaleX = 0, scaleY = 0,
 // Notes: By top-left corner offset, I mean entering the distance the top-left corner is from the origin, and, consequently, the origin. For example, entering negative half the width & height will set the top-left there, and, therefore, set the origin at the center.
 // See: http://pixijs.download/dev/docs/PIXI.Graphics.html#drawRect http://pixijs.download/dev/docs/PIXI.Graphics.html
 function makeScaleRect(scaleX = 0, scaleY = 0,
-                       scaleWidth = .25, scaleHeight = .25,
-                       scaleCornerOffsetX = 0, scaleCornerOffsetY = 0,
-                       borderWidth = 0,
-                       color = 0xFF0000,
-                       outlineColor = 0xFFFF00) {
+    scaleWidth = .25, scaleHeight = .25,
+    scaleCornerOffsetX = 0, scaleCornerOffsetY = 0,
+    borderWidth = 0,
+    color = 0xFF0000,
+    outlineColor = 0xFFFF00) {
     // http://pixijs.download/dev/docs/PIXI.Graphics.html
     let rect = new PIXI.Graphics();
     let screenWidth = scaleToScreenWidth(scaleWidth);
