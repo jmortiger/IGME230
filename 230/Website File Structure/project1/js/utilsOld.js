@@ -163,11 +163,11 @@ function makeCenteredScaleRect(scaleX = 0, scaleY = 0,
 // Notes: By top-left corner offset, I mean entering the distance the top-left corner is from the origin, and, consequently, the origin. For example, entering negative half the width & height will set the top-left there, and, therefore, set the origin at the center.
 // See: http://pixijs.download/dev/docs/PIXI.Graphics.html#drawRect http://pixijs.download/dev/docs/PIXI.Graphics.html
 function makeScaleRect(scaleX = 0, scaleY = 0,
-    scaleWidth = .25, scaleHeight = .25,
-    scaleCornerOffsetX = 0, scaleCornerOffsetY = 0,
-    borderWidth = 0,
-    color = 0xFF0000,
-    outlineColor = 0xFFFF00) {
+                       scaleWidth = .25, scaleHeight = .25,
+                       scaleCornerOffsetX = 0, scaleCornerOffsetY = 0,
+                       borderWidth = 0,
+                       color = 0xFF0000,
+                       outlineColor = 0xFFFF00) {
     // http://pixijs.download/dev/docs/PIXI.Graphics.html
     let rect = new PIXI.Graphics();
     let screenWidth = scaleToScreenWidth(scaleWidth);
@@ -263,4 +263,13 @@ function scaleSprObjByHeight(sprObj, desiredScaleHeight) {
 
 function isDefined(thing) {
     return (thing != undefined && thing != null);
+}
+
+function setupContainer(paramObj) {
+    let newContainer = new PIXI.Container();
+    if (isDefined(paramObj.visible))
+        newContainer.visible = paramObj.visible;
+    if (isDefined(paramObj.parent))
+        parent.addChild(newContainer);
+    return newContainer;
 }
