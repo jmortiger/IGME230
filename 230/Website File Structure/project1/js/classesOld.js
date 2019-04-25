@@ -70,6 +70,10 @@ class ScreenObject {
         this.textObj.height = scaleToScreenHeight(this.scaleHeight)
         //console.log(`w=${this.textObj.width} h=${this.textObj.height}`);
     }
+
+    logInfo() {
+        console.log(`{scaleX: ${this.scaleX}, scaleY: ${this.scaleY}, scaleWidth: ${this.scaleWidth}, scaleHeight: ${this.scaleHeight}, {screenX: ${this.sprObj.x}, screenY: ${this.sprObj.y}, screenWidth: ${this.sprObj.width}, screenHeight: ${this.sprObj.height}}`);
+    }
 }
 
 class SprExtObj extends ScreenObject {
@@ -101,6 +105,12 @@ class SprExtObj extends ScreenObject {
         this.sprObj.y = scaleToScreenHeight(this.scaleY);
         this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
         this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
+    }
+
+    // getSpriteSize()
+    // Returns the width and height from the sprite.
+    getSpriteSize() {
+        return new PIXI.Point(this.sprObj.width, this.sprObj.height);
     }
 }
 
@@ -139,7 +149,7 @@ class TextObj extends SprExtObj {
         this.textObj.height = scaleToScreenHeight(this.scaleHeight);
     }
 
-    // getWidthHeightRatio()
+    // getSpriteSize()
     // Returns the width and height from the sprite.
     getSpriteSize() {
         return new PIXI.Point(this.sprObj.width, this.sprObj.height);

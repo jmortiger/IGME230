@@ -202,3 +202,9 @@ function resizeApp() {
         resizeSpriteFromDataObj(spriteObjs[i]);
     }
 }
+
+function logGameObjData() {
+    for (let i = 0; i < gameObjects.length; i++) {
+        gameObjects[i].logInfo();
+    }
+}

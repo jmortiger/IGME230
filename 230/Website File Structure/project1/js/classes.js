@@ -37,7 +37,7 @@ class RectObj {
 }
 
 class ScreenObject {
-    constructor(scaleX = 0, scaleY = 0, scaleWidth = .5, scaleHeight = 0) {
+    constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         this.scaleWidth = scaleWidth;
@@ -165,13 +165,22 @@ class TextObj extends SprExtObj {
 
         if (isDefined(paramObj.anchor)) {
             if ((typeof paramObj.anchor) == "number")
-                this.sprObj.anchor.set(paramObj.anchor);
+                this.sprObj.anchor = paramObj.anchor;
             else if ((typeof paramObj.anchor) == "object")
                 this.sprObj.anchor.set(paramObj.anchor.x, paramObj.anchor.y);
         }
         else if (isDefined(paramObj.anchorX) && isDefined(paramObj.anchorY))
             this.sprObj.anchor.set(paramObj.anchorX, paramObj.anchorY);
-        
+
+        if (isDefined(paramObj.scale)) {
+            if ((typeof paramObj.scale) == "number")
+                this.sprObj.scale.set(paramObj.scale, paramObj.scale);
+            else if ((typeof paramObj.scale) == "object")
+                this.sprObj.scale.set(paramObj.scale.x, paramObj.scale.y);
+        }
+        else if (isDefined(paramObj.scaleX) && isDefined(paramObj.scaleY))
+            this.sprObj.scale.set(paramObj.scaleX, paramObj.scaleY);
+
         //if (!isDefined(textStyle))
         //    this.textObj = new PIXI.Text(textStr);
         //else

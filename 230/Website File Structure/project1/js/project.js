@@ -133,10 +133,13 @@ function init() {
     // TEST CODE: Add text
     let titleTest = new TextObj("Shifting Hues", .5, 0, {
         scaleWidth: .75,
-        style: titleTextStyle
+        scaleHeight: .25,
+        style: titleTextStyle,
+        scale: 1
     }/*.75, .25*/);
     //titleTest.textObj.anchor = 0;
     titleTest.textObj.anchor = new PIXI.Point(.5, 0);
+    scaleSprObjByWidth(titleTest, titleTest.scaleWidth);
 
     //let titleTest = makeTextObjFromParamObj("Shifting Hues", .5, 0, {
     //    scaleWidth: .75,
