@@ -183,6 +183,8 @@ function makeScaleRect(scaleX = 0, scaleY = 0,
     return rect;
 }
 
+// Makes a rectangle w/ an origin at the center of the rectangle.
+// See: http://pixijs.download/dev/docs/PIXI.Graphics.html#drawRect http://pixijs.download/dev/docs/PIXI.Graphics.html
 function makeRectangle(screenWidth = 50, screenHeight = 50, color = 0xFF0000, outlineColor = 0xFFFF00) {
     // http://pixijs.download/dev/docs/PIXI.Graphics.html
     let rect = new PIXI.Graphics();
@@ -237,7 +239,7 @@ function refreshScreenVals(sprExtObj) {
     sprExtObj.sprObj.width = scaleToScreenWidth(sprExtObj.scaleWidth);
     sprExtObj.sprObj.height = scaleToScreenHeight(sprExtObj.scaleHeight);
 }
-
+// Sometimes wrong y? TODO: CHECK
 function scaleSprObjByWidth(sprObj, desiredScaleWidth) {
     // Error handling and checking (divide by zero)
     if (desiredScaleWidth == 0) return false;
@@ -246,7 +248,8 @@ function scaleSprObjByWidth(sprObj, desiredScaleWidth) {
     let factor = size.x / desiredScaleWidth;
     let desiredScaleHeight = size.y * factor;
     sprObj.scaleWidth = desiredScaleWidth;
-    sprObj.scaleHeight = desiredScaleHeight;
+	sprObj.scaleHeight = desiredScaleHeight;
+	//console.log(`${size.x}x${size.y} to ${desiredScaleWidth}xX. X = ${desiredScaleHeight}.`);
 }
 
 function scaleSprObjByHeight(sprObj, desiredScaleHeight) {
@@ -259,6 +262,39 @@ function scaleSprObjByHeight(sprObj, desiredScaleHeight) {
     sprObj.scaleWidth = desiredScaleWidth;
     sprObj.scaleHeight = desiredScaleHeight;
     return true;
+}
+
+function scaleSprObjByCurrDimensions(sprObj, currWidth = sprObj.sprObj.width, currHeight = sprObj.sprObj.height) {
+	if (currWidth > currHeight) {
+		sprObj.scaleWidth = yToX(currWidth / currWidth);
+		sprObj.scaleHeight = currHeight / currWidth;
+	}
+	else if (currHeight > currWidth) {
+		sprObj.scaleWidth = yToX(currWidth / currHeight);
+		sprObj.scaleHeight = currHeight / currHeight;
+	}
+	else {
+		sprObj.scaleWidth = yToX(1);
+		sprObj.scaleHeight = 1;
+	}
+}
+
+function scaleWidthProp(currScaleWidth, currScaleHeight, desiredScaleWidth) {
+	return (currScaleHeight * desiredScaleWidth) / currScaleWidth;
+}
+
+function scaleHeightProp(currScaleWidth, currScaleHeight, desiredScaleHeight) {
+	return (currScaleWidth * desiredScaleHeight) / currScaleHeight;
+}
+
+function scaleSprWidthProp(spr, desiredScaleWidth) {
+	spr.scaleHeight = (spr.scaleHeight * desiredScaleWidth) / spr.scaleWidth;
+	spr.scaleWidth = desiredScaleWidth;
+}
+
+function scaleSprHeightProp(spr, desiredScaleHeight) {
+	spr.scaleWidth = (spr.scaleWidth * desiredScaleHeight) / spr.scaleHeight;
+	spr.scaleHeight = desiredScaleHeight;
 }
 
 function isDefined(thing) {
