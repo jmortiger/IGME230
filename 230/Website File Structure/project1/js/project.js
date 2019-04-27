@@ -42,6 +42,7 @@ let dimensionLabel;
 
 // TEST CODE
 let idleAnimTest/*, lastFrame, timeSinceAnimUpdate = 0.0;*/
+let player;
 
 // Set the onload event to the image pre-loader; the init function will be called from there.
 window.onload = preload;
@@ -110,44 +111,29 @@ function init() {
 	//    SCENES[i].visible = false;
 	//    app.stage.addChild(SCENES[i]);
 	//}
+	let label;
 	for (let i in SCENES) {
 		if (SCENES.hasOwnProperty(i)) {
 			SCENES[i] = new PIXI.Container();
 			SCENES[i].visible = false;
 			app.stage.addChild(SCENES[i]);
+			label = new TextObj(i, 0, 0, {
+				//scaleWidth: .1,
+				//scaleHeight: .25,
+				scaleByCurrDimensions: "current dimensions",
+				style: sceneLabelTextStyle,
+				scale: 1,
+				doNotRefreshScreenVals: true,
+				anchorX: 0,
+				anchorY: 0,
+				alpha: .25
+			});
+			scaleSprWidthProp(label, .175);
+			refreshScreenVals(label);
+			SCENES[i].addChild(label.textObj);
+			spriteObjs.push(label);
 		}
 	}
-	let label = new TextObj("Test Scene", 0, 0, {
-		//scaleWidth: .1,
-		//scaleHeight: .25,
-		scaleByCurrDimensions: "current dimensions",
-		style: sceneLabelTextStyle,
-		scale: 1,
-		doNotRefreshScreenVals: true,
-		anchorX: 0,
-		anchorY: 0,
-		alpha: .25
-	});
-	scaleSprWidthProp(label, .175);
-	refreshScreenVals(label);
-	SCENES.testScene.addChild(label.textObj);
-	gameObjects.push(label);
-
-	label = new TextObj("Start Scene", 0, 0, {
-		//scaleWidth: .1,
-		//scaleHeight: .25,
-		scaleByCurrDimensions: "current dimensions",
-		style: sceneLabelTextStyle,
-		scale: 1,
-		doNotRefreshScreenVals: true,
-		anchorX: 0,
-		anchorY: 0,
-		alpha: .25
-	});
-	scaleSprWidthProp(label, .175);
-	refreshScreenVals(label);
-	SCENES.startScene.addChild(label.textObj);
-	gameObjects.push(label);
 
 	//dimensionLabel = new TextObj(`${currScreenWidth}x${currScreenHeight}`, 1, 1, {
 	//	//scaleWidth: .75,
@@ -168,20 +154,21 @@ function init() {
 	// TEST CODE: create animation
 	SCENES.startScene.visible = true;
 	let idleAnimTextures = loadSpriteSheet("media/images/PC-Idle No Border.png", 256, 256, 8, 4, 2);
-
 	let idleAnimTest = createAnim(scaleToScreenWidth(yToX(.5)), scaleToScreenHeight(.5), 256, 256, idleAnimTextures, 15 / 60, true);
 	idleAnimTest.anchor = new PIXI.Point(0, 0);
-	let idleAnimObj = new SprExtObj(idleAnimTest, .5, .5, {
+	let animObj = new SprExtObj(idleAnimTest, .5, .5, {
 		scaleWidth: yToX(.35),
 		scaleHeight: .35,
 		anchorX: .5,
 		anchorY: .5
 	});
-	idleAnimObj.sprObj.play();
-	gameObjects.push(idleAnimObj);
-	SCENES.testScene.addChild(idleAnimObj.sprObj);
+	let animMover = new Mover(animObj.scaleX, animObj.scaleY, animObj.scaleWidth, animObj.scaleHeight, .25, .25, (1 - .175));
+	player = new GameObject(animObj, animMover);
+	//idleAnimObj.sprObj.play();
+	gameObjects.push(player);
+	SCENES.testScene.addChild(player.sprObj);
 
-	// TEST CODE: Add text
+	// Add title text
 	let titleTest = new TextObj("Shifting Hues", .5, 0, {
 		//scaleWidth: .75,
 		//scaleHeight: .25,
@@ -194,14 +181,37 @@ function init() {
 	scaleSprWidthProp(titleTest, .75);
 	refreshScreenVals(titleTest);
 	SCENES.startScene.addChild(titleTest.textObj);
-	gameObjects.push(titleTest);
+	spriteObjs.push(titleTest);
 	
 	// Start update loop
 	app.ticker.add(gameLoop);
 }
 
 function gameLoop() {
-	// Pause check
+	// Update keyData
+	updateKeyData();
+
+	// Handle Pausing
+	if (getKeyUp(keyboardCode.P)) {
+		isPaused = !isPaused;
+		console.log(`isPaused: ${isPaused}`);
+		if (isPaused) {
+			for (let i = 0; i < gameObjects.length; i++) {
+				if (isDefined(gameObjects[i].sprObj) && isDefined(gameObjects[i].sprObj.stop)) {
+					gameObjects[i].sprObj.stop();
+				}
+			}
+		}
+		else if (!isPaused) {
+			for (let i = 0; i < gameObjects.length; i++) {
+				if (isDefined(gameObjects[i].sprObj) && isDefined(gameObjects[i].sprObj.play)) {
+					gameObjects[i].sprObj.play();
+				}
+			}
+		}
+	}
+
+	// If paused, leave
 	if (isPaused) return;
 
 	// Calculate deltaTime
@@ -210,26 +220,33 @@ function gameLoop() {
 		console.log(`FPS: ${app.ticker.FPS} fps`);
 		console.log(`Delta Time: ${deltaTime} seconds`);
 	}
-
-	// Update keyData
-	updateKeyData();
-
+	
 	// Switch screens from the startScreen to the testScreen if 'S' is pressed
 	if (SCENES.startScene.visible && getKey(keyboardCode.S)) {
 		console.log("Switching to test scene");
 		SCENES.startScene.visible = false;
 		SCENES.testScene.visible = true;
+		for (let i = 0; i < gameObjects.length; i++) {
+			if (isDefined(gameObjects[i].sprObj) && isDefined(gameObjects[i].sprObj.play)) {
+				gameObjects[i].sprObj.play();
+			}
+		}
 	}
-	// TEST CODE: Update frame change time
-	//timeSinceAnimUpdate += deltaTime;
-	//if (lastFrame != idleAnimTest.currentFrame) {
-	//    console.log(`Time since last anim update: ${timeSinceAnimUpdate}s`);
-	//    console.log(`Animation FPS: ${1 / timeSinceAnimUpdate}s`);
-	//    lastFrame = idleAnimTest.currentFrame;
-	//    timeSinceAnimUpdate = 0;
-	//}
 
-
+	if (SCENES.testScene.visible) {
+		if (getKey(keyboardCode.A))
+			player.mover.fx = -.2;
+		if (getKey(keyboardCode.D))
+			player.mover.fx = .2;
+		if (getKey(keyboardCode.W) && player.mover.y == player.mover.maxY)
+			player.mover.fY = -1;
+		console.log(`fy:${player.mover.fy}`);
+		for (let i = 0; i < gameObjects.length; i++) {
+			if (isDefined(gameObjects[i].update)) {
+				gameObjects[i].update(deltaTime);
+			}
+		}
+	}
 }
 
 function createTextStyles() {
@@ -248,7 +265,7 @@ function createTextStyles() {
 	sceneLabelTextStyle = new PIXI.TextStyle({
 		fill: 0xFFFFFF,
 		fontFamily: "Verdana",
-		fontSize: 50
+		fontSize: 200
 	});
 
 	defaultTextStyle = new PIXI.TextStyle({
@@ -285,7 +302,8 @@ function resizeApp() {
 		gameObjects[i].scaleObj();
 	}
 	for (let i = 0; i < spriteObjs.length; i++) {
-		resizeSpriteFromDataObj(spriteObjs[i]);
+		//resizeSpriteFromDataObj(spriteObjs[i]);
+		spriteObjs[i].scaleObj();
 	}
 }
 

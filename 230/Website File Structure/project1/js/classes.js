@@ -111,6 +111,7 @@ class SprExtObj extends ScreenObject {
 					this.sprObj.alpha = paramObj.alpha / 255;
 			}
 		}
+		// ANCHOR
 		if (isDefined(paramObj.anchor)) {
 			if ((typeof paramObj.anchor) == "number")
 				this.sprObj.anchor = paramObj.anchor;
@@ -119,7 +120,7 @@ class SprExtObj extends ScreenObject {
 		}
 		else if (isDefined(paramObj.anchorX) && isDefined(paramObj.anchorY))
 			this.sprObj.anchor.set(paramObj.anchorX, paramObj.anchorY);
-
+		// SCALE
 		if (isDefined(paramObj.scale)) {
 			if ((typeof paramObj.scale) == "number")
 				this.sprObj.scale.set(paramObj.scale, paramObj.scale);
@@ -128,8 +129,14 @@ class SprExtObj extends ScreenObject {
 		}
 		else if (isDefined(paramObj.scaleX) && isDefined(paramObj.scaleY))
 			this.sprObj.scale.set(paramObj.scaleX, paramObj.scaleY);
-		// TODO: handle other params
+		// INTERACTIVE
+		if (isDefined(paramObj.interactive))
+			this.sprObj.interactive = paramObj.interactive;
+		// BUTTON MODE
+		if (isDefined(paramObj.buttonMode))
+			this.sprObj.buttonMode = paramObj.buttonMode;
 
+		// TODO: handle other params
 
 		if ((isDefined(paramObj.doNotRefreshScreenVals) && !paramObj.doNotRefreshScreenVals) || 
 			(isDefined(paramObj.doRefreshScreenVals) && paramObj.doRefreshScreenVals))
@@ -166,8 +173,7 @@ class TextObj extends SprExtObj {
 	constructor(textStr = "Failure To Set TextObj textStr", scaleX = 0, scaleY = 0, paramObj) {
 		super(new PIXI.Text(textStr), scaleX, scaleY, paramObj);
 		this.textObj = this.sprObj;
-
-
+		
 		if ((isDefined(paramObj.firstScaleMethod) && paramObj.firstScaleMethod == "currentDimensions") || (isDefined(paramObj.scaleByCurrDimensions))) {
 			scaleSprObjByCurrDimensions(this, this.sprObj.width, this.sprObj.height);
 		}
@@ -212,8 +218,7 @@ class TextObj extends SprExtObj {
 		}
 		else if (isDefined(paramObj.scaleX) && isDefined(paramObj.scaleY))
 			this.sprObj.scale.set(paramObj.scaleX, paramObj.scaleY);
-
-
+		
 		//if ((isDefined(paramObj.doNotRefreshScreenVals) && !paramObj.doNotRefreshScreenVals) ||
 		//	(isDefined(paramObj.doRefreshScreenVals) && paramObj.doRefreshScreenVals))
 		//	refreshScreenVals(this);
@@ -247,7 +252,7 @@ class TextObj extends SprExtObj {
 }
 
 // INCOMPLETE
-class Button extends SprExtObj {
+/*class Button extends SprExtObj {
 	constructor(scaleX = 0, scaleY = 0, scaleWidth = .15, scaleHeight = .1, imgSrc = 'media/images/button-130.png', anchor = new PIXI.Point(.5, .5)) {
 		super(scaleX, scaleY, scaleWidth, scaleHeight, makeBttnFrmImgSrc(imgSrc));
 		this.sprObj.anchor.set(anchor.x, anchor.y);
@@ -291,42 +296,128 @@ class Button extends SprExtObj {
 		this.sprObj.width = scaleToScreenWidth(this.scaleWidth);
 		this.sprObj.height = scaleToScreenHeight(this.scaleHeight);
 	}
-}
+}*/
 
-class GameObject extends ScreenObject {
-	constructor(scaleX = 0, scaleY = 0, scaleWidth = 0, scaleHeight = 0) {
-		super(scaleX, scaleY, scaleWidth, scaleHeight);
-		this.scaleX = scaleX;
-		this.scaleY = scaleY;
-		this.scaleWidth = scaleWidth;
-		this.scaleHeight = scaleHeight;
+class GameObject {
+	constructor(sprExtObj, mover = null, collider = null) {
+		this.sprExtObj = sprExtObj;
+		if (isDefined(this.sprExtObj))
+			this.sprObj = sprExtObj.sprObj;
+		else
+			this.sprObj = null;
+		this.mover = mover;
+		this.collider = collider;
 	}
 
-	//update(deltaTime) {
-
-	//}
-
-	checkCollision(other) {
-
+	update(deltaTime) {
+		if (isDefined(this.mover)) {
+			this.mover.update(deltaTime);
+			this.sprExtObj.scaleX = this.mover.x;
+			this.sprExtObj.scaleY = this.mover.y;
+			//this.sprExtObj.scaleWidth = this.mover.width;
+			//this.sprExtObj.scaleHeight = this.mover.height;
+			refreshScreenVals(this.sprExtObj);
+			//console.log(`x:${this} y:${}`);
+		}
+		if (isDefined(this.collider))
+			this.collider.update(deltaTime);
 	}
-	// TODO: FINISH
-	scaleObject(previousScreenWidth, previousScreenHeight, newScreenWidth, newScreenHeight) {
-		if (previousScreenHeight == newScreenHeight && previousScreenWidth == newScreenWidth)
-			return;
 
+	scaleObj() {
+		if (isDefined(this.sprExtObj))
+			this.sprExtObj.scaleObj();
 	}
 }
 
 // TODO: Lookup inheritance
-class Moveable extends GameObject {
-	constructor(x = 0, y = 0, width = 0, height = 0, dx = 0, dy = 0) {
-		super(x = 0, y = 0, width = 0, height = 0);
-		this.dx = dx;
-		this.dy = dy;
+class Mover/* extends GameObject*/ {
+	constructor(x = 0, y = 0, width = 0, height = 0, maxVx = 0, maxVy = 0, maxY = 1) {
+		//super(x = 0, y = 0, width = 0, height = 0);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.maxVx = maxVx;
+		this.maxVy = maxVy;
+		this.maxY = maxY;
+
+		this.dx = 0;
+		this.dy = 0;
+		this.vx = 0;
+		this.vy = 0;
+		this.fx = 0;
+		this.fy = 0;
+		this.frictionFactor = .0075;
+		this.gravity = .1;
+		// If the speed is lower than this, then just set it to 0
+		this.vXDeadzone = .0025;
+		// If the force is lower than this, then just set it to 0
+		this.fXDeadzone = .0005;
+		this.isCalculating = true;
 	}
 
-	update(deltaTime) {
 
+	update(deltaTime) {
+		// 1. Calculate forces
+		this.calculateForces();
+
+		// 2. Calculate velocity
+		this.vx += this.fx * deltaTime;
+		if (this.vx > this.maxVx)
+			this.vx = this.maxVx;
+		if (this.vx < -this.maxVx)
+			this.vx = -this.maxVx;
+		if (Math.abs(this.vx) < this.vXDeadzone)
+			this.vx = 0;
+
+		this.vy += this.fy * deltaTime;
+		if (this.vy >  this.maxVy)
+			this.vy =  this.maxVy;
+		if (this.vy < -this.maxVy)
+			this.vy = -this.maxVy;
+
+		if (this.y == this.maxY) {
+			if (Math.abs(this.vx) > this.vXDeadzone)
+				this.vx *= (1 - this.frictionFactor);
+			else
+				this.vx = 0;
+			if (this.fy < 0) this.fy = 0;
+			if (this.vy < 0) this.vy = 0;
+		}
+		else
+			this.fy += this.gravity;
+
+		// 3. Calculate dx & dy
+		this.dx = this.vx * deltaTime;
+		this.dy = this.vy * deltaTime;
+
+		// 4. Set x and y
+		// Check if you're crossing the floor (hack to get things working; TODO: fix)
+		if (this.dy + this.y > this.maxY)
+			this.y = this.maxY;
+		else
+			this.y += this.dy;
+		this.x += this.dx;
+
+		// Reset forces
+		this.fx = 0;
+		this.fy = 0;
+		//console.log(`vx:${this.vx}`);
+		console.log(`vy:${this.vy}`);
+		//console.log(`fx:${this.fx}`);
+		console.log(`fy:${this.fy}`);
+	}
+
+	// Calculate forces on object. Currently only includes friction and gravity.
+	calculateForces() {
+		if (this.y == this.maxY) {
+			//if (Math.abs(this.fx) > this.fXDeadzone)
+			//	this.fx *= (.7/*1 - this.frictionFactor*/);
+			//else
+			//	this.fx = 0;
+		}
+		else
+			this.fy += this.gravity;
 	}
 }
 
