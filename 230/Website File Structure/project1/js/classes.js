@@ -403,9 +403,9 @@ class Mover/* extends GameObject*/ {
 		this.fx = 0;
 		this.fy = 0;
 		//console.log(`vx:${this.vx}`);
-		console.log(`vy:${this.vy}`);
+		//console.log(`vy:${this.vy}`);
 		//console.log(`fx:${this.fx}`);
-		console.log(`fy:${this.fy}`);
+		//console.log(`fy:${this.fy}`);
 	}
 
 	// Calculate forces on object. Currently only includes friction and gravity.

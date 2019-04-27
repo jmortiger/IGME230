@@ -240,7 +240,7 @@ function gameLoop() {
 			player.mover.fx = .2;
 		if (getKey(keyboardCode.W) && player.mover.y == player.mover.maxY)
 			player.mover.fY = -1;
-		console.log(`fy:${player.mover.fy}`);
+		//console.log(`fy:${player.mover.fy}`);
 		for (let i = 0; i < gameObjects.length; i++) {
 			if (isDefined(gameObjects[i].update)) {
 				gameObjects[i].update(deltaTime);
