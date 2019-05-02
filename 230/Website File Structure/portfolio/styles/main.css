@@ -1,14 +1,32 @@
 /*Bootstrap CSS*/
 /*@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";*/
 /*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" >*/
-
-header, footer/*, #content*/ {
+@font-face {
+    font-family: Finger Paint;
+    src: url("../media/fonts/Finger_Paint/FingerPaint-Regular.ttf");
+}
+@font-face {
+    font-family: Varela Round;
+    src: url("../media/fonts/Varela_Round/VarelaRound-Regular.ttf");
+}
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/fonts/Inconsolata-Regular.tff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: Inconsolata;
+    src: url("../media/fonts/Inconsolata-Bold.tff");
+    font-weight: bold;
+}
+@font-face {
+    font-family: Geostar;
+    src: url("../media/fonts/Geostar-Regular.ttf");
+}
+/*header,*/ footer/*, #content*/ {
     background-color: blueviolet;
     border: 3px solid whitesmoke;
     border-radius: 7px 7px;
-}
-
-footer {
 }
 
 .carousel {
@@ -27,5 +45,139 @@ footer {
 
 #carouselParent {
     width: 100%;
-    height: 33%;
+    height: 33vh;
+    /*margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;*/
+    /*background-image: url("../media/Mars 524x512 Good 1.png");
+    background-repeat: no-repeat;*/
 }
+
+#content {
+    /*margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;*/
+}
+
+#carouselLeft, #carouselRight {
+    background-color: rgba(0, 0, 0, 0);
+    transition: ease-in-out background-color .5s;
+}
+#carouselLeft:hover, #carouselRight:hover {
+    background-color: rgba(0, 0, 0, .25);
+}
+
+/*Fade in card img overlay on hover*/
+.fadeBGOnHover {
+    background-color: rgba(0, 0, 0, .33);
+    opacity: 0;
+    transition: ease-in-out opacity .5s;
+}
+    .fadeBGOnHover:hover {
+        opacity: 1;
+    }
+
+nav {
+    border: 3px solid whitesmoke;
+    border-radius: 7px 7px;
+}
+
+nav > ul > li > a {
+    font-family: 'Varela Round';
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, .85);
+}
+
+#header/*, #header > nav*/ {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.fitWidthToCont {
+    /*width: 100%;*/
+    height: auto/*100%*/;
+    max-height: 100%;
+}
+
+#aboutMe {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#nameDrop {
+    font-family: 'Finger Paint';
+    color: darkviolet;
+    text-shadow: 0px 0px 5px darkturquoise;
+}
+
+.scaleImgHeight, #Mars {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+}
+
+/*#carouselName >*/ h1, h2 {
+    text-align: center;
+}
+
+#carouselName {
+    text-align: center;
+}
+
+.carousel-inner, .carousel-item {
+    height: 100%;
+}
+
+.carousel-item {
+    padding: 1%;
+}
+
+#carousel2 {
+    background-image: url("../media/ShiftingHuesPortfolioScreencap1.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h2 {
+    color: whitesmoke;
+    text-shadow: 0px 0px 4px whitesmoke;
+    /*padding-top: 15px;*/
+}
+
+.white-overlay {
+    background-color: rgba(255, 255, 255, 0.45);
+    width: 100%;
+    height: 100%;
+    /*padding: 1%;*/
+}
+
+.black-overlay {
+    background-color: rgba(0,0,0,.45);
+    width: 100%;
+    height: 100%;
+}
+#carousel2 > div {
+    padding: 1%;
+}
+#carousel2 {
+    padding: 0%;
+}
+
+footer{
+    padding: .5%;
+    text-align: center;
+}
+
+/*.reveal-child-p-on-hover > p {
+    display: none;
+    opacity: 0;
+    transition: display ease-in-out .75s;
+}
+
+.reveal-child-p-on-hover:hover > p {
+    display: block;
+    opacity: 1;
+}*/

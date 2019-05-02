@@ -15,44 +15,115 @@
 </head>
 <body>
     <div id="wrapper">
-        <header class="container-fluid">
-            header content here
+        <header id="header" class="container-fluid w-100">
+            <nav class="navbar navbar-expand-sm bg-dark">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#aboutMe">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
         <div id="content" class="container-fluid">
             <div id="carouselParent" class="carousel slide border border-light rounded-lg" data-ride="carousel" data-keyboard="true">
                 <ul class="carousel-indicators">
                     <li data-target="#carouselParent" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselParent" data-slide-to="1"></li>
-                    <li data-target="#carouselParent" data-slide-to="2"></li>
+                    <!--<li data-target="#carouselParent" data-slide-to="2"></li>-->
                 </ul>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <h1>Hi, I&#39;m J Mor.</h1>
-                        <img src="media/Mars 524x512 Good 1.png" alt="Img belongs to splapp-me-do" />
+                        <h1 id="carouselName">Hi, I&#39;m <b id="nameDrop">J Mor</b>.</h1>
+                        <!--<img id="Mars" class="scaleImgHeight" src="media/mars 524x512 good 1.png" alt="img belongs to splapp-me-do" />-->
                     </div>
-                    <div class="carousel-item">
-                        I&#39;m a XNA/Unity Game Developer.
+                    <div id="carousel2" class="carousel-item">
+                        <div class="black-overlay">
+
+                            <h2>I&#39;m a XNA/Unity Game Developer, but open to a variety of languages and engines.</h2>
+                            <!--<img class="fitWidthToCont" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Site Screencap" />-->
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        carousel3
-                    </div>
+                    <!--<div class="carousel-item">
+            I may not finish projects fast, but when I&#39;m done with them, it&#39;s worth the wait. If only I had the time to finish them. I mean, God forbid.
+                    </div>-->
                 </div>
-                <a class="carousel-control-prev" href="#carouselParent" data-slide="prev">
+                <a id="carouselLeft" class="carousel-control-prev" href="#carouselParent" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </a>
-                <a class="carousel-control-next" href="#carouselParent" data-slide="next">
+                <a id="carouselRight" class="carousel-control-next" href="#carouselParent" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
+            <div id="aboutMe" class="container-fluid white-overlay rounded-lg">
+                <h1 style="text-align: center;">Hi, I&#39;m <b id="nameDrop">J Mor</b>.</h1>
+                <p>I am a Game Designer from Long Island, New York, with a strong background in C# and MonoGame development. My more recent endevours have been the Unity engine and the PIXI.js library for WebGL and Canvas, along with refamiliarizing myself with C++.</p>
+            </div>
             <div id="portfolio" class="card-columns">
-                <div class="card">
-                    <img class="card-img-top" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Screencap" />
-                    <div class="card-img-overlay">
-                        <h3 class="card-title" style="color:white;">Shifting Hues</h3>
+                <a href="https://people.rit.edu/jgm1844/230/project1/project.html" target="_blank">
+                    <div class="card">
+                        <img class="card-img-top" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Screencap" />
+                        <div class="card-img-overlay fadeBGOnHover">
+                            <p class="card-title" style="color:white; text-shadow: 0px 0px 4px whitesmoke;">
+                                <h3 style="color:white;">Shifting Hues</h3>
+                                <br /><div style="color: white; text-shadow: 0px 0px 4px whitesmoke;">Shifting Hues is the poster child for why games on a deadline are always of quality. Blah blah blah this card&#39;s the only one done, it feels great, no really, I&#39;ll just make Google in an hour, no sweat.</div>
+                            </p>
+                        </div>
+                        <!--<div class="card-body reveal-child-p-on-hover">
+                            <p class="card-text">This is Shifting Hues.</p>
+                        </div>-->
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">This is Shifting Hues.</p>
-                        <a href="https://people.rit.edu/jgm1844/230/project1/project.html" class="stretched-link"></a>
+                </a>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
+                    </div>
+                </div>
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">This is another card.</p>
                     </div>
                 </div>
                 <div class="card bg-primary">
@@ -61,15 +132,13 @@
                     </div>
                 </div>
             </div>
-            <h1>Hi, I&#39;m J Mor.</h1>
-            main content here
         </div>
-        <footer>
+        <footer class="black-overlay">
             footer content here
         </footer>
     </div>
 
-    <!-- Optional JavaScript -->
+    <!-- Optional JavaScript  class="stretched-link"-->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
