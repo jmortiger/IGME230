@@ -14,16 +14,16 @@
     <title>Bootstrap Starter</title>
 </head>
 <body>
-    <div id="wrapper" class="container">
-        <header class="container">
+    <div id="wrapper">
+        <header class="container-fluid">
             header content here
         </header>
         <div id="content" class="container-fluid">
-            <div id="demo" class="carousel slide border border-light rounded-lg" data-ride="carousel" data-keyboard="true">
+            <div id="carouselParent" class="carousel slide border border-light rounded-lg" data-ride="carousel" data-keyboard="true">
                 <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
+                    <li data-target="#carouselParent" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselParent" data-slide-to="1"></li>
+                    <li data-target="#carouselParent" data-slide-to="2"></li>
                 </ul>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -37,10 +37,10 @@
                         carousel3
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselParent" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
+                <a class="carousel-control-next" href="#carouselParent" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
