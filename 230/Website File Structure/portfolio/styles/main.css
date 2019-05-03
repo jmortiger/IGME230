@@ -24,7 +24,6 @@
     src: url("../media/fonts/Geostar-Regular.ttf");
 }
 /*header,*/ footer/*, #content*/ {
-    background-color: blueviolet;
     border: 3px solid whitesmoke;
     border-radius: 7px 7px;
 }
