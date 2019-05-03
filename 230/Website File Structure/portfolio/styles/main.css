@@ -140,6 +140,7 @@ nav > ul > li > a {
     background-image: url("../media/ShiftingHuesPortfolioScreencap1.PNG");
     background-size: cover;
     background-repeat: no-repeat;
+    /*background-position: center;*/
 }
 
 h2 {
