@@ -105,6 +105,8 @@ nav > ul > li > a {
 #aboutMe {
     margin-top: 30px;
     margin-bottom: 30px;
+    /*font-size: larger;*/
+    /*text-align: center;*/
 }
 
 #nameDrop {
@@ -169,6 +171,10 @@ h2 {
 footer{
     padding: .5%;
     text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
 }
 
 /*.reveal-child-p-on-hover > p {
