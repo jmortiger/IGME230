@@ -19,6 +19,9 @@
             <nav class="navbar navbar-expand-sm bg-dark">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <a class="nav-link" href="https://people.rit.edu/jgm1844/230/">My Hompage</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#aboutMe">About Me</a>
                     </li>
                     <li class="nav-item">
@@ -35,15 +38,14 @@
                     <!--<li data-target="#carouselParent" data-slide-to="2"></li>-->
                 </ul>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <h1 id="carouselName">Hi, I&#39;m <b id="nameDrop">J Mor</b>.</h1>
-                        <!--<img id="Mars" class="scaleImgHeight" src="media/mars 524x512 good 1.png" alt="img belongs to splapp-me-do" />-->
-                    </div>
-                    <div id="carousel2" class="carousel-item">
+                    <div id="carouselItem1" class="carousel-item active">
                         <div class="black-overlay">
-
+                            <h1 id="carouselText" class="text-center">Hi, I&#39;m <b class="nameDrop">J Mor</b>.</h1>
+                        </div>
+                    </div>
+                    <div id="carouselItem2" class="carousel-item">
+                        <div class="black-overlay">
                             <h2>I&#39;m mainly a XNA/Unity Game Developer, but open to a variety of languages and engines.</h2>
-                            <!--<img class="fitWidthToCont" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Site Screencap" />-->
                         </div>
                     </div>
                     <!--<div class="carousel-item">
@@ -58,27 +60,53 @@
                 </a>
             </div>
             <div id="aboutMe" class="container-fluid white-overlay rounded-lg">
-                <h1 style="text-align: center;">Hi, I&#39;m <b id="nameDrop">J Mor</b>.</h1>
+                <h1 style="text-align: center;">Hi, I&#39;m <b class="nameDrop">J Mor</b>.</h1>
                 <p>I am a Game Designer from Long Island, New York, with a strong background in C# and MonoGame development. My more recent endevours have been the Unity engine and the PIXI.js library for WebGL and Canvas, along with refamiliarizing myself with C++.
-                <!--<br />-->My programming roots go back to my 10th grade intro classes to C++ and Java, and I&#39;ve been coding ever since. Unfortunately, that love was tragically cut short upon introduction to the evil demon Ecma, whose terrible curse has thrown me away from my love.
+                My programming roots go back to my 10th grade intro classes to C++ and Java, and I&#39;ve been coding ever since. Unfortunately, that love was tragically cut short upon introduction to the evil demon Ecma, whose terrible curse has thrown me away from my love.
                 </p>
             </div>
             <div id="portfolio" class="card-columns">
                 <a href="https://people.rit.edu/jgm1844/230/project1/project.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover">
-                            <p class="card-title" style="color:white; text-shadow: 0px 0px 4px whitesmoke;">
-                                <h3 style="color:white;">Shifting Hues</h3>
-                                <br /><div style="color: white; text-shadow: 0px 0px 4px whitesmoke;">Shifting Hues is the poster child for why games on a deadline are always of quality. Blah blah blah this card&#39;s the only one done, it feels great, no really, I&#39;ll just make Google in an hour, no sweat.</div>
-                            </p>
+                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                            <div class="myCardBody card-title container-fluid">
+                                <h3 class="myCardBodyItem myCardBodyItemTitle">Shifting Hues</h3>
+                                <div class="myCardBodyItem myCardBodyItemText">
+                                Shifting Hues is the poster child for why games on a deadline are always of quality. Blah blah blah this card&#39;s the only one done, it feels great, no really, I&#39;ll just make Google in an hour, no sweat.
+                                </div>
+                            </div>
                         </div>
-                        <!--<div class="card-body reveal-child-p-on-hover">
-                            <p class="card-text">This is Shifting Hues.</p>
-                        </div>-->
+                        <!--<div class="card-body reveal-child-p-on-hover"> <p class="card-text">This is Shifting Hues.</p> </div>-->
                     </div>
                 </a>
-                <div class="card bg-primary">
+                <a href="https://people.rit.edu/jgm1844/230/project2/dog-finder.html" target="_blank">
+                    <div class="card">
+                        <img class="card-img-top" src="media/DogFinderPortfolioScreencap1.png" alt="Dog Finder Screencap" />
+                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                            <div class="myCardBody card-title container-fluid">
+                                <h3 class="myCardBodyItem myCardBodyItemTitle">Dog Finder</h3>
+                                <div class="myCardBodyItem myCardBodyItemText">
+                                Shifting Hues is the poster child for why games on a deadline are always of quality. Blah blah blah this card&#39;s the only one done, it feels great, no really, I&#39;ll just make Google in an hour, no sweat.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://people.rit.edu/jgm1844/230/exercises/pixel-life/pixel-life.html" target="_blank">
+                    <div class="card">
+                        <img class="card-img-top" src="media/PixelLifePortfolioScreencap1.png" alt="Pixel Life Screencap" />
+                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                            <div class="myCardBody card-title container-fluid">
+                                <h3 class="myCardBodyItem myCardBodyItemTitle">Pixel Life</h3>
+                                <div class="myCardBodyItem myCardBodyItemText">
+                                Shifting Hues is the poster child for why games on a deadline are always of quality. Blah blah blah this card&#39;s the only one done, it feels great, no really, I&#39;ll just make Google in an hour, no sweat.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="card">
                     <div class="card-body text-center">
                         <p class="card-text">This is another card.</p>
                     </div>
