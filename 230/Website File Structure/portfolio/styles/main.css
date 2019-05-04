@@ -28,13 +28,18 @@ header {
     margin-bottom: 20px;
 }
 
+/*Styling for the form error text spans*/
+.formError {
+    color: red;
+}
+
 footer {
     border: 3px solid whitesmoke;
     border-radius: 7px 7px;
     padding: .5%;
 }
 
-.carousel, .carousel-inner { border-width: 10px; }
+/*.carousel, .carousel-inner { border-width: 10px; }*/
 
 .carousel { background-color: darkgray; }
 
