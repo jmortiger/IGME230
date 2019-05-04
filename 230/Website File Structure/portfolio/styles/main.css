@@ -1,6 +1,6 @@
-/*Bootstrap CSS*/
-/*@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";*/
-/*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" >*/
+/*Bootstrap CSS
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" >*/
 @font-face {
     font-family: Finger Paint;
     src: url("../media/fonts/Finger_Paint/FingerPaint-Regular.ttf"); }
@@ -32,23 +32,19 @@ footer {
     border: 3px solid whitesmoke;
     border-radius: 7px 7px;
     padding: .5%;
-    text-align: center;
 }
 
-.carousel {
-    background-color: darkgray;
-    border-width: 10px;
-}
+.carousel, .carousel-inner { border-width: 10px; }
 
-.carousel-inner {
-    border-color: #dee2e6;
-    border-width: 10px;
-}
+.carousel { background-color: darkgray; }
+
+.carousel-inner { border-color: #dee2e6; }
 
 #wrapper {
     background-image: linear-gradient(black, mediumblue, aqua, white);
 }
 
+/*****************************************************/
 /*Set up size of carousel*/
 #carouselParent {
     width: 100%;
@@ -56,8 +52,8 @@ footer {
     /*margin-left: 0px;
     margin-right: 0px;
     padding-left: 0px;
-    padding-right: 0px;*/
-    /*background-image: url("../media/Mars 524x512 Good 1.png");
+    padding-right: 0px;
+    background-image: url("../media/Mars 524x512 Good 1.png");
     background-repeat: no-repeat;*/
 }
 
@@ -69,6 +65,30 @@ footer {
 #carouselLeft:hover, #carouselRight:hover {
     background-color: rgba(0, 0, 0, .25);
 }
+
+/*Adjust padding so the .black-overlay takes up the whole parent*/
+#carouselItem1 > .black-overlay, #carouselItem2 > .black-overlay {
+    padding: var(--mainPadding, 1vh);
+}
+#carouselItem1, #carouselItem2 { padding: 0%; }
+
+/*Set up carousel background images*/
+#carouselItem1 {
+    background-image: url("../media/mars 524x512 good 1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#carouselItem2 {
+    background-image: url("../media/ShiftingHuesPortfolioScreencap1.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.carousel-inner, .carousel-item { height: 100%; }
+
+.carousel-item { padding: 1%; }
+/*****************************************************/
 
 /*Fade in card img overlay on hover*/
 .fadeBGOnHover {
@@ -107,8 +127,7 @@ nav > ul > li > a {
 #aboutMe {
     margin-top: 30px;
     margin-bottom: 30px;
-    /*font-size: larger;*/
-    /*text-align: center;*/
+    font-size: larger;
 }
 
 .nameDrop {
@@ -123,23 +142,12 @@ nav > ul > li > a {
     max-height: 100%;
 }
 
-/*#carouselText >*/ h1, h2 {
-    text-align: center;
-}
-
-.carousel-inner, .carousel-item {
-    height: 100%;
-}
-
-.carousel-item {
-    padding: 1%;
-}
+footer, h1, h2 { text-align: center; }
 
 .white-overlay {
     background-color: rgba(255, 255, 255, 0.45);
     width: 100%;
     height: 100%;
-    /*padding: 1%;*/
 }
 
 .black-overlay {
@@ -148,42 +156,22 @@ nav > ul > li > a {
     height: 100%;
 }
 
-/*Adjust padding so the .black-overlay takes up the whole parent*/
-#carouselItem1 > .black-overlay, #carouselItem2 > .black-overlay {
-    padding: var(--mainPadding, 1vh);
-}
-#carouselItem1, #carouselItem2 {
-    padding: 0%;
-}
-
-/*Set up carousel background images*/
-#carouselItem1 {
-    background-image: url("../media/mars 524x512 good 1.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-#carouselItem2 {
-    background-image: url("../media/ShiftingHuesPortfolioScreencap1.PNG");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 h2 {
     color: whitesmoke;
     text-shadow: 0px 0px 4px whitesmoke;
     /*padding-top: 15px;*/
 }
 
-
+/*Setup card spacing*/
 .myCardBody {
     padding: 5%;
     padding-top: 2.5%;
     margin: 0%;
 }
-.myCardBody > h3 {
-    /*margin: 0px;*/
-}
+/*.myCardBody > h3 {
+    margin: 0px;
+}*/
+
 .myCardBodyItem {
     color: white;
     text-shadow: 0px 0px 4px whitesmoke;
