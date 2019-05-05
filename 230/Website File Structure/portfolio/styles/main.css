@@ -73,6 +73,7 @@ footer {
 
 /*Adjust padding so the .black-overlay takes up the whole parent*/
 #carouselItem1 > .black-overlay, #carouselItem2 > .black-overlay {
+    padding: 1vh;
     padding: var(--mainPadding, 1vh);
 }
 #carouselItem1, #carouselItem2 { padding: 0%; }
@@ -192,3 +193,11 @@ h2 {
     display: block;
     opacity: 1;
 }*/
+
+/*Fixed card body text overflow (temp fix)*/
+.myCardBody/*, .myCardBody > .myCardBodyItemText*/ {
+    overflow: auto;
+}
+.myCardBody > .myCardBodyItemText {
+    overflow: visible;
+}
