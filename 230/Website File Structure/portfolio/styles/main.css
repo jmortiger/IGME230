@@ -201,3 +201,8 @@ h2 {
 .myCardBody > .myCardBodyItemText {
     overflow: visible;
 }
+
+/*If the device is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
+@media screen and (hover: hover) and (pointer: fine){
+
+}

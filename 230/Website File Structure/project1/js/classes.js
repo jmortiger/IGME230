@@ -347,7 +347,7 @@ class Mover/* extends GameObject*/ {
 		this.vy = 0;
 		this.fx = 0;
 		this.fy = 0;
-		this.frictionFactor = .0075;
+		this.frictionFactor = .0275;
 		this.gravity = .1;
 		// If the speed is lower than this, then just set it to 0
 		this.vXDeadzone = .0025;

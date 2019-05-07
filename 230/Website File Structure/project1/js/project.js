@@ -157,12 +157,15 @@ function init() {
 	let idleAnimTest = createAnim(scaleToScreenWidth(yToX(.5)), scaleToScreenHeight(.5), 256, 256, idleAnimTextures, 15 / 60, true);
 	idleAnimTest.anchor = new PIXI.Point(0, 0);
 	let animObj = new SprExtObj(idleAnimTest, .5, .5, {
-		scaleWidth: yToX(.35),
-		scaleHeight: .35,
+		scaleWidth: yToX(.25),
+		scaleHeight: .25,
 		anchorX: .5,
 		anchorY: .5
 	});
-	let animMover = new Mover(animObj.scaleX, animObj.scaleY, animObj.scaleWidth, animObj.scaleHeight, .25, .25, (1 - .175));
+	let animMover = new Mover(animObj.scaleX, animObj.scaleY,
+							  animObj.scaleWidth, animObj.scaleHeight, 
+							  1, .25, 
+							  (1 - .175));
 	player = new GameObject(animObj, animMover);
 	//idleAnimObj.sprObj.play();
 	gameObjects.push(player);
