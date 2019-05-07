@@ -97,12 +97,12 @@ footer {
 /*****************************************************/
 
 /*Fade in card img overlay on hover*/
-.fadeBGOnHover {
+.fadeInOnHover {
     background-color: rgba(0, 0, 0, .65);
     opacity: 0;
     transition: ease-in-out opacity .5s;
 }
-    .fadeBGOnHover:hover {
+    .fadeInOnHover:hover {
         opacity: 1;
     }
 
@@ -202,7 +202,12 @@ h2 {
     overflow: visible;
 }
 
-/*If the device is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
+/*If the device has a screen and is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
 @media screen and (hover: hover) and (pointer: fine){
+
+}
+
+/*If the device has a screen and is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
+@media screen and (hover: hover) and (pointer: fine) {
 
 }

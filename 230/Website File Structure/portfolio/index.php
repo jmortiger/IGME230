@@ -115,7 +115,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/project1/project.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Shifting Hues</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">
@@ -129,7 +129,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/project2/dog-finder.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/DogFinderPortfolioScreencap1.png" alt="Dog Finder Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Dog Finder</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">
@@ -142,7 +142,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/exercises/pixel-life/pixel-life.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/PixelLifePortfolioScreencap1.png" alt="Pixel Life Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Pixel Life</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">
