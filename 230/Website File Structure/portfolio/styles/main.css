@@ -62,14 +62,23 @@ footer {
     background-repeat: no-repeat;*/
 }
 
-/*Carousel buttons have black background fade in on hover*/
-#carouselLeft, #carouselRight {
+/*black background fade in on hover*/
+.fadeBlackBGInOnHover {
     background-color: rgba(0, 0, 0, 0);
     transition: ease-in-out background-color .5s;
 }
-#carouselLeft:hover, #carouselRight:hover {
-    background-color: rgba(0, 0, 0, .25);
+    .fadeBlackBGInOnHover:hover {
+        background-color: rgba(0, 0, 0, .25);
+    }
+
+/*Carousel buttons have black background fade in on hover*/
+/*#carouselLeft, #carouselRight {
+    background-color: rgba(0, 0, 0, 0);
+    transition: ease-in-out background-color .5s;
 }
+    #carouselLeft:hover, #carouselRight:hover {
+        background-color: rgba(0, 0, 0, .25);
+    }*/
 
 /*Adjust padding so the .black-overlay takes up the whole parent*/
 #carouselItem1 > .black-overlay, #carouselItem2 > .black-overlay {

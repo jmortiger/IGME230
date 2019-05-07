@@ -97,10 +97,10 @@ function test_input($data) {
                     I may not finish projects fast, but when I&#39;m done with them, it&#39;s worth the wait. If only I had the time to finish them. I mean, God forbid.
                             </div>-->
                 </div>
-                <a id="carouselLeft" class="carousel-control-prev" href="#carouselParent" data-slide="prev">
+                <a id="carouselLeft" class="carousel-control-prev fadeBlackBGInOnHover" href="#carouselParent" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </a>
-                <a id="carouselRight" class="carousel-control-next" href="#carouselParent" data-slide="next">
+                <a id="carouselRight" class="carousel-control-next fadeBlackBGInOnHover" href="#carouselParent" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
