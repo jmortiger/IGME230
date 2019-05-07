@@ -216,7 +216,7 @@ h2 {
 
 }
 
-/*If the device has a screen and is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
-@media screen and (hover: hover) and (pointer: fine) {
+/*If the device has a screen and isn't an easily hoverable (touchscreen) or a not very accurate (Wiimote) pointer*/
+@media screen and (hover: none), screen and (pointer: coarse) {
 
 }
