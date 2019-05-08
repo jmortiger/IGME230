@@ -1,0 +1,6 @@
+
+class DialogueHandler {
+	constructor() {
+
+	}
+}
