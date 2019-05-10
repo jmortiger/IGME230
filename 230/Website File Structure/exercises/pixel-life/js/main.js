@@ -1,3 +1,5 @@
+"use strict";
+
 const numCols = 70;
 const numRows = 40;
 const cellWidth = 10;
@@ -18,10 +20,10 @@ function init() {
 	span.className = 'cell';
 
 	// Modded
-	gridContainer.style.display = "grid";
-	let gTRVal = /*`${cellWidth}px`*/"auto";
+	//gridContainer.style.display = "grid";
+	let gTRVal = /*`${cellWidth}px`*/"1fr";
 	for (let i = 1; i < numRows; i++) {
-		gTRVal += /*` ${cellWidth}px`*/" auto";
+		gTRVal += /*` ${cellWidth}px`*/" 1fr";
 	}
 	gridContainer.style.gridTemplateRows = gTRVal;
 	let gTCVal = /*`${cellWidth}px`*/"auto";
@@ -89,15 +91,75 @@ function init() {
 		console.log(`${col}, ${row}`);
 	}
 
+	const maxFrameDelay = 1000 / 12;
 	let lastUpdate = performance.now();
-
 	let lastFrame = performance.now();
-
-	let maxFrameDelay = 1000 / 12;
-
+	
 	let isPaused = true;
 
+	let stepKeyDisp = document.querySelector("#stepKeyDisplay");
+	let pauseKeyDisp = document.querySelector("#pauseKeyDisplay");
+	let resetKeyDisp = document.querySelector("#resetKeyDisplay");
+
+	const onPause = (e) => {
+		updateGrid();
+		isPaused = !isPaused;
+	};
+	const onStep = (e) => { doStep = true; };
+	const onReset = (e) => {
+		//lastUpdate = performance.now();
+		//lastFrame = performance.now();
+		isPaused = true;
+		doStep = false;
+		framesProcessed = 0;
+		framesDrawn = 0;
+		updateFrameCounter();
+		lifeworld.init(numCols, numRows);
+		updateGrid();
+	};
+	const onKeyDown = (e) => {
+		if (e.code == stepKeyDisp.dataset.stepKey)
+			onStep();
+		if (e.code == pauseKeyDisp.dataset.pauseKey)
+			onPause();
+		if (e.code == resetKeyDisp.dataset.resetKey)
+			onReset();
+	};
+	window.onkeydown = onKeyDown;
+
 	let doStep = false;
+	stepKeyDisp.innerHTML = `Step Key bound to ${stepKeyDisp.dataset.stepKey}.`;
+
+	document.querySelector("#defineStepKey").onclick = (e) => {
+		stepKeyDisp.innerHTML = "Press a key to define the step keybind";
+		window.onkeydown = (e) => {
+			stepKeyDisp.dataset.stepKey = e.code;
+			stepKeyDisp.innerHTML = `Step Key bound to ${e.code}.`;
+			window.onkeydown = onKeyDown;
+		};
+	};
+
+	pauseKeyDisp.innerHTML = `Pause Key bound to ${pauseKeyDisp.dataset.pauseKey}.`;
+
+	document.querySelector("#definePauseKey").onclick = (e) => {
+		pauseKeyDisp.innerHTML = "Press a key to define the pause keybind";
+		window.onkeydown = (e) => {
+			pauseKeyDisp.dataset.pauseKey = e.code;
+			pauseKeyDisp.innerHTML = `Pause Key bound to ${e.code}.`;
+			window.onkeydown = onKeyDown;
+		};
+	};
+
+	resetKeyDisp.innerHTML = `Reset Key bound to ${resetKeyDisp.dataset.resetKey}.`;
+
+	document.querySelector("#defineResetKey").onclick = (e) => {
+		resetKeyDisp.innerHTML = "Press a key to define the reset keybind";
+		window.onkeydown = (e) => {
+			resetKeyDisp.dataset.resetKey = e.code;
+			resetKeyDisp.innerHTML = `Reset Key bound to ${e.code}.`;
+			window.onkeydown = onKeyDown;
+		};
+	};
 
 	let framesProcessed = 0, framesDrawn = 0;
 
@@ -106,13 +168,12 @@ function init() {
 	const updateFrameCounter = () => { frameCounter.innerHTML = frameCounterBaseText + framesDrawn; };
 	updateFrameCounter();
 
-	document.querySelector("#stepButton").onclick = (e) => { doStep = true; };
-	document.querySelector("#pauseButton").onclick = (e) => {
-		updateGrid();
-		isPaused = !isPaused;
-	};
+	document.querySelector("#stepButton").onclick = onStep;
+	document.querySelector("#pauseButton").onclick = onPause;
+	document.querySelector("#reset").onclick = onReset;
 
 	lifeworld.init(numCols, numRows);
+	updateGrid();
 	loop(performance.now());
 
 	function loop(timestamp) {

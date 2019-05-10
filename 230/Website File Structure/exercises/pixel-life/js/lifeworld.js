@@ -1,10 +1,14 @@
 const lifeworld = {
-    init(numCols, numRows) {
+    init(numCols, numRows, world = null) {
         this.numCols = numCols;
-        this.numRows = numRows;
-        this.world = this.buildArray();
-        this.worldBuffer = this.buildArray();
-        this.randomSetup();
+		this.numRows = numRows;
+		this.world = world;
+		this.worldBuffer = this.buildArray();
+
+		if (!(this.world)) {
+			this.world = this.buildArray();
+			this.randomSetup();
+		}
     },
 
     buildArray() {
