@@ -1,47 +1,46 @@
-
 span.cell {
     box-sizing: border-box;
 
-    height: 10px;
-    width: 10px;
+    height: 25px;
+    width: 25px;
     border: 1px solid purple;
     background-color: #ccc;
     padding: 0;
     margin: 0;
+    position: absolute;
 }
 
 /* Get rid of the cell border when it is selected */
 span.cellSelected {
-    height: 10px;
-    width: 10px;
+    height: 25px;
+    width: 25px;
     background-color: red;
     padding: 0;
     margin: 0;
+    position: absolute;
 }
 
 #gridContainer {
+    top: 5px;
+    left: 5px;
     padding: 0;
     display: inline-block;
-}
+    position: absolute;
 
-#rhsContainer {
-    
+    /*background: border-box rgba(0, 0, 0, .25);*/
 }
 
 #colorChooser {
-    
-}
-
-#stepButton {
-    
-}
-
-#pauseButton {
-    
+    position: absolute;
+    top: 65px;
+    left: 800px;
 }
 
 h1 {
     font-family: 'Press Start 2P', cursive;
     display: inline-block;
+    position: absolute;
     font-size: 1.3em;
+    top: 0;
+    left: 800px;
 }
