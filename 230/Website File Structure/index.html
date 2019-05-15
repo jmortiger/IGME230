@@ -3,23 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="styles/indexCSS.css" type="text/css" rel="stylesheet">
+    <link href="styles/main.css" type="text/css" rel="stylesheet">
     <title>J Mor&#39;s IGME 230 Index Page</title>
 </head>
 <body>
     <div id="wrapper">
         <header>
-            <h1>J Mor&#39;s 230 Page</h1>
+            <h1 class="rounded-black-border">J Mor&#39;s 230 Page</h1>
             <nav>
-                <ul class="flex-container">
-                    <li id="projects"><a href="#projects" title="Projects">Projects</a></li>
-                    <li id="exercise"><a href="#exercises" title="Exercises">Exercises</a></li>
-                    <li id="misc"><a href="#misc" title="Misc">Misc</a></li>
+                <ul class="nav-flexbox rounded-black-border">
+                    <li class="nav-flex-item" id="projects"><a href="#projects" title="Projects">Projects</a></li>
+                    <li class="nav-flex-item" id="exercise"><a href="#exercises" title="Exercises">Exercises</a></li>
+                    <li class="nav-flex-item" id="misc"><a href="#misc" title="Misc">Misc</a></li>
                 </ul>
             </nav>
-            <img id="banner" src="photo.jpeg" alt="Photo of me" />
+            <img id="banner" class="rounded-black-border" src="photo.jpeg" alt="Photo of me" />
         </header>
-        <div class="flex-container">
+        <div style="display:flex;">
             <div id="main">
                 <p id="about">
                     I am a 2nd year GDD student who loves Resident
@@ -30,26 +30,33 @@
             </div>
             <!--<div id="mainContent">
                 </div>-->
-            <aside>
-                <h2>Projects</h2>
-                <ul class="main" id="projects">
-                    <li><a href="https://people.rit.edu/jgm1844/230/project1">Project 1</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/project2">Project 2</a></li>
-                </ul>
-                <h2>Exercises</h2>
-                <ul class="main" id="exercises">
-                    <li><a href="https://people.rit.edu/jgm1844/230/error/error.html">The custom 404 error page.</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/error/noterror.html">An existing page for testing the error page.</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/error/noterror.html">A non-existent page for testing the error page.</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/auth/myPage.html">The auth required page.</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/exercises/recipe/recipe">The recipe page.</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/exercises/darth/darth">The darth page.</a></li>
-                </ul>
-                <h2>Misc.</h2>
-                <ul class="main" id="misc">
-                    <li><a href="https://github.com/jmortiger/IGME230">My 230 GitHub Repo</a></li>
-                    <li><a href="https://people.rit.edu/jgm1844/230/hello.html">The &quot;hello&quot; page.</a></li>
-                </ul>
+            <aside class="rounded-black-border">
+                <div class="asideDiv">
+                    <h2>Projects</h2>
+                    <ul class="main" id="projects">
+                        <li><a href="https://people.rit.edu/jgm1844/230/project1">Project 1</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/project2">Project 2</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="asideDiv" id="exercisesDiv">
+                    <h2>Exercises</h2>
+                    <ul class="main" id="exercises">
+                        <li><a href="https://people.rit.edu/jgm1844/230/error/error.html">The custom 404 error page.</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/error/noterror.html">An existing page for testing the error page.</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/error/noterror.html">A non-existent page for testing the error page.</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/auth/myPage.html">The auth required page.</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/exercises/recipe/recipe">The recipe page.</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/exercises/darth/darth">The darth page.</a></li>
+                    </ul>
+                </div>
+                <div class="asideDiv">
+                    <h2>Misc.</h2>
+                    <ul class="main" id="misc">
+                        <li><a href="https://github.com/jmortiger/IGME230">My 230 GitHub Repo</a></li>
+                        <li><a href="https://people.rit.edu/jgm1844/230/hello.html">The &quot;hello&quot; page.</a></li>
+                    </ul>
+                </div>
             </aside>
         </div>
     </div>

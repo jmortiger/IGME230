@@ -225,7 +225,7 @@ function gameLoop() {
 	}
 	
 	// Switch screens from the startScreen to the testScreen if 'S' is pressed
-	if (SCENES.startScene.visible && getKey(keyboardCode.S)) {
+	if (SCENES.startScene.visible && true/*getKey(keyboardCode.S)*/) {
 		console.log("Switching to test scene");
 		SCENES.startScene.visible = false;
 		SCENES.testScene.visible = true;
@@ -242,8 +242,11 @@ function gameLoop() {
 		if (getKey(keyboardCode.D))
 			player.mover.fx = .2;
 		if (getKey(keyboardCode.W) && player.mover.y == player.mover.maxY)
-			player.mover.fY = -1;
+			player.mover.fy = -3;
 		//console.log(`fy:${player.mover.fy}`);
+		//console.log(`vy:${player.mover.vy}`);
+		//console.log(`maxY:${player.mover.maxY}`);
+		//console.log(`y:${player.mover.y}`);
 		for (let i = 0; i < gameObjects.length; i++) {
 			if (isDefined(gameObjects[i].update)) {
 				gameObjects[i].update(deltaTime);
