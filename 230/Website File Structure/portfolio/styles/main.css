@@ -62,17 +62,27 @@ footer {
     background-repeat: no-repeat;*/
 }
 
-/*Carousel buttons have black background fade in on hover*/
-#carouselLeft, #carouselRight {
+/*black background fade in on hover*/
+.fadeBlackBGInOnHover {
     background-color: rgba(0, 0, 0, 0);
     transition: ease-in-out background-color .5s;
 }
-#carouselLeft:hover, #carouselRight:hover {
-    background-color: rgba(0, 0, 0, .25);
+    .fadeBlackBGInOnHover:hover {
+        background-color: rgba(0, 0, 0, .25);
+    }
+
+/*Carousel buttons have black background fade in on hover*/
+/*#carouselLeft, #carouselRight {
+    background-color: rgba(0, 0, 0, 0);
+    transition: ease-in-out background-color .5s;
 }
+    #carouselLeft:hover, #carouselRight:hover {
+        background-color: rgba(0, 0, 0, .25);
+    }*/
 
 /*Adjust padding so the .black-overlay takes up the whole parent*/
 #carouselItem1 > .black-overlay, #carouselItem2 > .black-overlay {
+    padding: 1vh;
     padding: var(--mainPadding, 1vh);
 }
 #carouselItem1, #carouselItem2 { padding: 0%; }
@@ -96,12 +106,12 @@ footer {
 /*****************************************************/
 
 /*Fade in card img overlay on hover*/
-.fadeBGOnHover {
+.fadeInOnHover {
     background-color: rgba(0, 0, 0, .65);
     opacity: 0;
     transition: ease-in-out opacity .5s;
 }
-    .fadeBGOnHover:hover {
+    .fadeInOnHover:hover {
         opacity: 1;
     }
 
@@ -192,3 +202,21 @@ h2 {
     display: block;
     opacity: 1;
 }*/
+
+/*Fixed card body text overflow (temp fix)*/
+.myCardBody/*, .myCardBody > .myCardBodyItemText*/ {
+    overflow: auto;
+}
+.myCardBody > .myCardBodyItemText {
+    overflow: visible;
+}
+
+/*If the device has a screen and is an easily hoverable (mouse, not touchscreen) and highly accurate (mouse, not Wiimote) pointer*/
+@media screen and (hover: hover) and (pointer: fine){
+
+}
+
+/*If the device has a screen and isn't an easily hoverable (touchscreen) or a not very accurate (Wiimote) pointer*/
+@media screen and (hover: none), screen and (pointer: coarse) {
+
+}

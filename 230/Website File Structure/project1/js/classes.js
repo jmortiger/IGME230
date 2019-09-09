@@ -329,7 +329,6 @@ class GameObject {
 	}
 }
 
-// TODO: Lookup inheritance
 class Mover/* extends GameObject*/ {
 	constructor(x = 0, y = 0, width = 0, height = 0, maxVx = 0, maxVy = 0, maxY = 1) {
 		//super(x = 0, y = 0, width = 0, height = 0);
@@ -347,13 +346,16 @@ class Mover/* extends GameObject*/ {
 		this.vy = 0;
 		this.fx = 0;
 		this.fy = 0;
-		this.frictionFactor = .0075;
+		this.frictionFactor = .0275;
 		this.gravity = .1;
 		// If the speed is lower than this, then just set it to 0
 		this.vXDeadzone = .0025;
 		// If the force is lower than this, then just set it to 0
 		this.fXDeadzone = .0005;
 		this.isCalculating = true;
+
+		this.stateIndex = 0;
+		this.states = ["grounded", "jumping"];
 	}
 
 
@@ -371,6 +373,10 @@ class Mover/* extends GameObject*/ {
 			this.vx = 0;
 
 		this.vy += this.fy * deltaTime;
+		//console.log(`fy:${player.mover.fy}`);
+		//console.log(`vy:${player.mover.vy}`);
+		//console.log(`maxY:${player.mover.maxY}`);
+		//console.log(`y:${player.mover.y}`);
 		if (this.vy >  this.maxVy)
 			this.vy =  this.maxVy;
 		if (this.vy < -this.maxVy)
@@ -381,11 +387,11 @@ class Mover/* extends GameObject*/ {
 				this.vx *= (1 - this.frictionFactor);
 			else
 				this.vx = 0;
-			if (this.fy < 0) this.fy = 0;
-			if (this.vy < 0) this.vy = 0;
+			if (this.fy > 0) this.fy = 0;
+			if (this.vy > 0) this.vy = 0;
 		}
 		else
-			this.fy += this.gravity;
+			this.fy += this.gravity * deltaTime;
 
 		// 3. Calculate dx & dy
 		this.dx = this.vx * deltaTime;
@@ -401,7 +407,7 @@ class Mover/* extends GameObject*/ {
 
 		// Reset forces
 		this.fx = 0;
-		this.fy = 0;
+		//this.fy = 0;
 		//console.log(`vx:${this.vx}`);
 		//console.log(`vy:${this.vy}`);
 		//console.log(`fx:${this.fx}`);
@@ -410,6 +416,7 @@ class Mover/* extends GameObject*/ {
 
 	// Calculate forces on object. Currently only includes friction and gravity.
 	calculateForces() {
+		//console.log(`fy:${this.fy}`);
 		if (this.y == this.maxY) {
 			//if (Math.abs(this.fx) > this.fXDeadzone)
 			//	this.fx *= (.7/*1 - this.frictionFactor*/);
@@ -418,6 +425,27 @@ class Mover/* extends GameObject*/ {
 		}
 		else
 			this.fy += this.gravity;
+		//console.log(`fy:${this.fy}`);
+	}
+}
+
+class MoverState {
+	constructor() {
+		this.GroundedState;
+		this.JumpingState;
+	}
+
+	update(deltaTime) { }
+	calculateForces() { }
+}
+
+class GroundedState extends MoverState {
+	constructor() {
+		super();
+	}
+
+	update(deltaTime) {
+
 	}
 }
 

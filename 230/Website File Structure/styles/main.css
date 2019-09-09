@@ -1,12 +1,13 @@
 /* Reset
 ------------------------------------------------------------ */
-* {
+*, ul li {
     margin: 0;
     padding: 0;
 }
 
 html {
-    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -21,13 +22,7 @@ ol, ul {
     margin: 0;
 }
 
-ul li {
-    margin: 0;
-    padding: 0;
-}
-
 h1 {
-    /*margin-bottom: 10px;*/
     color: #111111;
 }
 
@@ -36,7 +31,6 @@ a, img {
     border: none;
     color: #000;
     font-weight: bold;
-    /*text-transform: uppercase;*/
 }
 
 p {
@@ -45,24 +39,34 @@ p {
     font-size: 1.2em;
 }
 
-img {
-    display: block;
-    /*margin-bottom: 10px;*/
-}
-
 aside {
     font-style: italic;
     font-size: 0.9em;
 }
 
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, menu, nav, section, img {
     display: block;
 }
 
-    /* ----------Structure---------- */
-header nav li {
+/* ----------Structure---------- */
+header nav ul li {
     display: inline;
+}
+.nav-flexbox {
+    display: flex;
+    /*padding-bottom: 10px;*/
+    margin-bottom: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.nav-flexbox li {
+    margin: 10px;
+    flex: 0 1 auto;
+}
+.nav-flex-item {
+    /*width: min-content;*/
+    /*display: inline;*/
 }
 
 a {
@@ -79,7 +83,6 @@ header h1 {
     margin: 10px/*4px 4px 0px 4px*/;
     padding: 5px;
     background-color: lightcoral;
-    border: 2px solid black;
 }
 
 #banner {
@@ -90,47 +93,18 @@ header h1 {
     height: 10%;
 }
 
-.flex-container {
-    /*float: left;*/
-    display: flex;
-}
-
-nav ul {
-    /*margin-top: 10px;*/
-    padding-bottom: 10px;
-    flex-direction: row;
-    justify-content: space-around;
-    border: 2px solid black;
-}
-
-nav ul li {
-    margin: 10px;
-    flex: 1 1 auto;
-}
-
-/*#projects {
-    flex-grow: 1;
-}
-
-#exercise {
-    flex-grow: 1;
-}
-
-#misc {
-    flex-grow: 1;
-}*/
-
 #main {
     padding: 5px;
     flex: 2 2 auto;
 }
 
 aside {
+    /*box-sizing: border-box;*/
+
     display: block;
     float: right;
     flex: 1 1 auto;
-    border: 2px solid black;
-    padding: 5px;
+    /*padding: 5px;*/
 }
 
 aside ul {
@@ -138,11 +112,27 @@ aside ul {
     list-style-position: inside;
 }
 
-#exercises {
-    width: 50%;
+.asideDiv {
+    margin: 5px;
+}
+/*#projects, #exercises, #misc {
+    margin: 5px;
+}*/
+#exercisesDiv {
     background-color: lightgray;
+    margin: 0;
+    padding: 5px;
+}
+#exercises {
+    /*width: 50%;*/
+    /*background-color: lightgray;*/
 }
 
-/*.main {
+header nav ul {
+    background-color: darkgrey;
+}
 
-}*/
+.rounded-black-border {
+    border: 2px solid black;
+    border-radius: 6px;
+}

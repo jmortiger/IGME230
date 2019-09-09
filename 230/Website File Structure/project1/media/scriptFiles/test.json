@@ -1,0 +1,19 @@
+{
+  "dialougeLabel": "testDialouge",
+  "dialogeLines": [
+    {
+      "character": "P1",
+      "lines": [
+        "hi, this is P1, and this is line 1.",
+        "and this is line 2"
+      ]
+    },
+    {
+      "character": "P2",
+      "lines": [
+        "I'm P2, and this is my line 1, and line 3 overall.",
+        "and this is my line 2, and line 4 overall."
+      ]
+    }
+  ]
+}

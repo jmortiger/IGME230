@@ -97,10 +97,10 @@ function test_input($data) {
                     I may not finish projects fast, but when I&#39;m done with them, it&#39;s worth the wait. If only I had the time to finish them. I mean, God forbid.
                             </div>-->
                 </div>
-                <a id="carouselLeft" class="carousel-control-prev" href="#carouselParent" data-slide="prev">
+                <a id="carouselLeft" class="carousel-control-prev fadeBlackBGInOnHover" href="#carouselParent" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </a>
-                <a id="carouselRight" class="carousel-control-next" href="#carouselParent" data-slide="next">
+                <a id="carouselRight" class="carousel-control-next fadeBlackBGInOnHover" href="#carouselParent" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
@@ -115,7 +115,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/project1/project.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/ShiftingHuesPortfolioScreencap1.PNG" alt="Shifting Hues Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Shifting Hues</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">
@@ -129,7 +129,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/project2/dog-finder.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/DogFinderPortfolioScreencap1.png" alt="Dog Finder Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Dog Finder</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">
@@ -142,7 +142,7 @@ function test_input($data) {
                 <a href="https://people.rit.edu/jgm1844/230/exercises/pixel-life/pixel-life.html" target="_blank">
                     <div class="card">
                         <img class="card-img-top" src="media/PixelLifePortfolioScreencap1.png" alt="Pixel Life Screencap" />
-                        <div class="card-img-overlay fadeBGOnHover myCardBody">
+                        <div class="card-img-overlay fadeInOnHover myCardBody">
                             <div class="myCardBody card-title container-fluid">
                                 <h3 class="myCardBodyItem myCardBodyItemTitle">Pixel Life</h3>
                                 <div class="myCardBodyItem myCardBodyItemText">

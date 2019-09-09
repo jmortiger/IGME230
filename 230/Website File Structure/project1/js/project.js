@@ -157,12 +157,15 @@ function init() {
 	let idleAnimTest = createAnim(scaleToScreenWidth(yToX(.5)), scaleToScreenHeight(.5), 256, 256, idleAnimTextures, 15 / 60, true);
 	idleAnimTest.anchor = new PIXI.Point(0, 0);
 	let animObj = new SprExtObj(idleAnimTest, .5, .5, {
-		scaleWidth: yToX(.35),
-		scaleHeight: .35,
+		scaleWidth: yToX(.25),
+		scaleHeight: .25,
 		anchorX: .5,
 		anchorY: .5
 	});
-	let animMover = new Mover(animObj.scaleX, animObj.scaleY, animObj.scaleWidth, animObj.scaleHeight, .25, .25, (1 - .175));
+	let animMover = new Mover(animObj.scaleX, animObj.scaleY,
+							  animObj.scaleWidth, animObj.scaleHeight, 
+							  1, .25, 
+							  (1 - .175));
 	player = new GameObject(animObj, animMover);
 	//idleAnimObj.sprObj.play();
 	gameObjects.push(player);
@@ -222,7 +225,7 @@ function gameLoop() {
 	}
 	
 	// Switch screens from the startScreen to the testScreen if 'S' is pressed
-	if (SCENES.startScene.visible && getKey(keyboardCode.S)) {
+	if (SCENES.startScene.visible && true/*getKey(keyboardCode.S)*/) {
 		console.log("Switching to test scene");
 		SCENES.startScene.visible = false;
 		SCENES.testScene.visible = true;
@@ -239,8 +242,11 @@ function gameLoop() {
 		if (getKey(keyboardCode.D))
 			player.mover.fx = .2;
 		if (getKey(keyboardCode.W) && player.mover.y == player.mover.maxY)
-			player.mover.fY = -1;
+			player.mover.fy = -3;
 		//console.log(`fy:${player.mover.fy}`);
+		//console.log(`vy:${player.mover.vy}`);
+		//console.log(`maxY:${player.mover.maxY}`);
+		//console.log(`y:${player.mover.y}`);
 		for (let i = 0; i < gameObjects.length; i++) {
 			if (isDefined(gameObjects[i].update)) {
 				gameObjects[i].update(deltaTime);

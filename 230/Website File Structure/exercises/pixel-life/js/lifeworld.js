@@ -1,10 +1,14 @@
 const lifeworld = {
-    init(numCols, numRows) {
+    init(numCols, numRows, world = null) {
         this.numCols = numCols;
-        this.numRows = numRows;
-        this.world = this.buildArray();
-        this.worldBuffer = this.buildArray();
-        this.randomSetup();
+		this.numRows = numRows;
+		this.world = world;
+		this.worldBuffer = this.buildArray();
+
+		if (!(this.world)) {
+			this.world = this.buildArray();
+			this.randomSetup();
+		}
     },
 
     buildArray() {
@@ -27,7 +31,6 @@ const lifeworld = {
                     this.world[row][col] = 1;
             }
         }
-        //debugger;
     },
 
     getLivingNeighbors(row, col) {
@@ -69,58 +72,8 @@ const lifeworld = {
                 neighbors.push(this.world[row][col + 1]);
                 neighbors.push(this.world[row - 1][col + 1]);
             }
-        }
+		}
 
-        //if ((row != 0 && col != 0) && (row < this.numRows - 1 && col < this.numCols - 1)) {
-        //    neighbors.push((this.world[row - 1][col - 1]).parseInt());
-        //    neighbors.push((this.world[row - 1][col]).parseInt());
-        //    neighbors.push((this.world[row - 1][col + 1]).parseInt());
-        //    neighbors.push((this.world[row][col - 1]).parseInt());
-        //    neighbors.push((this.world[row][col + 1]).parseInt());
-        //    neighbors.push((this.world[row + 1][col - 1]).parseInt());
-        //    neighbors.push((this.world[row + 1][col]).parseInt());
-        //    neighbors.push((this.world[row + 1][col + 1]).parseInt());
-        //}
-        //else if (row < this.numRows - 1 && col < this.numCols - 1) {
-        //    neighbors.push((this.world[row][col + 1]).parseInt());
-        //    neighbors.push((this.world[row + 1][col]).parseInt());
-        //    neighbors.push((this.world[row + 1][col + 1]).parseInt());
-        //    if (row != 0) {
-        //        neighbors.push((this.world[row - 1][col]).parseInt());
-        //        neighbors.push((this.world[row - 1][col + 1]).parseInt());
-        //    }
-        //    if (col != 0) {
-        //        neighbors.push((this.world[row][col - 1]).parseInt());
-        //        neighbors.push((this.world[row + 1][col - 1]).parseInt());
-        //    }
-        //}
-        //else if (row != 0 && col != 0) {
-        //    neighbors.push((this.world[row - 1][col - 1]).parseInt());
-        //    neighbors.push((this.world[row - 1][col]).parseInt());
-        //    neighbors.push((this.world[row][col - 1]).parseInt());
-        //    if (row < this.numRows - 1) {
-        //        neighbors.push((this.world[row + 1][col]).parseInt());
-        //        neighbors.push((this.world[row + 1][col - 1]).parseInt());
-        //    }
-        //    if (col < this.numCols - 1) {
-        //        neighbors.push((this.world[row][col + 1]).parseInt());
-        //        neighbors.push((this.world[row - 1][col + 1]).parseInt());
-        //    }
-        //}
-        //else if (row == this.numRows - 1 && col == this.numCols - 1) {
-        //    neighbors.push(this.world[row - 1][col - 1]);
-        //    neighbors.push(this.world[row - 1][col]);
-        //    neighbors.push(this.world[row][col - 1]);
-        //}
-
-        //neighbors.push(this.world[row - 1][col - 1]);
-        //neighbors.push(this.world[row - 1][col]);
-        //neighbors.push(this.world[row - 1][col + 1]);
-        //neighbors.push(this.world[row][col - 1]);
-        //neighbors.push(this.world[row][col + 1]);
-        //neighbors.push(this.world[row + 1][col - 1]);
-        //neighbors.push(this.world[row + 1][col]);
-        //neighbors.push(this.world[row + 1][col + 1]);
         let sum = 0;
         for (let i = 0; i < neighbors.length; i++)
             sum += neighbors[i];
@@ -144,13 +97,9 @@ const lifeworld = {
                 }
             }
         }
-        //console.log(this.world);
-        //console.log(this.worldBuffer);
 
         let temp = this.world;
         this.world = this.worldBuffer;
         this.worldBuffer = temp;
-
-        //this.randomSetup();
     }
 }
