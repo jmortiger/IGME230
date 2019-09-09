@@ -223,7 +223,7 @@ function formatUserString(userInput) {
         //if (userInput.filter((elem) => { return elem.contains(dispMod_reverse); }) != null)
 
         for (let i = inputStrArr.length - 2; i >= 0; i--)
-            userInput += "-" + inputStrArr[i];
+            userInput += "/" + inputStrArr[i];
     }
     return userInput;
 }
