@@ -5,6 +5,17 @@ const favURLsKey = "jgm1844-dog-finder-favs";
 
 const dispMod_reverse = "reverseResults";
 
+// Attempt to add statistics
+const statFile = "statFile.txt";
+const imgStatsProto = {
+	url, // The url of the image
+	hits, // the times visited
+	favs, // the times favorited
+	score, // The sum of up and downvotes
+	breed // the breed of the dog in the image
+}
+let imgStatsArr = new Array();
+
 // Gets user favorites
 let favs = localStorage.getItem(favURLsKey);
 if (isDefined(favs)) favs = new Array();
@@ -106,6 +117,8 @@ function showFavorites() {
     // Log debug
     document.querySelector("#debug").innerHTML += `<br /><b>Gathering from favorites:</b>`;
 
+	// Construct a JSON that imitates the result of a successful web service 
+	// query to feed the favorites through the same display function
     let mockJSON = {
         status: "success",
         message: (favs.slice())
@@ -182,6 +195,7 @@ function jsonLoaded(obj) {
     }
 }
 
+// Adds the specified element's image url to the favorites
 function addFavorite(e) {
     console.log(`addFavorite called`);
 
@@ -194,6 +208,7 @@ function addFavorite(e) {
     e.target.onclick = removeFavorite;
     storeFavs();
 }
+// Removes the specified element's image url from the favorites
 function removeFavorite(e) {
     console.log(`removeFavorite called`);
 
@@ -206,12 +221,38 @@ function removeFavorite(e) {
     e.target.onclick = addFavorite;
     storeFavs();
 }
+// Stores the current state of the favorites in local storage
 function storeFavs() {
     console.log(`storeFavs called`);
     let temp = JSON.stringify(favs);
     console.log(temp);
     localStorage.setItem(favURLsKey, temp);
 }
+
+// **********FUNCTIONS FOR STATISTICS**********
+
+function ImgStats(url, hits, favs, score, breed){
+	this.url = url;
+	this.hits = hits;
+	this.favs = favs;
+	this.score = score;
+}
+
+function getImgStats(imgUrl) {
+	let result;
+	let results = imgStatsArr.filter(imgStats => imgStats.url == imgUrl);
+	if (results.length <= 0) {
+		result = new imgStatsProto(imgUrl, 0, 0, 0);
+		imgStatsArr.push(result);
+	}
+	else if (results.length > 1) {
+		// TODO: Handle case
+	}
+	else
+		result = results[0];
+	return result;
+}
+// **********STATISTICS FUNCTIONS END**********
 
 // HELPER FUNCTIONS
 // Tries to reformat multi-word breeds into applicable formats (i.e. "golden retriever" -> "retriever-golden")
@@ -223,7 +264,7 @@ function formatUserString(userInput) {
         //if (userInput.filter((elem) => { return elem.contains(dispMod_reverse); }) != null)
 
         for (let i = inputStrArr.length - 2; i >= 0; i--)
-            userInput += "/" + inputStrArr[i];
+            userInput += "/" + inputStrArr[i]; // delimiter changed from '-' to '/'
     }
     return userInput;
 }

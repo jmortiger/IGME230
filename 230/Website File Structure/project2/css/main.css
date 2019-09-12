@@ -75,7 +75,7 @@ button:active {
     border: none;
     opacity: 0;
 
-    font-size: x-large;
+    font-size: xx-large;
 }
 .result:hover>.favButton { opacity: 1; }
 .favButton:hover {
