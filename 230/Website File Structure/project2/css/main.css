@@ -145,27 +145,33 @@ header {
     /*align-content: stretch;*/
 }
 
+/*Images*/
 .result {
-    border: 5px solid gray;
     /*width: min-content;*/
     /*height: min-content;*/
     text-align: center;
 }
-
 .result {
     margin: 7px 0px 7px 0px;
 }
-
 .imgLink {
     /*height: min-content;*/
     /*height: 1px;*/
     margin: 0px;
     padding: 0px;
 }
-
 a:link, a:visited {
     display: inline;
     color: black;
+}
+
+/*Round result edges*/
+.result {
+    border-radius: 10px 10px;
+    border: 5px solid gray;
+}
+.result img {
+    border-radius: 10px 10px;
 }
 
 header {
