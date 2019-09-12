@@ -6,6 +6,9 @@ Text Style Creator: https://pixijs.io/pixi-text-style
 */
 "use strict";
 
+const TARGET_FPS = 30;
+const getTargetDeltaTime = () => 1 / TARGET_FPS;
+
 let currScreenWidth = 0;
 let currScreenHeight = 0;
 

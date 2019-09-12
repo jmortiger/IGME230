@@ -71,8 +71,10 @@ function keySetup() {
         }
 
         let mousePosition = app.renderer.plugins.interaction.mouse.global;
-        if (e.keyCode == keyboardCode.M)
-            console.log(`mouseX:${mousePosition.x} mouseY:${mousePosition.y}`);
+		if (e.keyCode == keyboardCode.M) {
+			console.log(`Screen: mouseX:${mousePosition.x} mouseY:${mousePosition.y}`);
+			console.log(`Scale: mouseX:${screenToScaleWidth(mousePosition.x)} mouseY:${screenToScaleHeight(mousePosition.y)}`);
+		}
         //if (e.keyCode == keyboardCode.P) {
         //    isPaused = !isPaused;
         //    console.log(`isPaused: ${isPaused}`);

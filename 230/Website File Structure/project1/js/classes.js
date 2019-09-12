@@ -329,9 +329,8 @@ class GameObject {
 	}
 }
 
-class Mover/* extends GameObject*/ {
+class Mover {
 	constructor(x = 0, y = 0, width = 0, height = 0, maxVx = 0, maxVy = 0, maxY = 1) {
-		//super(x = 0, y = 0, width = 0, height = 0);
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -347,7 +346,8 @@ class Mover/* extends GameObject*/ {
 		this.fx = 0;
 		this.fy = 0;
 		this.frictionFactor = .0275;
-		this.gravity = .1;
+		// Force of gravity
+		this.fg = .1;
 		// If the speed is lower than this, then just set it to 0
 		this.vXDeadzone = .0025;
 		// If the force is lower than this, then just set it to 0
@@ -391,7 +391,7 @@ class Mover/* extends GameObject*/ {
 			if (this.vy > 0) this.vy = 0;
 		}
 		else
-			this.fy += this.gravity * deltaTime;
+			this.fy += this.fg * deltaTime;
 
 		// 3. Calculate dx & dy
 		this.dx = this.vx * deltaTime;
@@ -424,7 +424,7 @@ class Mover/* extends GameObject*/ {
 			//	this.fx = 0;
 		}
 		else
-			this.fy += this.gravity;
+			this.fy += this.fg;
 		//console.log(`fy:${this.fy}`);
 	}
 }
