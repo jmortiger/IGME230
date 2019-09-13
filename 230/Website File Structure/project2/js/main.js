@@ -7,13 +7,13 @@ const dispMod_reverse = "reverseResults";
 
 // Attempt to add statistics
 const statFile = "statFile.txt";
-const imgStatsProto = {
-	url, // The url of the image
-	hits, // the times visited
-	favs, // the times favorited
-	score, // The sum of up and downvotes
-	breed // the breed of the dog in the image
-}
+// const imgStatsProto = {
+// 	url, // The url of the image
+// 	hits, // the times visited
+// 	favs, // the times favorited
+// 	score, // The sum of up and downvotes
+// 	breed // the breed of the dog in the image
+// }
 let imgStatsArr = new Array();
 
 // Gets user favorites
