@@ -15,7 +15,7 @@ html, body {
     display: flex;
     flex-direction: column;
 }
-#navbar {
+#controlbar {
     flex: 0 1 auto;
 }
 #mainContent {
@@ -33,7 +33,7 @@ html, body {
     /*grid-auto-flow:*/ 
 }
 .note {
-
+    position: relative;
 }
 
 /*Main div styling*/
@@ -42,6 +42,10 @@ html, body {
     height: 100%;*/
 
     background-color: black;
+}
+
+/*Controlbar styling*/
+#controlbar {
     border: 3px solid gray;
 }
 
@@ -52,4 +56,12 @@ html, body {
 
     background-color: darkgray;
     color: whitesmoke;
+    border-radius: 10px;
+
+    margin: 5px;
+    padding: 5px;
+}
+
+#pageTitle {
+    display: inline;
 }
