@@ -1,6 +1,5 @@
 // GLOBAL FIELDS
-// start and end for A*
-let startNode = null, endNode = null;
+const START_NODE_ID = "startNode", END_NODE_ID = "endNode", WALL_NODE_CLASS_NAME = "wallNode";
 
 window.onload = init;
 
@@ -79,49 +78,57 @@ function applyCellInfo(cell) {
 				currAction = formElems[i].value;
 		}
 		if (currAction == "Start") {
-			// If there's a currently stored start node, remove it's id
-			if (startNode) startNode.id = "";
-			if (cell.className.includes("wallNode")) {
+			// If there's a currently stored start node, remove its id
+			if (getStartNode()) getStartNode().id = "";
+			if (cell.className.includes(WALL_NODE_CLASS_NAME)) {
 				let temp = cell.className.split(" ");
 				cell.className = "";
-				for (let str in temp) {
-					if (str != "wallNode") cell.className += " " + str;
-				}
+				temp.forEach((str) => {
+					if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
+				});
+				//for (let str in temp) {
+				//	if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
+				//}
 				cell.className = cell.className.slice(1);
 			}
-			if (cell.id == "endNode") cell.id = "";
-			if (cell == endNode) endNode = null;
-			startNode = cell;
-			cell.id = "startNode";
+			if (cell.id == END_NODE_ID) cell.id = "";
+			cell.id = START_NODE_ID;
 		}
 		else if (currAction == "Wall") {
-			if (cell.id == "startNode") startNode.id = "";
-			if (cell == startNode) startNode = null;
-			if (cell.id == "endNode") cell.id = "";
-			if (cell == endNode) endNode = null;
-			if (!cell.className.includes("wallNode")) cell.className += " wallNode";
+			if (cell.id == START_NODE_ID) cell.id = "";
+			if (cell.id == END_NODE_ID) cell.id = "";
+			if (!cell.className.includes(WALL_NODE_CLASS_NAME)) cell.className += " " + WALL_NODE_CLASS_NAME;
 		}
 		else if (currAction == "End") {
-			if (cell.id == "startNode") cell.id = "";
-			if (cell == startNode) startNode = null;
-			if (cell.className.includes("wallNode")) {
+			if (cell.id == START_NODE_ID) cell.id = "";
+			if (cell.className.includes(WALL_NODE_CLASS_NAME)) {
 				let temp = cell.className.split(" ");
 				cell.className = "";
-				for (let str in temp) {
-					if (str != "wallNode") cell.className += " " + str;
-				}
+				temp.forEach((str) => {
+					if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
+				});
+				//for (let str in temp) {
+				//	if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
+				//}
 				cell.className = cell.className.slice(1);
 			}
 			// If there's a currently stored end node, remove its id
-			if (endNode) endNode.id = "";
-			endNode = cell;
-			cell.id = "endNode";
+			if (getEndNode()) getEndNode().id = "";
+			cell.id = END_NODE_ID;
 		}
 	};
 }
 
 function getWallNodes() {
-	return document.querySelectorAll(".wallNode");
+	return document.querySelectorAll("." + WALL_NODE_CLASS_NAME);
+}
+
+function getStartNode() {
+	return document.querySelector("#" + START_NODE_ID);
+}
+
+function getEndNode() {
+	return document.querySelector("#" + END_NODE_ID);
 }
 
 //function removeStringPortion(startString, toRemove) {
