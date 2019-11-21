@@ -1,0 +1,67 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    /*margin: 0;*/
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#gridContainer {
+    display: block;
+    height: 100%;
+    margin: 5px 0px 0px 0px;
+}
+
+.cell {
+    /*height: 100%;*/
+    border: 1px solid grey;
+    background-color: white;
+    margin: 0;
+}
+
+#controlPanel {
+    width: 100%;
+    /*height: 50%;*/
+    z-index: -1;
+    display: block;
+    /*margin: 0;*/
+    /*padding: 15px;*/
+}
+
+h1 {
+    display: inline-block;
+    width: 100%;
+    height: min-content;
+    /*margin: 0;*/
+}
+
+.controlDimensionElem {
+    height: min-content;
+}
+
+#controlGridWidth, #controlGridHeight {
+    /*display: block;*/
+    /*width: min-content;
+    height: min-content;*/
+    width: initial;
+    height: initial;
+    /*z-index: 10;*/
+}
+
+#startNode {
+    background-color: rgba(0, 255, 0, 255);
+}
+#endNode {
+    background-color: rgba(255, 0, 0, 255);
+}
+.wallNode {
+    background-color: rgba(128, 128, 128, 255);
+}

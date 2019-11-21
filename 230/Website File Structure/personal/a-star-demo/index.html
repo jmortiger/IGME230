@@ -1,13 +1,40 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <link href="styles/main.css" type="text/css" rel="stylesheet" />
     <title>A* Algorithm</title>
+    <script src="js/main.js"></script>
 </head>
 <body>
-    <div id="grid">
+    <div id="controlPanel">
+        <h1>Simulation Controller</h1>
+        <div class="controlDimensionElem">
+            Grid Width: 
+            <input id="controlGridWidth" type="number" name="gridWidth" min="2" max="30" value="5" />
+        </div>
+        <div class="controlDimensionElem">
+            Grid Height: 
+            <input id="controlGridHeight" type="number" name="gridHeight" min="2" max="30" value="5" />
+        </div>
+        <form id="setClickedElemsRadioForm">
+            Click a cell to set it as:
+            <div class="controlElem">
+                Start Node:<input type="radio" name="setCellAs" value="Start" checked />
+            </div>
+            <div class="controlElem">
+                End Node:<input type="radio" name="setCellAs" value="End" />
+            </div>
+            <div class="controlElem">
+                Wall Node:<input type="radio" name="setCellAs" value="Wall" />
+            </div>
+            <!--<input type="radio" name="setCellAs" value="Start" checked />
+            <input type="radio" name="setCellAs" value="End" />
+            <input type="radio" name="setCellAs" value="Wall" />-->
+        </form>
+    </div>
+    <div id="gridContainer">
 
     </div>
 </body>
