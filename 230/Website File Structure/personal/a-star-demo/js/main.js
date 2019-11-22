@@ -1,17 +1,25 @@
 // GLOBAL FIELDS
-const START_NODE_ID = "startNode", END_NODE_ID = "endNode", WALL_NODE_CLASS_NAME = "wallNode";
+const
+	START_NODE_ID = "startNode",
+	END_NODE_ID = "endNode",
+	WALL_NODE_CLASS_NAME = "wallNode";
+let OPEN = new Array(),
+	CLOSED = new Array(),
+	gridCells;
 
 window.onload = init;
 
 function init() {
-	//document.querySelector("#gridContainer");
-	let temp = buildGrid(document.querySelector("#controlGridWidth").value, document.querySelector("#controlGridHeight").value, 0, "gridContainer");
+	resetGrid();
 	document.querySelector("#controlGridWidth").onchange = resetGrid;
 	document.querySelector("#controlGridHeight").onchange = resetGrid;
+	document.querySelector("#simPlay").onclick = playSimulation;
+	document.querySelector("#simStep").onclick = stepSimulation;
+	document.querySelector("#simReset").onclick = resetSimulation;
 }
 
 function resetGrid(e) {
-	buildGrid(document.querySelector("#controlGridWidth").value, document.querySelector("#controlGridHeight").value, 0, "gridContainer");
+	gridCells = buildGrid(document.querySelector("#controlGridWidth").value, document.querySelector("#controlGridHeight").value, 0, "gridContainer")[1];
 }
 
 // Returns: An array of 2 elements;
@@ -86,9 +94,6 @@ function applyCellInfo(cell) {
 				temp.forEach((str) => {
 					if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
 				});
-				//for (let str in temp) {
-				//	if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
-				//}
 				cell.className = cell.className.slice(1);
 			}
 			if (cell.id == END_NODE_ID) cell.id = "";
@@ -107,9 +112,6 @@ function applyCellInfo(cell) {
 				temp.forEach((str) => {
 					if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
 				});
-				//for (let str in temp) {
-				//	if (str != WALL_NODE_CLASS_NAME) cell.className += " " + str;
-				//}
 				cell.className = cell.className.slice(1);
 			}
 			// If there's a currently stored end node, remove its id
@@ -117,6 +119,43 @@ function applyCellInfo(cell) {
 			cell.id = END_NODE_ID;
 		}
 	};
+}
+
+function playSimulation() {
+
+}
+
+function stepSimulation() {
+
+}
+
+function AStar(start, goal, h) {
+	let startAsNode = new MyNode(start, 0, h(start));
+	OPEN.push(start);
+
+	let cameFrom;
+
+	let currNode;
+	while (OPEN.length != 0) {
+		// get node w/ lowest score
+		currNode = () => {
+			let lowestFScore = OPEN[0];
+			for (let i = 0; i < OPEN.length; i++)
+				if (OPEN[i].fScore < lowestFScore)
+					lowestFScore = OPEN[i];
+			return lowestFScore;
+		};
+		// Remove from open set
+		OPEN = OPEN.filter((e) => { return e != currNode; });
+		// if it's done, finish
+		//if (currNode = goal)
+
+	}
+}
+
+function resetSimulation() {
+	OPEN = new Array();
+	CLOSED = new Array();
 }
 
 function getWallNodes() {
@@ -135,3 +174,36 @@ function getEndNode() {
 //	if (!startString.includes(toRemove)) return startString;
 
 //}
+
+function getNeighboringNodes(node) {
+	let coords = getNodeCoords(node), nodes = new Array(), xCoord = coords[0], yCoord = coords[1];
+	//for (let i = -1; i < 2; i++) {
+	//	for (let j = -1; j < 2; j++) {
+
+	//	}
+	//}
+	nodes.push(gridCells[xCoord - 1][yCoord - 1]);
+	nodes.push(gridCells[xCoord][yCoord - 1]);
+	nodes.push(gridCells[xCoord + 1][yCoord - 1]);
+	nodes.push(gridCells[xCoord - 1][yCoord]);
+	nodes.push(gridCells[xCoord][yCoord]);
+	nodes.push(gridCells[xCoord + 1][yCoord]);
+	nodes.push(gridCells[xCoord - 1][yCoord + 1]);
+	nodes.push(gridCells[xCoord][yCoord + 1]);
+	nodes.push(gridCells[xCoord + 1][yCoord + 1]);
+}
+
+function getNodeCoords(node) {
+	for (let i = 0; i < gridCells.length; i++)
+		for (let j = 0; j < gridCells[i].length; j++)
+			if (gridCells[i][j] == node) return [i, j];
+	return null;
+}
+
+class MyNode {
+	constructor(elem, gScore, fScore) {
+		this.elem = elem;
+		this.gScore = gScore;
+		this.fScore = fScore;
+	}
+}
