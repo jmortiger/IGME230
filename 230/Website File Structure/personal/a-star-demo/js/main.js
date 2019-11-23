@@ -2,7 +2,8 @@
 const
 	START_NODE_ID = "startNode",
 	END_NODE_ID = "endNode",
-	WALL_NODE_CLASS_NAME = "wallNode";
+	WALL_NODE_CLASS_NAME = "wallNode",
+	PATH_NODE_CLASS_NAME = "pathNode";
 let OPEN = new Array(),
 	CLOSED = new Array(),
 	gridCells;
@@ -16,6 +17,8 @@ function init() {
 	document.querySelector("#simPlay").onclick = playSimulation;
 	document.querySelector("#simStep").onclick = stepSimulation;
 	document.querySelector("#simReset").onclick = resetSimulation;
+	document.querySelector("#testNeighbors").onclick = testNeighbors;
+	document.querySelector("#clearPathNodes").onclick = clearPathNodes;
 }
 
 function resetGrid(e) {
@@ -121,6 +124,29 @@ function applyCellInfo(cell) {
 	};
 }
 
+function testNeighbors() {
+	if (getStartNode()) {
+		let neighbors = getNeighboringNodes(getStartNode());
+		if (neighbors)
+			neighbors.forEach((e) => { e.className += " " + PATH_NODE_CLASS_NAME; });
+	}
+}
+
+function clearPathNodes() {
+	gridCells.forEach((a) => {
+		a.forEach((cell) => {
+			if (cell.className.includes(PATH_NODE_CLASS_NAME)) {
+				let temp = cell.className.split(" ");
+				cell.className = "";
+				temp.forEach((str) => {
+					if (str != PATH_NODE_CLASS_NAME) cell.className += " " + str;
+				});
+				cell.className = cell.className.slice(1);
+			}
+		});
+	});
+}
+
 function playSimulation() {
 
 }
@@ -156,6 +182,7 @@ function AStar(start, goal, h) {
 function resetSimulation() {
 	OPEN = new Array();
 	CLOSED = new Array();
+	clearPathNodes();
 }
 
 function getWallNodes() {
@@ -172,25 +199,30 @@ function getEndNode() {
 
 //function removeStringPortion(startString, toRemove) {
 //	if (!startString.includes(toRemove)) return startString;
-
 //}
 
 function getNeighboringNodes(node) {
 	let coords = getNodeCoords(node), nodes = new Array(), xCoord = coords[0], yCoord = coords[1];
-	//for (let i = -1; i < 2; i++) {
-	//	for (let j = -1; j < 2; j++) {
+	console.log("Testing nodes.");
+	if (isNodeValid(xCoord - 1, yCoord - 1)) nodes.push(gridCells[xCoord - 1][yCoord - 1]);
+	if (isNodeValid(xCoord, yCoord - 1)) nodes.push(gridCells[xCoord][yCoord - 1]);
+	if (isNodeValid(xCoord + 1, yCoord - 1)) nodes.push(gridCells[xCoord + 1][yCoord - 1]);
+	if (isNodeValid(xCoord - 1, yCoord)) nodes.push(gridCells[xCoord - 1][yCoord]);
+	//if (isNodeValid(xCoord, yCoord)) nodes.push(gridCells[xCoord][yCoord]);
+	if (isNodeValid(xCoord + 1, yCoord)) nodes.push(gridCells[xCoord + 1][yCoord]);
+	if (isNodeValid(xCoord - 1, yCoord + 1)) nodes.push(gridCells[xCoord - 1][yCoord + 1]);
+	if (isNodeValid(xCoord, yCoord + 1)) nodes.push(gridCells[xCoord][yCoord + 1]);
+	if (isNodeValid(xCoord + 1, yCoord + 1)) nodes.push(gridCells[xCoord + 1][yCoord + 1]);
+	return nodes;
+}
 
-	//	}
-	//}
-	nodes.push(gridCells[xCoord - 1][yCoord - 1]);
-	nodes.push(gridCells[xCoord][yCoord - 1]);
-	nodes.push(gridCells[xCoord + 1][yCoord - 1]);
-	nodes.push(gridCells[xCoord - 1][yCoord]);
-	nodes.push(gridCells[xCoord][yCoord]);
-	nodes.push(gridCells[xCoord + 1][yCoord]);
-	nodes.push(gridCells[xCoord - 1][yCoord + 1]);
-	nodes.push(gridCells[xCoord][yCoord + 1]);
-	nodes.push(gridCells[xCoord + 1][yCoord + 1]);
+// Checks if given coordinates are within the array bounds
+function isNodeValid(xCoord, yCoord) {
+	return !(
+		xCoord < 0 ||
+		yCoord < 0 ||
+		xCoord >= gridCells.length ||
+		yCoord >= gridCells[0].length);
 }
 
 function getNodeCoords(node) {
@@ -198,6 +230,17 @@ function getNodeCoords(node) {
 		for (let j = 0; j < gridCells[i].length; j++)
 			if (gridCells[i][j] == node) return [i, j];
 	return null;
+}
+
+function removeClassName(elementToChange, nameToRemove) {
+	if (elementToChange.className.includes(nameToRemove)) {
+		let temp = elementToChange.className.split(" ");
+		elementToChange.className = "";
+		temp.forEach((str) => {
+			if (str != nameToRemove) elementToChange.className += " " + str;
+		});
+		elementToChange.className = elementToChange.className.slice(1);
+	}
 }
 
 class MyNode {
