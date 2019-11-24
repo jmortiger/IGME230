@@ -12,11 +12,15 @@
         <h1>Simulation Controller</h1>
         <div class="controlDimensionElem">
             Grid Width:
-            <input id="controlGridWidth" type="number" name="gridWidth" min="2" max="30" value="5" />
+            <input id="controlGridWidth" type="number" name="gridWidth" min="2" max="30" value="50" />
         </div>
         <div class="controlDimensionElem">
             Grid Height:
-            <input id="controlGridHeight" type="number" name="gridHeight" min="2" max="30" value="5" />
+            <input id="controlGridHeight" type="number" name="gridHeight" min="2" max="30" value="25" />
+        </div>
+        <div class="controlElem">
+            Step Delay:
+            <input id="controlStepDelay" type="number" name="gridWidth" min="0" max="15" value=".25" />
         </div>
         <form id="setClickedElemsRadioForm">
             Click a cell to set it as:
@@ -29,12 +33,19 @@
             <div class="controlElem">
                 Wall Node:<input type="radio" name="setCellAs" value="Wall" />
             </div>
+            <div class="controlElem">
+                Delete Wall:<input type="radio" name="setCellAs" value="DeleteWall" />
+            </div>
         </form>
         <input id="simStep" type="button" name="step" value="Step" />
-        <input id="simPlay" type="button" name="play" value="Play" />
+        <input id="simPlay" type="button" name="play" value="Play With Step Delay" />
+        <input id="simPlayAll" type="button" name="playAll" value="Play at Speed" />
         <input id="simReset" type="button" name="reset" value="Reset" />
+        <input id="toggleDiagonal" type="button" name="toggleDiagonal" value="Toggle Diagonal" />
         <input id="testNeighbors" class="testElem" type="button" name="testNeighbor" value="Test Neighbor Getting Function" />
         <input id="clearPathNodes" type="button" name="clearPath" value="Clear Path" />
+        <input id="clearWallNodes" type="button" name="clearWalls" value="Clear Walls" />
+        <input id="genRandomWalls" type="button" name="genRandWalls" value="Generate Random Walls" />
     </div>
     <div id="gridContainer"></div>
 </body>
