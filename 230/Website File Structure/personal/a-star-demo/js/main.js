@@ -195,6 +195,33 @@ function genRandomWalls() {
 			cell.className += " " + WALL_NODE_CLASS_NAME;
 		}
 	}));
+
+	// If there's a currently stored start node, remove its id
+	if (getStartNode())
+		getStartNode().id = "";
+
+	// Remove it as a wall
+	removeClassName(gridCells[0][0], WALL_NODE_CLASS_NAME);
+
+	// If this cell is the end node, remove it as the end node
+	if (gridCells[0][0].id == END_NODE_ID)
+		gridCells[0][0].id = "";
+
+	// Set this cell as the start node
+	gridCells[0][0].id = START_NODE_ID;
+	// If this cell is the start node, remove it as the start node
+	if (gridCells[gridCells.length - 1][gridCells[gridCells.length - 1].length - 1].id == START_NODE_ID)
+		gridCells[gridCells.length - 1][gridCells[gridCells.length - 1].length - 1].id = "";
+
+	// Remove it as a wall
+	removeClassName(gridCells[gridCells.length - 1][gridCells[gridCells.length - 1].length - 1], WALL_NODE_CLASS_NAME);
+
+	// If there's a currently stored end node, remove its id
+	if (getEndNode())
+		getEndNode().id = "";
+
+	// Set this cell as the end node
+	gridCells[gridCells.length - 1][gridCells[gridCells.length - 1].length - 1].id = END_NODE_ID;
 }
 
 // Removes path node class from all grid cells
@@ -306,51 +333,19 @@ function AStarInit(start, goal, h) {
 	}
 
 	// Open the start node and define it's g & f scores
-	//OPEN.push(start);
 	start.className += " " + OPEN_NODE_CLASS_NAME;
 
 	let startNodeCoords = getNodeCoords(newAStarData.start), startX = startNodeCoords[0], startY = startNodeCoords[1]
 	newAStarData.gScores[startX][startY] = 0;
 	newAStarData.fScores[startX][startY] = newAStarData.gScores[startX][startY] + newAStarData.h(newAStarData.start);
 	return newAStarData;
-	//a_start = start;
-	//a_goal = goal;
-	//a_h = h;
-	//a_currNode = start;
-	//a_gScores = [];
-	//a_fScores = [];
-	//a_cameFrom = [];
-	//for (let i = 0; i < gridCells.length; i++) {
-	//	a_gScores.push([]);
-	//	a_fScores.push([]);
-	//	a_cameFrom.push([]);
-	//	for (let j = 0; j < gridCells[i].length; j++) {
-	//		a_gScores[i].push(Infinity);
-	//		a_fScores[i].push(Infinity);
-	//		a_cameFrom[i].push(null);
-	//	}
-	//}
-
-	//// Open the start node and define it's g & f scores
-	//OPEN.push(start);
-	//let a_startNodeCoords = getNodeCoords(start), a_startX = a_startNodeCoords[0], a_startY = a_startNodeCoords[1]
-	//a_gScores[a_startX][a_startY] = 0;
-	//a_fScores[a_startX][a_startY] = a_gScores[a_startX][a_startY] + h(start);
 }
 
 function AStarStep(data = aStarDataObj) {
-	//if (OPEN.length != 0) {
 	if (getOpenNodes().length != 0) {
 		// get node w/ lowest score
-		//let lowestFScore = OPEN[0];
 		let lowestFScore = getOpenNodes()[0];
-		//for (let i = 0; i < OPEN.length; i++) {
 		for (let i = 0; i < getOpenNodes().length; i++) {
-			//if (getValAtNodeCoords(data.fScores, OPEN[i]) < getValAtNodeCoords(data.fScores, lowestFScore))
-			//	lowestFScore = OPEN[i];
-			//else if (getValAtNodeCoords(data.fScores, OPEN[i]) == getValAtNodeCoords(data.fScores, lowestFScore)) {
-			//	if (OPEN[i] == data.currNode)
-			//		lowestFScore = OPEN[i];
 			if (getValAtNodeCoords(data.fScores, getOpenNodes()[i]) < getValAtNodeCoords(data.fScores, lowestFScore))
 				lowestFScore = getOpenNodes()[i];
 			else if (getValAtNodeCoords(data.fScores, getOpenNodes()[i]) == getValAtNodeCoords(data.fScores, lowestFScore)) {
@@ -361,7 +356,6 @@ function AStarStep(data = aStarDataObj) {
 		data.currNode = lowestFScore;
 
 		// Remove from open set
-		//OPEN = OPEN.filter((e) => { return e != data.currNode; });
 		removeClassName(data.currNode, OPEN_NODE_CLASS_NAME);
 		data.currNode.className += " " + CLOSED_NODE_CLASS_NAME;
 
@@ -389,8 +383,6 @@ function AStarStep(data = aStarDataObj) {
 				// 3. ... and the best path to here, ...
 				data.cameFrom[neighborCoords[0]][neighborCoords[1]] = data.currNode;
 				// 4. ... and if this neighbor wasn't open, open it
-				//if (!OPEN.includes(neighbor))
-				//	OPEN.push(neighbor);
 				if (!nodeListToArray(getOpenNodes()).includes(neighbor)) {
 					neighbor.className += " " + OPEN_NODE_CLASS_NAME;
 					removeClassName(neighbor, CLOSED_NODE_CLASS_NAME);
@@ -398,7 +390,6 @@ function AStarStep(data = aStarDataObj) {
 			}
 		});
 	}
-	//if (OPEN.length == 0)
 	if (getOpenNodes().length == 0)
 		data.isComplete = true;
 	return data;
@@ -478,8 +469,54 @@ function AStarComplete(start, goal, h) {
 	}
 }
 
-function BreadthFirstInit() {
+function BreadthFirstInit(start, goal) {
+	let bdbd = new BreadthFirstData(start, goal);
+	for (let i = 0; i < gridCells.length; i++) {
+		bdbd.gScores.push([]);
+		bdbd.cameFrom.push([]);
+		for (let j = 0; j < gridCells[i].length; j++) {
+			bdbd.gScores[i].push(Infinity);
+			bdbd.cameFrom[i].push(null);
+		}
+	}
 
+	// Open the start node and define it's g & f scores
+	start.className += " " + OPEN_NODE_CLASS_NAME;
+
+	let startNodeCoords = getNodeCoords(bdbd.start), startX = startNodeCoords[0], startY = startNodeCoords[1]
+	bdbd.gScores[startX][startY] = 0;
+	return bdbd;
+}
+function BreadthFirstStep(bFD) {
+	let pendingOpening = [];
+	//for (let i = 0; i < getOpenNodes().length; i++) {
+
+	//}
+	getOpenNodes().forEach(a => getTraversableNodes(a).forEach(b => {
+		if (!b.className.includes(CLOSED_NODE_CLASS_NAME)) {
+			let coords = getNodeCoords(b), x = coords[0], y = coords[1], potenGScore = getValAtNodeCoords(bFD.gScores, bFD.currNode) + dist(bFD.currNode, b);
+			pendingOpening.push(b);
+			if (bFD.gScores[x][y] >= potenGScore) {
+				bFD.gScores[x][y] = potenGScore;
+				bFD.cameFrom[x][y] = bFD.currNode;
+			}
+			if (!b.className.includes(OPEN_NODE_CLASS_NAME)) {
+				pendingOpening.push(b);
+			}
+			if (b == bFD.goal) {
+				bFD.isComplete = true;
+				bFD.path = getPathConstructed(b, bFD.cameFrom);
+			}
+		}
+	}));
+	getOpenNodes().forEach(e => {
+		removeClassName(e, OPEN_NODE_CLASS_NAME);
+		if (!e.className.includes(CLOSED_NODE_CLASS_NAME))
+			e.className += " " + CLOSED_NODE_CLASS_NAME;
+	});
+	pendingOpening.forEach(b => b.className += " " + OPEN_NODE_CLASS_NAME);
+
+	return bFD;
 }
 
 // Checks if you can travel from nodeFrom to nodeTo.
@@ -627,6 +664,20 @@ class AStarData {
 
 		this.gScores	= gScores;
 		this.fScores	= fScores;
+		this.cameFrom	= cameFrom;
+		this.currNode	= currNode;
+
+		this.isComplete = false;
+		this.path		= null;
+	}
+}
+
+class BreadthFirstData {
+	constructor(start, goal, gScores = [], cameFrom = [], currNode = start) {
+		this.start		= start;
+		this.goal		= goal;
+
+		this.gScores	= gScores;
 		this.cameFrom	= cameFrom;
 		this.currNode	= currNode;
 
