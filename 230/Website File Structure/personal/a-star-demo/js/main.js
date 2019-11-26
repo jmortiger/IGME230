@@ -11,7 +11,8 @@ const
 let OPEN = new Array(),
 	//CLOSED = new Array(),
 	gridCells,
-	canTravelDiagonally = true;
+	canTravelDiagonally = true,
+	shouldLoopGen = false;
 
 // A STAR FIELDS
 let a_gScores = new Array(),
@@ -61,6 +62,7 @@ function init() {
 	document.querySelector("#clearWallNodes").onclick = clearWallNodes;
 	document.querySelector("#toggleDiagonal").onclick = e => canTravelDiagonally = !canTravelDiagonally;
 	document.querySelector("#genRandomWalls").onclick = genRandomWalls;
+	document.querySelector("#shouldLoopGen").onclick = e => shouldLoopGen = !shouldLoopGen;
 	//document.querySelector("#").onclick = ;
 }
 
@@ -222,6 +224,10 @@ function genRandomWalls() {
 
 	// Set this cell as the end node
 	gridCells[gridCells.length - 1][gridCells[gridCells.length - 1].length - 1].id = END_NODE_ID;
+
+	// If looping, immediately start
+	if (shouldLoopGen)
+		playAtSpeedSimulation();
 }
 
 // Removes path node class from all grid cells
@@ -288,6 +294,9 @@ function playAtSpeedSimulation() {
 				}
 			}
 			aStarDataObj = null;
+			if (shouldLoopGen) {
+				setTimeout(genRandomWalls, /*document.querySelector("#controlStepDelay").value * */500);
+			}
 		}
 		else {
 			setTimeout(playAtSpeedSimulation, document.querySelector("#controlStepDelay").value * 1000);
