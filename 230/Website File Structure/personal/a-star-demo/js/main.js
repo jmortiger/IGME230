@@ -7,25 +7,14 @@ const
 	WALL_NODE_CLASS_NAME = "wallNode",
 	PATH_NODE_CLASS_NAME = "pathNode",
 	CLOSED_NODE_CLASS_NAME = "closedNode",
-	OPEN_NODE_CLASS_NAME = "openNode";
-let OPEN = new Array(),
-	//CLOSED = new Array(),
-	gridCells,
+	OPEN_NODE_CLASS_NAME = "openNode",
+	STATE = new StateInfo(),
+	nodeElemProto = document.createElement("span");
+let gridCells,
 	canTravelDiagonally = true,
-	shouldLoopGen = false;
-
-// A STAR FIELDS
-let a_gScores = new Array(),
-	a_fScores = new Array(),
-	a_cameFrom = new Array(),
-	a_start,
-	a_goal,
-	a_h,
-	a_currNode,
-	aStarDataObj = null;
-//function AStarVars() {
-
-//}
+	shouldLoopGen = false,
+	aStarDataObj = null,
+	nodes = [];
 
 // CONST HELPER FUNC
 const
@@ -63,13 +52,57 @@ function init() {
 	document.querySelector("#toggleDiagonal").onclick = e => canTravelDiagonally = !canTravelDiagonally;
 	document.querySelector("#genRandomWalls").onclick = genRandomWalls;
 	document.querySelector("#shouldLoopGen").onclick = e => shouldLoopGen = !shouldLoopGen;
+	document.querySelector("#panelBttn").onclick = toggleNav;
+	document.querySelector("#nodeCollectionTypeRadioForm").onformchange = changeNodeCollectionType;
 	//document.querySelector("#").onclick = ;
 }
 
+function changeNodeCollectionType(e) {
+	if (e.elements[0].checked)
+		changeToGrid();
+	else if (e.elements[1].checked)
+		changeToNodeList();
+}
+
+function changeToGrid() {
+	resetGrid(null);
+}
+
+function changeToNodeList() {
+	gridCells = null;
+	document.querySelector("#gridContainer").innerHTML = "";
+
+}
+
+function getNextNodeName() {
+	let uniqueNameFound = false, currentNum = 0;
+	while (uniqueNameFound) {
+		uniqueNameFound = true;
+		for (let i = 0; i < nodes.length; i++) {
+			if (nodes[i].nodeLabel == ("" + currentNum)) {
+				uniqueNameFound = false;
+				currentNum++;
+				break;
+			}
+		}
+	}
+	return "" + currentNum;
+}
+
+function addNode() {
+	let nodeElem = document.createElement("span");
+	let node = new Node(getNextNodeName(), [], nodeElem);
+	nodes.push(node);
+}
+
+function displayNodeList() {
+
+}
+
+// Grid and Node Creations
 function resetGrid(e) {
 	gridCells = buildGrid(document.querySelector("#controlGridWidth").value, document.querySelector("#controlGridHeight").value, 0, "gridContainer")[1];
 }
-
 // Returns: An array of 2 elements;
 //		The element holding the grid (if not already in document, must be inserted)
 //		A matrix of grid cells
@@ -125,9 +158,8 @@ function buildGrid(numCols, numRows, cellSpacing, containerId = "gridContainer")
 	}
 	return [gridContainer, cells];
 }
-
 function applyCellInfo(cell) {
-	cell.onclick = (e) => {
+	let setCellType = (e) => {
 		let currAction, formElems = document.querySelector("#setClickedElemsRadioForm").elements;
 
 		// Get the currently selected action
@@ -174,9 +206,13 @@ function applyCellInfo(cell) {
 			// Set this cell as the end node
 			cell.id = END_NODE_ID;
 		}
-		else if (currAction == "DeleteWall") {
+		else if (currAction == "DeleteWall")
 			removeClassName(cell, WALL_NODE_CLASS_NAME);
-		}
+	};
+	cell.onclick = setCellType;
+	cell.onmouseenter = (a) => {
+		if (STATE.isLMBDown)
+			setCellType(a);
 	};
 }
 
@@ -230,30 +266,6 @@ function genRandomWalls() {
 		playAtSpeedSimulation();
 }
 
-// Removes path node class from all grid cells
-function clearPathNodes() {
-	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
-	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, PATH_NODE_CLASS_NAME)));
-}
-
-// Removes wall node class from all grid cells
-function clearWallNodes() {
-	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
-	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, WALL_NODE_CLASS_NAME)));
-}
-
-// Removes open node class from all grid cells
-function clearOpenNodes() {
-	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
-	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, OPEN_NODE_CLASS_NAME)));
-}
-
-// Removes closed node class from all grid cells
-function clearClosedNodes() {
-	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
-	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, CLOSED_NODE_CLASS_NAME)));
-}
-
 function playSimulation() {
 	resetSimulation();
 	let path = AStarComplete(getStartNode(), getEndNode(), (canTravelDiagonally) ? H_DEFAULT_GRID : H_DEFAULT_MANHATTAN_GRID);
@@ -281,7 +293,10 @@ function playAtSpeedSimulation() {
 		aStarDataObj = AStarStep(aStarDataObj);
 		if (aStarDataObj.isComplete) {
 			if (!aStarDataObj.path) {
-				alert("There is no path to the end!");
+				if (shouldLoopGen)
+					setTimeout(genRandomWalls, /*document.querySelector("#controlStepDelay").value * */500);
+				else
+					alert("There is no path to the end!");
 				return;
 			}
 			let currNode;
@@ -558,13 +573,13 @@ function dist(nodeA, nodeB) {
 }
 
 function resetSimulation() {
-	OPEN = new Array();
-	//CLOSED = new Array();
 	clearPathNodes();
 	clearOpenNodes();
 	clearClosedNodes();
 	aStarDataObj = null;
 }
+
+// *** GET NODE(S) OF TYPE ***
 
 function getWallNodes() {
 	return document.querySelectorAll("." + WALL_NODE_CLASS_NAME);
@@ -580,6 +595,32 @@ function getStartNode() {
 
 function getEndNode() {
 	return document.querySelector("#" + END_NODE_ID);
+}
+
+// *** CLEAR NODES OF TYPE ***
+
+// Removes path node class from all grid cells
+function clearPathNodes() {
+	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
+	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, PATH_NODE_CLASS_NAME)));
+}
+
+// Removes wall node class from all grid cells
+function clearWallNodes() {
+	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
+	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, WALL_NODE_CLASS_NAME)));
+}
+
+// Removes open node class from all grid cells
+function clearOpenNodes() {
+	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
+	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, OPEN_NODE_CLASS_NAME)));
+}
+
+// Removes closed node class from all grid cells
+function clearClosedNodes() {
+	// Traverses each grid cell in both array dimensions and calls "removeClassName" on them
+	gridCells.forEach((a) => a.forEach(cell => removeClassName(cell, CLOSED_NODE_CLASS_NAME)));
 }
 
 function nodeListToArray(nodeList) {
@@ -664,33 +705,15 @@ function removeClassName(elementToChange, nameToRemove) {
 	//return elementToChange;
 }
 
-
-class AStarData {
-	constructor(start, goal, h, gScores = [], fScores = [], cameFrom = [], currNode = start) {
-		this.start		= start;
-		this.goal		= goal;
-		this.h			= h;
-
-		this.gScores	= gScores;
-		this.fScores	= fScores;
-		this.cameFrom	= cameFrom;
-		this.currNode	= currNode;
-
-		this.isComplete = false;
-		this.path		= null;
+function toggleNav() {
+	if (document.querySelector("#controlPanel").style.left != "0" && document.querySelector("#controlPanel").style.left != "0px") {
+		document.querySelector("#controlPanel").style.left = "0px";
+		document.querySelector("#panelBttn").innerHTML = "Close";
 	}
-}
+	else {
+		document.querySelector("#controlPanel").style.left = "-25%";
+		document.querySelector("#panelBttn").innerHTML = "Open";
 
-class BreadthFirstData {
-	constructor(start, goal, gScores = [], cameFrom = [], currNode = start) {
-		this.start		= start;
-		this.goal		= goal;
-
-		this.gScores	= gScores;
-		this.cameFrom	= cameFrom;
-		this.currNode	= currNode;
-
-		this.isComplete = false;
-		this.path		= null;
+		//document.querySelector("#controlPanel").getBoundingClientRect().width;
 	}
 }

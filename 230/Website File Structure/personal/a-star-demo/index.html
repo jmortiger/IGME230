@@ -5,18 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <link href="styles/main.css" type="text/css" rel="stylesheet" />
     <title>A* Algorithm</title>
+    <script src="js/classes.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
     <div id="controlPanel">
+        <span id="panelBttn">OPEN</span>
         <h1>Simulation Controller</h1>
+        <div class="controlElem">
+            Algorithm:
+            <select id="pickAlgorithm">
+                <option value="A*" selected>A*</option>
+            </select>
+        </div>
+        <form id="nodeCollectionTypeRadioForm">
+            <div class="controlElem">
+                Grid<input type="radio" name="gridOrNodeList" value="Grid" checked />
+            </div>
+            <div class="controlElem">
+                Node List<input type="radio" name="gridOrNodeList" value="NodeList" />
+            </div>
+        </form>
         <div class="controlDimensionElem">
             Grid Width:
-            <input id="controlGridWidth" type="number" name="gridWidth" min="2" max="30" value="50" />
+            <input id="controlGridWidth" type="number" name="gridWidth" min="2" max="100" value="50" />
         </div>
         <div class="controlDimensionElem">
             Grid Height:
-            <input id="controlGridHeight" type="number" name="gridHeight" min="2" max="30" value="25" />
+            <input id="controlGridHeight" type="number" name="gridHeight" min="2" max="100" value="25" />
         </div>
         <div class="controlElem">
             Step Delay:
@@ -37,6 +53,27 @@
                 Delete Wall:<input type="radio" name="setCellAs" value="DeleteWall" />
             </div>
         </form>
+        <!--<div id="addNodePanel">
+            <div class="controlElem">
+                Node Label:
+                <input id="controlNodeLabel" type="text" name="nodeLabel" maxlength="15" value="" />
+            </div>
+            <form id="addEdgeForm">
+                <div class="controlElem">
+                    Other Node's Label:
+                    <input id="controlOtherNodeLabel" type="text" name="otherNodeLabel" maxlength="15" value="" />
+                </div>
+                <div class="controlElem">
+                    Edge Weight:
+                    <input id="controlEdgeWeight" type="number" name="edgeWeight" min="0" value="1" />
+                </div>
+                <input type="submit" />
+            </form>
+            <div id="nodeEdgeList"></div>
+        </div>-->
+        <div>
+            <button id="addNode" type="button">Add Node</button>
+        </div>
         <input id="simStep" type="button" name="step" value="Step" />
         <input id="simPlay" type="button" name="play" value="Play With Step Delay" />
         <input id="simPlayAll" type="button" name="playAll" value="Play at Speed" />
@@ -49,5 +86,6 @@
         <input id="shouldLoopGen" type="button" name="loopGen" value="Toggle Looping" />
     </div>
     <div id="gridContainer"></div>
+    <div id="nodeContainer" style="display: none;"></div>
 </body>
 </html>

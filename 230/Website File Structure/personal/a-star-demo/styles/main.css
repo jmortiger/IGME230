@@ -2,60 +2,20 @@ html {
     width: 100%;
     height: 100%;
     margin: 0;
+    padding: 0;
 }
-
 * {
     /*margin: 0;*/
 }
-
 body {
     width: 100%;
     height: 100%;
     margin: 0;
+    padding: 0;
+    background-color: rgba(64, 64, 64, 255);
 }
 
-#gridContainer {
-    display: block;
-    height: 100%;
-    margin: 5px 0px 0px 0px;
-}
-
-.cell {
-    /*height: 100%;*/
-    border: 1px solid grey;
-    background-color: white;
-    margin: 0;
-}
-
-#controlPanel {
-    width: 100%;
-    /*height: 50%;*/
-    z-index: -1;
-    display: block;
-    /*margin: 0;*/
-    /*padding: 15px;*/
-}
-
-h1 {
-    display: inline-block;
-    width: 100%;
-    height: min-content;
-    /*margin: 0;*/
-}
-
-.controlDimensionElem {
-    height: min-content;
-}
-
-#controlGridWidth, #controlGridHeight {
-    /*display: block;*/
-    /*width: min-content;
-    height: min-content;*/
-    width: initial;
-    height: initial;
-    /*z-index: 10;*/
-}
-
+/*Node Coloring*/
 #startNode {
     background-color: rgba(0, 255, 0, 255);
 }
@@ -73,4 +33,86 @@ h1 {
 }
 .closedNode {
     background-color: rgba(64, 64, 64, 255);
+}
+
+/*Fixed control panel*/
+#controlPanel {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+#panelBttn {
+    display: none;
+}
+/*Fixed control panel END*/
+/*Sliding tray control panel*/
+/*#controlPanel {
+    display: block;
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -25%;
+    background-color: rgba(64, 64, 64, 255);
+    color: rgba(255, 255, 255, 255);
+    transition: 0.5s;
+}
+#panelBttn {
+    position: absolute;
+    top: 1em;
+    right: -2em;
+    transform: rotate(-90deg);
+    background-color: rgba(64, 64, 64, 255);
+    color: rgba(255, 255, 255, 255);
+    font-size: larger;
+
+    opacity: .25;
+    transition: .25s;
+}
+    #panelBttn:hover {
+        opacity: 1;
+    }*/
+/*Sliding tray control panel END*/
+
+#nodeContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#gridContainer {
+    display: block;
+    height: 100%;
+    /*margin: 5px 0px 0px 0px;*/
+    margin: 0;
+    padding: 0;
+}
+
+.cell {
+    margin: 0;
+    border: 1px solid grey;
+    background-color: white;
+}
+
+h1 {
+    display: inline-block;
+    /*width: 100%;*/
+    /*height: min-content;*/
+    margin: 0;
+    padding: 5px;
+}
+
+.controlDimensionElem {
+    height: min-content;
+}
+
+#controlGridWidth, #controlGridHeight {
+    width: initial;
+    height: initial;
+}
+
+#pickAlgorithm {
+    display: inline;
+    width: min-content;
 }
